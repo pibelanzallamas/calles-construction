@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
           <div className="line">
             <img src={six} alt="" />
-            <p>Web Dev: BC</p>
+            <p>Developed by Brandon Castillo</p>
           </div>
         </div>
       </div>
