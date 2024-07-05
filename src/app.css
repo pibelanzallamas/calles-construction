@@ -87,37 +87,17 @@ button {
 }
 
 @media (min-width: 800px) {
-  .home-compo {
-    gap: 0;
+  .home-compo h1 {
+    font-size: 3rem;
+  }
+  .home-compo p {
+    font-size: 1.5rem;
   }
   .home-img {
     aspect-ratio: 16/9;
   }
-  h1 {
-    margin: 4rem 2rem;
-    font-size: 3rem;
-  }
-  p {
-    margin: 0 2rem;
-    font-size: 1.4rem;
-  }
-  .home-buttons {
-    margin: 3rem 2rem;
-    justify-content: left;
-    align-items: center;
-  }
-  .home-buttons .button-a {
-    font-size: 1.3rem;
-    padding: 0.8rem;
-  }
-  .home-buttons .button-b {
-    margin-left: 1rem;
+  .button-estimate-div button {
     font-size: 1.1rem;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  .home-buttons .button:hover {
-    color: red;
   }
 }
 .services-compo {
