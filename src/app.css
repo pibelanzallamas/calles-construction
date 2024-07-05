@@ -1,0 +1,357 @@
+@font-face {
+  font-family: graduate;
+  src: url("./assets/Graduate-Regular.ttf");
+}
+@font-face {
+  font-family: open-sans;
+  src: url("./assets/OpenSans.ttf");
+}
+nav {
+  background-color: #fff;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  height: 2.5em;
+  width: 3.5rem;
+}
+.nav-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-links {
+  display: none;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 1rem;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.open {
+  display: flex;
+}
+
+@media (min-width: 800px) {
+  nav {
+    padding: 0.8rem 0.6rem;
+  }
+}
+.home {
+  min-height: 100vh;
+  background-color: #fbf7ef;
+  padding: 0.94rem;
+}
+
+.home-compo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.home-compo figure {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+.home-compo figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-compo p {
+  font-size: 1.2rem;
+}
+
+.button-estimate-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.6rem;
+  font-size: 1rem;
+  font-weight: 800;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  border: none;
+}
+
+@media (min-width: 800px) {
+  .home-compo {
+    gap: 0;
+  }
+  .home-img {
+    aspect-ratio: 16/9;
+  }
+  h1 {
+    margin: 4rem 2rem;
+    font-size: 3rem;
+  }
+  p {
+    margin: 0 2rem;
+    font-size: 1.4rem;
+  }
+  .home-buttons {
+    margin: 3rem 2rem;
+    justify-content: left;
+    align-items: center;
+  }
+  .home-buttons .button-a {
+    font-size: 1.3rem;
+    padding: 0.8rem;
+  }
+  .home-buttons .button-b {
+    margin-left: 1rem;
+    font-size: 1.1rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .home-buttons .button:hover {
+    color: red;
+  }
+}
+.services-compo {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+.service figure {
+  width: 3rem;
+  height: 3rem;
+}
+.service figure img {
+  width: 100%;
+  height: 100%;
+}
+.service p {
+  width: 30ch;
+  text-align: center;
+}
+
+.jobs-compo {
+  padding-top: 1rem;
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.jobs-img {
+  aspect-ratio: 1/1;
+}
+.jobs-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-compo h2 {
+  font-size: 1.7rem;
+  color: #0f4c61;
+}
+.text-compo p {
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.job-card figure {
+  width: 100%;
+}
+.job-card figure img {
+  width: 100%;
+  height: 100%;
+}
+.job-card .l {
+  text-align: left;
+}
+.job-card .r {
+  text-align: right;
+}
+.job-card h3 {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+}
+.job-card p {
+  font-size: 1.1rem;
+  margin-top: 0.2rem;
+}
+
+.gallery-compo {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.gallery-compo figure {
+  width: 100%;
+}
+.gallery-compo figure img {
+  width: 100%;
+  height: 100%;
+}
+
+.estimate-compo {
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}
+.estimate-compo h2 {
+  text-align: center;
+  font-size: 1.9rem;
+}
+.estimate-compo form {
+  margin-top: 1rem;
+}
+.estimate-compo form .field, .estimate-compo form button {
+  margin-top: 1rem;
+}
+.estimate-compo form .field label, .estimate-compo form button label {
+  text-align: left;
+  font-size: 1rem;
+}
+.estimate-compo form .field input,
+.estimate-compo form .field textarea, .estimate-compo form button input,
+.estimate-compo form button textarea {
+  margin-top: 0.3rem;
+  width: 100%;
+  background-color: inherit;
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  border: 2px solid gray;
+  border-radius: 0.4rem;
+  font-family: open-sans;
+}
+.estimate-compo form .field input:focus,
+.estimate-compo form .field textarea:focus, .estimate-compo form button input:focus,
+.estimate-compo form button textarea:focus {
+  border: #9c2020 2px solid;
+}
+
+.sending-text {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+}
+
+.location-compo {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.location-compo p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.location-img {
+  width: 100%;
+}
+.location-img img {
+  width: 100%;
+  height: 100%;
+}
+
+footer {
+  padding: 2rem 0.5rem;
+  background-color: #999;
+  color: white;
+}
+
+.social {
+  margin: 0 auto;
+  width: 20vw;
+  display: flex;
+  gap: 0.2rem;
+}
+.social figure {
+  width: 1rem;
+  height: 1rem;
+}
+.social figure img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.contact {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.credits p {
+  font-size: 0.5rem;
+  line-height: 0.8rem;
+}
+.credits .line {
+  display: flex;
+  align-items: center;
+}
+.credits .line img {
+  height: 0.6rem;
+  width: 0.6rem;
+  display: block;
+  margin-right: 0.1rem;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover, a:active {
+  color: #770d0d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: open-sans;
+}
+
+h1 {
+  font-family: graduate;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1.9rem;
+}
+
+/*# sourceMappingURL=app.css.map */
