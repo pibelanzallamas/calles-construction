@@ -25,6 +25,24 @@ nav
 .open
   display: flex
 
+.desktop-navbar
+  display: none
+
 @media (min-width: 800px)
   nav
     padding: 0.8rem 0.6rem
+
+@media (min-width: 1000px)
+  nav
+    padding: 1rem 1.5rem 1rem 1rem
+  .desktop-navbar
+    display: flex
+    width: 30vw
+    justify-content: space-between
+    font-weight: 500
+    font-size: 1.1rem
+  .hamburger
+    display: none
+  .nav-logo
+    height: 3em
+    width: 4rem

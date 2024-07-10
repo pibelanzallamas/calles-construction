@@ -7,7 +7,6 @@ function Hidden({ isOpen }) {
         <a href="#jobs">Services</a>
         <a href="#gallery">Gallery</a>
         <a href="#location">Location</a>
-        {/* <a href="#estimate">Get Estimate</a> */}
       </ul>
     </div>
   );

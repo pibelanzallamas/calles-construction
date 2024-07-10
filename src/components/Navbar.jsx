@@ -14,8 +14,14 @@ function Navbar({ openFunc }) {
       <figure className="nav-logo">
         <img src={logo} alt="calles-logo" />
       </figure>
-
-      <Hamburger toggled={isOpen} toggle={setOpen} />
+      <ul className="desktop-navbar">
+        <a href="#jobs">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#location">Location</a>
+      </ul>
+      <div className="hamburger">
+        <Hamburger toggled={isOpen} toggle={setOpen} />
+      </div>
     </nav>
   );
 }
