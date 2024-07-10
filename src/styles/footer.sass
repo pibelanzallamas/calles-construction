@@ -17,6 +17,11 @@ footer
       height: 100%
       display: block
 
+.credits
+  diplay: flex
+  margin-top: 1rem 
+  margin-bottom: 1rem
+
 .contact //2 y 3
   display: flex
   flex-direction: column
@@ -33,8 +38,26 @@ footer
       line-height: 1.6rem
       font-size: 1.2rem   
 
-.credits
-  diplay: flex
-  margin-top: 1rem 
-  margin-bottom: 1rem
 
+@media (min-width: 800px)
+  .social //1
+    display: flex
+    justify-content: center
+    gap: 0.6rem
+    figure
+      width: 2.5rem
+      height: 2.5rem
+  .credits 
+    width: 90%
+    display: flex
+    justify-content: space-around
+  .contact
+    display: inline-block
+    .line
+      img
+        height: 1.4rem
+        width: 1.4rem
+      font-size: 1.6rem
+      line-height: 2.1rem
+    
+    

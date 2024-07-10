@@ -292,6 +292,12 @@ footer {
   display: block;
 }
 
+.credits {
+  diplay: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .contact {
   display: flex;
   flex-direction: column;
@@ -312,12 +318,33 @@ footer {
   font-size: 1.2rem;
 }
 
-.credits {
-  diplay: flex;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+@media (min-width: 800px) {
+  .social {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .social figure {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .credits {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .contact {
+    display: inline-block;
+  }
+  .contact .line {
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+  }
+  .contact .line img {
+    height: 1.4rem;
+    width: 1.4rem;
+  }
 }
-
 * {
   padding: 0;
   margin: 0;
