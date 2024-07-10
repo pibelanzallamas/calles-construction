@@ -207,6 +207,15 @@ button:active, button:hover {
   height: 100%;
 }
 
+@media (min-width: 800px) {
+  .gallery-div {
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
 .estimate-compo {
   padding-top: 1rem;
   margin-bottom: 2rem;
@@ -250,6 +259,25 @@ button:active, button:hover {
   margin-top: 1rem;
 }
 
+@media (min-width: 800px) {
+  .estimate-compo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .estimate-compo h2 {
+    font-size: 2.4rem;
+  }
+  .estimate-compo form {
+    width: 70vw;
+  }
+  .estimate-compo form .field label {
+    font-size: 1.6rem;
+  }
+  .estimate-compo form .field input, .estimate-compo form .field textarea {
+    font-size: 1.2rem;
+  }
+}
 .location-compo {
   padding-top: 1rem;
   display: flex;
