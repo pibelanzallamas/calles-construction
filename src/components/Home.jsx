@@ -41,11 +41,9 @@ function Home() {
             We offer a variety of professional contracting services to meet all
             your needs.
           </p>
-          <div className="button-estimate-div">
-            <button onClick={handleGo} className="button">
-              Get Estimate
-            </button>
-          </div>
+          <button onClick={handleGo} className="button">
+            Get Estimate
+          </button>
         </div>
         <figure>
           <img src={image} alt="home-image" />
