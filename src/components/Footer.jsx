@@ -15,20 +15,28 @@ export default function Footer() {
     <footer id="contact">
       <div className="social">
         <figure>
-          <img src={facelogo} alt="social" />
+          <a href="https://www.google.com.ar" target="_blank">
+            <img src={facelogo} alt="social" />
+          </a>
         </figure>
         <figure>
-          <img src={telegram} alt="social" />
+          <a href="https://www.google.com.ar" target="_blank">
+            <img src={telegram} alt="social" />
+          </a>
         </figure>
         <figure>
-          <img src={twitterlogo} alt="social" />
+          <a href="https://www.google.com.ar" target="_blank">
+            <img src={twitterlogo} alt="social" />
+          </a>
         </figure>
         <figure>
-          <img src={instalogo} alt="social" />
+          <a href="https://www.google.com.ar" target="_blank">
+            <img src={instalogo} alt="social" />
+          </a>
         </figure>
       </div>
-      <div className="contact">
-        <div className="credits">
+      <div className="credits">
+        <div className="contact">
           <div className="line">
             <img src={one} alt="" />
             <p>Contact</p>
@@ -46,18 +54,18 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="credits">
+        <div className="contact">
           <div className="line">
             <img src={fourth} alt="" />
-            <p>2024</p>
+            <p>Jul, 2024</p>
           </div>
           <div className="line">
             <img src={five} alt="" />
-            <p>Paterson, New Jersey, Usa</p>
+            <p>Paterson, New Jersey</p>
           </div>
           <div className="line">
             <img src={six} alt="" />
-            <p>Developed by Brandon Castillo</p>
+            <p>Powered by Vercel</p>
           </div>
         </div>
       </div>
