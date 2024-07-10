@@ -135,9 +135,15 @@ button:active, button:hover {
 }
 
 @media (min-width: 800px) {
+  .services-compo {
+    font-size: 1.4rem;
+  }
   .services-compo figure {
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  .services-compo p {
+    font-size: 1.5rem;
   }
 }
 .jobs-compo {
@@ -191,6 +197,24 @@ button:active, button:hover {
   margin-top: 0.2rem;
 }
 
+@media (min-width: 800px) {
+  .jobs-compo {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .text-compo h2 {
+    font-size: 1.8rem;
+  }
+  .text-compo p {
+    font-size: 1.5rem;
+  }
+  .job-card h3 {
+    font-size: 1.8rem;
+  }
+  .job-card p {
+    font-size: 1.5rem;
+  }
+}
 .gallery-compo {
   padding-top: 1rem;
   display: flex;
@@ -209,7 +233,7 @@ button:active, button:hover {
 
 @media (min-width: 800px) {
   .gallery-div {
-    width: 85vw;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
