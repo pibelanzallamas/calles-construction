@@ -424,6 +424,7 @@ nav {
 @media (min-width: 1000px) {
   .location-compo {
     width: 60vw;
+    margin: 2rem auto 1rem auto;
   }
 }
 footer {
