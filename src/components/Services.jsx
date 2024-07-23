@@ -5,6 +5,7 @@ import { services } from "../utilities/services.js";
 function Services() {
   return (
     <section className="services-compo">
+      <h2>Services</h2>
       {services.map((service, i) => (
         <Service
           title={service.title}

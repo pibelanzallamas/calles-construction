@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/nav-logo.png";
 import { Squash as Hamburger } from "hamburger-react";
+import { Link } from "react-router-dom";
 
 function Navbar({ openFunc }) {
   const [isOpen, setOpen] = useState(false);
@@ -11,13 +12,16 @@ function Navbar({ openFunc }) {
 
   return (
     <nav id="navbar">
-      <figure className="nav-logo">
-        <img src={logo} alt="calles-logo" />
-      </figure>
+      <Link to="/">
+        <figure className="nav-logo">
+          <img src={logo} alt="calles-logo" />
+        </figure>
+      </Link>
       <ul className="desktop-navbar">
-        <a href="#jobs">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#location">Location</a>
+        <Link to="/services">Services</Link>
+        <Link to="/jobs">Jobs</Link>
+        <Link to="/gallery">Gallery</Link>
+        <Link to="/location">Location</Link>
       </ul>
       <div className="hamburger">
         <Hamburger toggled={isOpen} toggle={setOpen} />

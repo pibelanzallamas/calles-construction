@@ -83,6 +83,9 @@ nav {
 .home-mobile p {
   font-size: 1.2rem;
 }
+.home-mobile .button-estimate-div {
+  margin-bottom: 3rem;
+}
 
 .home-desktop {
   display: none;
@@ -139,11 +142,12 @@ nav {
   }
 }
 .services-compo {
-  margin-top: 3rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 2rem;
+  align-items: center;
 }
 
 .service {
@@ -191,13 +195,16 @@ nav {
   }
 }
 .jobs-compo {
-  padding-top: 1rem;
+  margin-top: 1rem;
   display: flex;
   gap: 3rem;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin-bottom: 2rem;
+}
+.jobs-compo h2 {
+  margin-bottom: -1rem;
 }
 
 .jobs-img {
@@ -209,7 +216,7 @@ nav {
   object-fit: cover;
 }
 
-.text-compo h2 {
+.text-compo h3 {
   font-size: 1.7rem;
   color: #0f4c61;
 }
@@ -279,12 +286,18 @@ nav {
   }
 }
 .gallery-compo {
-  padding-top: 1rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+}
+.gallery-compo .button-estimate-div {
+  margin-top: 2rem;
   margin-bottom: 2rem;
+}
+.gallery-compo h2 {
+  margin-bottom: 1rem;
 }
 .gallery-compo figure {
   width: 100%;
@@ -384,6 +397,9 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
+}
+.location-compo h2 {
   margin-bottom: 1rem;
 }
 .location-compo p {
@@ -526,7 +542,7 @@ body {
 }
 
 .home {
-  min-height: 100vh;
+  min-height: initial;
   background-color: #fbf7ef;
   padding: 0.94rem;
 }
@@ -538,6 +554,7 @@ h1 {
 
 h2 {
   font-size: 1.9rem;
+  color: #0f4c61;
 }
 
 .button-estimate-div {
@@ -557,6 +574,11 @@ button {
 
 button:active, button:hover {
   color: orange;
+}
+
+.flex-grow {
+  border: orange 1px solid;
+  flex: 1;
 }
 
 @media (min-width: 800px) {
