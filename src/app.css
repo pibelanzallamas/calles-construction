@@ -83,6 +83,9 @@ nav {
 .home-mobile p {
   font-size: 1.2rem;
 }
+.home-mobile .button-estimate-div {
+  margin-bottom: 3rem;
+}
 
 .home-desktop {
   display: none;
@@ -99,7 +102,7 @@ nav {
     font-size: 3rem;
   }
   .home-mobile p {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 500;
   }
   .home-mobile h1, .home-mobile p {
@@ -136,14 +139,16 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 }
 .services-compo {
-  margin-top: 3rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 2rem;
+  align-items: center;
 }
 
 .service {
@@ -167,6 +172,8 @@ nav {
 
 @media (min-width: 800px) {
   .services-compo {
+    margin-top: 0rem;
+    padding: 1rem;
     font-size: 1.4rem;
   }
   .services-compo figure {
@@ -178,12 +185,18 @@ nav {
   }
 }
 @media (min-width: 1000px) {
-  .services-compo {
-    margin: 7rem auto;
+  .grid-services {
     display: grid;
-    padding: 0 9rem;
     grid-template-columns: 50% 50%;
     row-gap: 3rem;
+  }
+  .services-compo {
+    margin-bottom: 0rem;
+    padding-bottom: 5rem;
+  }
+  .services-compo h2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   .services-compo figure {
     width: 3.4rem;
@@ -191,13 +204,16 @@ nav {
   }
 }
 .jobs-compo {
-  padding-top: 1rem;
+  margin-top: 1rem;
   display: flex;
   gap: 3rem;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin-bottom: 2rem;
+}
+.jobs-compo h2 {
+  margin-bottom: -1rem;
 }
 
 .jobs-img {
@@ -209,7 +225,7 @@ nav {
   object-fit: cover;
 }
 
-.text-compo h2 {
+.text-compo h3 {
   font-size: 1.7rem;
   color: #0f4c61;
 }
@@ -243,8 +259,8 @@ nav {
 
 @media (min-width: 800px) {
   .jobs-compo {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
   .text-compo h2 {
     font-size: 1.8rem;
@@ -263,10 +279,15 @@ nav {
   .jobs-compo {
     width: 60vw;
     margin: 0 auto;
+    padding-top: 2rem;
     gap: 5rem;
+    padding-bottom: 4rem;
   }
-  .text-compo h2 {
-    font-size: 2.3rem;
+  .jobs-compo h2 {
+    margin-bottom: -2rem;
+  }
+  .text-compo h3 {
+    font-size: 2.2rem;
   }
   .text-compo p {
     font-size: 1.5rem;
@@ -279,12 +300,18 @@ nav {
   }
 }
 .gallery-compo {
-  padding-top: 1rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+}
+.gallery-compo .button-estimate-div {
+  margin-top: 2rem;
   margin-bottom: 2rem;
+}
+.gallery-compo h2 {
+  margin-bottom: 1rem;
 }
 .gallery-compo figure {
   width: 100%;
@@ -296,14 +323,17 @@ nav {
 
 @media (min-width: 800px) {
   .gallery-compo {
-    width: 90vw;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 @media (min-width: 1000px) {
   .gallery-compo {
     width: 60vw;
     gap: 2rem;
-    margin: 4rem auto;
+    margin: 0rem auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 .estimate-compo {
@@ -357,7 +387,7 @@ nav {
     font-size: 2.4rem;
   }
   .estimate-compo form {
-    width: 70vw;
+    width: 60vw;
   }
   .estimate-compo form .field label {
     font-size: 1.6rem;
@@ -367,9 +397,12 @@ nav {
   }
 }
 @media (min-width: 1000px) {
+  .estimate-compo {
+    padding-bottom: 3rem;
+    margin-bottom: 0;
+  }
   .estimate-compo form {
     width: 40vw;
-    margin: 0 auto;
   }
   .estimate-compo form .field label {
     font-size: 1.3rem;
@@ -384,6 +417,9 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
+}
+.location-compo h2 {
   margin-bottom: 1rem;
 }
 .location-compo p {
@@ -401,6 +437,8 @@ nav {
 
 @media (min-width: 800px) {
   .location-compo {
+    padding-left: 4rem;
+    padding-right: 4rem;
     margin-bottom: 1rem;
   }
   .location-compo p {
@@ -418,7 +456,12 @@ nav {
 @media (min-width: 1000px) {
   .location-compo {
     width: 60vw;
-    margin: 2rem auto 1rem auto;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+  .location-compo h2 {
+    margin-bottom: 2rem;
   }
 }
 footer {
@@ -526,7 +569,7 @@ body {
 }
 
 .home {
-  min-height: 100vh;
+  min-height: initial;
   background-color: #fbf7ef;
   padding: 0.94rem;
 }
@@ -538,6 +581,7 @@ h1 {
 
 h2 {
   font-size: 1.9rem;
+  color: #0f4c61;
 }
 
 .button-estimate-div {
@@ -559,10 +603,12 @@ button:active, button:hover {
   color: orange;
 }
 
+.flex-grow {
+  border: orange 1px solid;
+  flex: 1;
+}
+
 @media (min-width: 800px) {
-  .home {
-    padding: 0;
-  }
   h2 {
     font-size: 2.4rem;
   }

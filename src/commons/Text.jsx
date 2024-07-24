@@ -3,7 +3,7 @@ import React from "react";
 function Text({ text }) {
   return (
     <div className="text-compo">
-      <h2> {text.title}</h2>
+      <h3> {text.title}</h3>
       <p> {text.desc}</p>
     </div>
   );

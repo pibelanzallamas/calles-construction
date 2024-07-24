@@ -1,12 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Hidden({ isOpen }) {
   return (
     <div>
       <ul className={`nav-links ${isOpen ? "open" : ""}`}>
-        <a href="#jobs">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#location">Location</a>
+        <Link to="/services">Services</Link>
+        <Link to="/jobs">Jobs</Link>
+        <Link to="/gallery">Gallery</Link>
+        <Link to="/location">Location</Link>
       </ul>
     </div>
   );
