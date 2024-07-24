@@ -174,7 +174,6 @@ nav {
   .services-compo {
     margin-top: 0rem;
     padding: 1rem;
-    marging-bottom: 0rem;
     font-size: 1.4rem;
   }
   .services-compo figure {
@@ -186,12 +185,18 @@ nav {
   }
 }
 @media (min-width: 1000px) {
-  .services-compo {
-    margin: 7rem auto;
+  .grid-services {
     display: grid;
-    padding: 0 9rem;
     grid-template-columns: 50% 50%;
     row-gap: 3rem;
+  }
+  .services-compo {
+    margin-bottom: 0rem;
+    padding-bottom: 5rem;
+  }
+  .services-compo h2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   .services-compo figure {
     width: 3.4rem;
@@ -274,10 +279,15 @@ nav {
   .jobs-compo {
     width: 60vw;
     margin: 0 auto;
+    padding-top: 2rem;
     gap: 5rem;
+    padding-bottom: 4rem;
   }
-  .text-compo h2 {
-    font-size: 2.3rem;
+  .jobs-compo h2 {
+    margin-bottom: -2rem;
+  }
+  .text-compo h3 {
+    font-size: 2.2rem;
   }
   .text-compo p {
     font-size: 1.5rem;
@@ -321,7 +331,9 @@ nav {
   .gallery-compo {
     width: 60vw;
     gap: 2rem;
-    margin: 4rem auto;
+    margin: 0rem auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 .estimate-compo {
@@ -385,9 +397,12 @@ nav {
   }
 }
 @media (min-width: 1000px) {
+  .estimate-compo {
+    padding-bottom: 3rem;
+    margin-bottom: 0;
+  }
   .estimate-compo form {
     width: 40vw;
-    margin: 0 auto;
   }
   .estimate-compo form .field label {
     font-size: 1.3rem;
@@ -441,7 +456,12 @@ nav {
 @media (min-width: 1000px) {
   .location-compo {
     width: 60vw;
-    margin: 2rem auto 1rem auto;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+  .location-compo h2 {
+    margin-bottom: 2rem;
   }
 }
 footer {
