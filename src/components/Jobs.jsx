@@ -3,6 +3,7 @@ import Text from "../commons/Text";
 import Job from "../commons/Job";
 import { services } from "../utilities/services";
 import jobs from "../assets/jobs-img.jpg";
+import TopButton from "../commons/TopButton";
 
 function Jobs() {
   const texts = [
@@ -18,6 +19,8 @@ function Jobs() {
 
   return (
     <section id="jobs" className="jobs-compo">
+      <h2>Jobs</h2>
+
       <figure className="jobs-img">
         <img src={jobs} alt="jobs-img" />
       </figure>
@@ -37,6 +40,8 @@ function Jobs() {
       <Job service={services[4]} />
 
       <Job service={services[5]} />
+
+      <TopButton />
     </section>
   );
 }

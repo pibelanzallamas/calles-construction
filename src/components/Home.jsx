@@ -1,13 +1,12 @@
 import React from "react";
 import image from "../assets/home-image.jpg";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
-  function handleGo() {
-    const refe = document.getElementById("estimate");
+  const navigate = useNavigate();
 
-    if (refe) {
-      refe.scrollIntoView({ behavior: "smooth" });
-    }
+  function handleGo() {
+    navigate("/estimate");
   }
 
   return (

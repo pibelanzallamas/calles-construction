@@ -9,6 +9,7 @@ import Gallery from "./components/Gallery";
 import Estimate from "./components/Estimate";
 import Location from "./components/Location";
 import Footer from "./components/Footer";
+import AppRoutes from "./components/AppRoutes";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -22,12 +23,13 @@ function App() {
       <Navbar openFunc={handleOpen} />
       <Hidden isOpen={open} />
       <div className="home">
-        <Home />
-        <Services />
-        <Jobs />
-        <Gallery />
-        <Estimate />
-        <Location />
+        <AppRoutes />
+        {/* <Home /> */}
+        {/* <Services /> */}
+        {/* <Jobs /> */}
+        {/* <Gallery /> */}
+        {/* <Estimate /> */}
+        {/* <Location /> */}
       </div>
       <Footer />
     </>
