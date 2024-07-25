@@ -1,5 +1,5 @@
 import React from "react";
-import calles from "../assets/calles_calle.png";
+import calles from "../assets/new-calles.png";
 
 function Location() {
   return (
