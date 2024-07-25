@@ -1,5 +1,6 @@
 import React from "react";
 import calles from "../assets/new-calles.png";
+import TopButton from "../commons/TopButton";
 
 function Location() {
   return (
@@ -11,6 +12,7 @@ function Location() {
       <p>
         <i>Orchard Dr, Clifton, New Jersey </i>
       </p>
+      <TopButton />
     </section>
   );
 }
