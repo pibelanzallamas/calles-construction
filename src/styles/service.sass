@@ -2,10 +2,13 @@
   margin-top: 1rem
   display: flex
   flex-direction: column
+  align-items: center
   gap: 1.5rem
   margin-bottom: 2rem
-  align-items: center
-  
+
+.services-compo2
+  display: none  
+
 .service
   display: flex
   flex-direction: column
@@ -33,11 +36,15 @@
       font-size: 1.5rem
 
 @media (min-width: 1000px)
-  .grid-services
-    display: grid
-    grid-template-columns: 50% 50%
-    row-gap: 3rem
   .services-compo
+    display: none
+  .services-compo2
+    padding-top: 1rem
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 2rem
+    margin-bottom: 2rem
     h2
       margin-top: 1rem
       margin-bottom: 0rem
@@ -46,3 +53,8 @@
     figure
       width: 3.4rem
       heigth: 3.4rem
+  .grid-services
+    display: grid
+    grid-template-columns: 50% 50%
+    
+    row-gap: 3rem

@@ -4,9 +4,9 @@ import { services } from "../utilities/services.js";
 
 function Services() {
   return (
-    <section className="services-compo">
-      <h2>Services</h2>
-      <div className="grid-services">
+    <>
+      <section className="services-compo">
+        <h2>Services</h2>
         {services.map((service, i) => (
           <Service
             title={service.title}
@@ -15,8 +15,21 @@ function Services() {
             key={i}
           />
         ))}
-      </div>
-    </section>
+      </section>
+      <section className="services-compo2">
+        <h2>Services</h2>
+        <div className="grid-services">
+          {services.map((service, i) => (
+            <Service
+              title={service.title}
+              desc={service.desc}
+              logo={service.logo}
+              key={i}
+            />
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 

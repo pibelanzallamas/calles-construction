@@ -61,7 +61,7 @@ export default function Footer() {
           </div>
           <div className="line">
             <img src={five} alt="" />
-            <p>Paterson, New Jersey</p>
+            <p>Clifton, New Jersey</p>
           </div>
           <div className="line">
             <img src={six} alt="" />
