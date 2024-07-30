@@ -174,6 +174,16 @@ nav {
   text-align: center;
 }
 
+.tail-deco {
+  margin-top: 2rem;
+  width: 30vw;
+  height: 80px;
+}
+.tail-deco img {
+  width: 100%;
+  height: 100%;
+}
+
 @media (min-width: 800px) {
   .services-compo {
     margin-top: 0rem;
@@ -193,17 +203,23 @@ nav {
     display: none;
   }
   .services-compo2 {
-    padding-top: 1rem;
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    margin-bottom: 2rem;
   }
   .services-compo2 .grid-services {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
     row-gap: 3rem;
+    column-gap: 4rem;
+  }
+  .services-compo2 .grid-services .service h3 {
+    font-size: 1.4rem;
+  }
+  .services-compo2 .grid-services .service p {
+    font-size: 1.2rem;
   }
   .services-compo2 .grid-services h2 {
     margin-top: 1rem;
@@ -212,8 +228,8 @@ nav {
     padding-bottom: 2rem;
   }
   .services-compo2 .grid-services figure {
-    width: 3.4rem;
-    heigth: 3.4rem;
+    width: 4rem;
+    height: 4rem;
   }
   .services-compo2 .grid-services figure img {
     width: 100%;
@@ -221,6 +237,7 @@ nav {
   }
   .services-compo2 .button-estimate-div {
     margin-top: 1rem;
+    padding-bottom: 2rem;
   }
 }
 .jobs-compo {
@@ -296,6 +313,9 @@ nav {
   }
 }
 @media (min-width: 1000px) {
+  .jobs-img {
+    aspect-ratio: 1/1;
+  }
   .jobs-compo {
     width: 60vw;
     margin: 0 auto;
@@ -332,9 +352,6 @@ nav {
 }
 .gallery-compo h2 {
   margin-bottom: 1rem;
-}
-.gallery-compo figure {
-  width: 100%;
 }
 .gallery-compo figure img {
   width: 100%;
@@ -523,11 +540,11 @@ footer {
 .contact {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
 }
 .contact .line {
   display: flex;
   align-items: center;
+  margin-top: 0.1rem;
 }
 .contact .line img {
   height: 1.2rem;
@@ -559,16 +576,10 @@ footer {
   }
   .contact .line {
     font-size: 1.6rem;
-    line-height: 2.1rem;
   }
   .contact .line img {
     height: 1.4rem;
     width: 1.4rem;
-  }
-}
-@media (min-width: 1000px) {
-  .credits {
-    justify-content: space-around;
   }
 }
 * {

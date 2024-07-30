@@ -1,0 +1,6 @@
+footer:
+		- agregarle unos logos al footer, parte superior
+services:
+		- agregarle una line decoration			
+
+				

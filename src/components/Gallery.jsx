@@ -7,6 +7,7 @@ import pic4 from "../assets/gallery-painting.jpeg";
 import pic6 from "../assets/gallery-paintings-2.jpeg";
 import pic8 from "../assets/gallery-electrician.jpeg";
 import TopButton from "../commons/TopButton";
+import tail from "../assets/tail.png";
 
 function Gallery() {
   return (
@@ -33,6 +34,7 @@ function Gallery() {
       <figure>
         <img src={pic5} alt="pic3" />
       </figure>
+
       <TopButton />
     </div>
   );
