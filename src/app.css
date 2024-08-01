@@ -532,29 +532,23 @@ footer {
 }
 
 .credits {
-  diplay: flex;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.contact {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  gap: 1rem;
 }
+
 .contact .line {
   display: flex;
   align-items: center;
-  margin-top: 0.1rem;
 }
 .contact .line img {
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 1.6rem;
+  width: 1.6rem;
   display: block;
   margin-right: 0.3rem;
 }
 .contact .line p {
-  line-height: 1.6rem;
+  line-height: 1.9rem;
   font-size: 1.2rem;
 }
 
