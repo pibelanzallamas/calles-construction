@@ -475,17 +475,19 @@ nav {
 .location-compo h2 {
   margin-bottom: 1rem;
 }
+.location-compo .location-img {
+  width: 100%;
+}
+.location-compo .location-img img {
+  width: 100%;
+  height: 100%;
+}
 .location-compo p {
   font-size: 1.1rem;
   margin-bottom: 1rem;
 }
-
-.location-img {
-  width: 100%;
-}
-.location-img img {
-  width: 100%;
-  height: 100%;
+.location-compo .button-estimate-div {
+  margin-top: -0.5rem;
 }
 
 @media (min-width: 800px) {
