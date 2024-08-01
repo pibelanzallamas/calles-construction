@@ -250,8 +250,8 @@ nav {
     height: 100%;
   }
   .services-compo2 .button-estimate-div {
-    margin-top: 1rem;
-    padding-bottom: 2rem;
+    margin-top: 1.5rem;
+    padding-bottom: 3.5rem;
   }
 }
 .jobs-compo {
@@ -330,9 +330,6 @@ nav {
   }
 }
 @media (min-width: 1000px) {
-  .jobs-img {
-    aspect-ratio: 1/1;
-  }
   .jobs-compo {
     width: 60vw;
     margin: 0 auto;
@@ -342,6 +339,12 @@ nav {
   }
   .jobs-compo h2 {
     margin-bottom: -3rem;
+  }
+  .jobs-compo .button-estimate-div {
+    margin-top: -1.5rem;
+  }
+  .jobs-img {
+    aspect-ratio: 16/9;
   }
   .text-compo h3 {
     font-size: 2.2rem;
@@ -391,10 +394,14 @@ nav {
 @media (min-width: 1000px) {
   .gallery-compo {
     width: 60vw;
-    gap: 2rem;
+    gap: 1rem;
     margin: 0rem auto;
     padding-top: 2rem;
     padding-bottom: 0rem;
+  }
+  .gallery-compo .button-estimate-div {
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
   }
   .gallery-compo h2 {
     margin-bottom: 0rem;
@@ -468,6 +475,12 @@ nav {
     padding-bottom: 3rem;
     margin-bottom: 0;
   }
+  .estimate-compo form .button-estimate-div {
+    margin-top: 1.5rem;
+  }
+  .estimate-compo h2 {
+    margin-top: 1rem;
+  }
   .estimate-compo form {
     width: 40vw;
   }
@@ -476,9 +489,6 @@ nav {
   }
   .estimate-compo form .field input, .estimate-compo form .field textarea {
     font-size: 1rem;
-  }
-  .estimate-compo h2 {
-    margin-top: 1rem;
   }
 }
 .location-compo {
@@ -538,6 +548,10 @@ nav {
   }
   .location-compo h2 {
     margin-bottom: 1rem;
+  }
+  .location-compo .button-estimate-div {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
 }
 footer {
@@ -610,7 +624,17 @@ footer {
 }
 @media (min-width: 1000px) {
   .credits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 9rem;
+    width: 75vw;
+  }
+  .contact .line img {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+  .contact .line p {
+    font-size: 1.3rem;
   }
 }
 * {
@@ -691,7 +715,7 @@ button:active, button:hover {
   }
   button {
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 800;
   }
 }

@@ -2,7 +2,6 @@ import React from "react";
 import Service from "../commons/Service";
 import { services } from "../utilities/services.js";
 import TopButton from "../commons/TopButton";
-import tail from "../assets/tail.png";
 
 function Services() {
   return (
@@ -31,9 +30,7 @@ function Services() {
             />
           ))}
         </div>
-        <figure className="tail-deco">
-          <img src={tail} alt="tail-for-decoration" />
-        </figure>
+
         <TopButton />
       </section>
     </>
