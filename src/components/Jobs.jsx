@@ -4,7 +4,6 @@ import Job from "../commons/Job";
 import { services } from "../utilities/services";
 import jobs from "../assets/jobs-img.jpg";
 import TopButton from "../commons/TopButton";
-import tail from "../assets/tail.png";
 
 function Jobs() {
   const texts = [
