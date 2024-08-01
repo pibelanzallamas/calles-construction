@@ -378,7 +378,7 @@ nav {
 }
 .estimate-compo {
   padding-top: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .estimate-compo h2 {
   text-align: center;
@@ -410,6 +410,9 @@ nav {
 .estimate-compo form .field input:focus,
 .estimate-compo form .field textarea:focus {
   border: orange 2px solid;
+}
+.estimate-compo form .button-estimate-div {
+  margin-top: 1rem;
 }
 
 .sending-text {
