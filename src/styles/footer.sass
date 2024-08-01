@@ -44,17 +44,17 @@ footer
       width: 2.5rem
       height: 2.5rem
   .credits 
-    width: 90%
-    display: flex
-    justify-content: space-around
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 3rem
   .contact
-    display: inline-block
     .line
       img
-        height: 1.4rem
-        width: 1.4rem
-      font-size: 1.6rem
+        height: 1.6rem
+        width: 1.6rem
+      p
+        font-size: 1.3rem
     
 @media (min-width: 1000px)
-  
-  
+  .credits
+    gap: 10%
