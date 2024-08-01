@@ -15,14 +15,11 @@ function Home() {
         <figure>
           <img src={image} alt="home-image" />
         </figure>
-
         <h1> Calle'$ Construcction</h1>
-
         <p>
           We offer a variety of professional contracting services to meet all
           your needs.
         </p>
-
         <div className="button-estimate-div">
           <button onClick={handleGo} className="button">
             Get Estimate
