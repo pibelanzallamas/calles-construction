@@ -1,5 +1,6 @@
 import "./app.css";
 import { useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hidden from "./components/Hidden";
 import Footer from "./components/Footer";
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <>
+      <Analytics />
       <Navbar openFunc={handleOpen} />
       <Hidden isOpen={hamburger} />
       <ScrollToTop />
