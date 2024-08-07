@@ -1,7 +1,6 @@
 import React from "react";
 import Service from "../commons/Service";
 import { services } from "../utilities/services.js";
-import TopButton from "../commons/TopButton";
 
 function Services() {
   return (
@@ -16,7 +15,6 @@ function Services() {
             key={i}
           />
         ))}
-        <TopButton />
       </section>
       <section className="services-compo2">
         <h2>Services</h2>
@@ -30,8 +28,6 @@ function Services() {
             />
           ))}
         </div>
-
-        <TopButton />
       </section>
     </>
   );
