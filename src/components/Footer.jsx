@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import facelogo from "../assets/facelogo.svg";
 import instalogo from "../assets/instalogo.svg";
 import twitterlogo from "../assets/twitterlogo.svg";
@@ -12,6 +13,7 @@ import five from "../assets/4.svg";
 import six from "../assets/6.svg";
 
 export default function Footer() {
+  const user = useSelector((state) => state.user);
   return (
     <footer id="contact">
       <div className="social">
@@ -66,8 +68,10 @@ export default function Footer() {
           </div>
           <div className="line">
             <img src={six} alt="" />
+
             <p>
-              Powered by Vercel - <Link to={"/login"}>Admin Mode</Link>
+              Powered by Vercel
+              {!user.id && <Link to={"/login"}> - Admin Mode</Link>}
             </p>
           </div>
         </div>

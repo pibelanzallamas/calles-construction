@@ -95,11 +95,6 @@ nav {
   margin-bottom: 1rem;
 }
 
-.admin-badge {
-  color: purple;
-  font-weight: 700;
-}
-
 .home-desktop {
   display: none;
 }
@@ -690,6 +685,11 @@ button {
 
 button:active, button:hover {
   color: orange;
+}
+
+.admin-badge {
+  color: #b62aee;
+  font-weight: 700;
 }
 
 @media (min-width: 800px) {

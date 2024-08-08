@@ -6,6 +6,8 @@
   font-family: open-sans
   src: url("./assets/OpenSans.ttf")
 
+$admin : #b62aee
+
 @import "./styles/navbar"
 @import "./styles/home"
 @import "./styles/service"
@@ -64,6 +66,10 @@ button
 
 button:active, button:hover
   color: orange
+
+.admin-badge
+  color: $admin
+  font-weight: 700
 
 //tablet -----------------------------
 @media (min-width: 800px)
