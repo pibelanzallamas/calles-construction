@@ -4,6 +4,7 @@ import Job from "../commons/Job";
 import { services } from "../utilities/services";
 import jobs from "../assets/jobs-img.jpg";
 import TopButton from "../commons/TopButton";
+import { useSelector } from "react-redux";
 
 function Jobs() {
   const texts = [
@@ -16,6 +17,8 @@ function Jobs() {
       desc: "We ensure quality by using top-notch materials, maintaining clear communication, adhering to safety standards, and delivering timely results with attention to team work.",
     },
   ];
+
+  const user = useSelector((state) => state.user);
 
   return (
     <section id="jobs" className="jobs-compo">

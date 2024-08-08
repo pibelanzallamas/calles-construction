@@ -1,6 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { setUser } from "../state/userState";
+import { useDispatch, useSelector } from "react-redux";
+import { alerts } from "../utils/alerts";
 import facelogo from "../assets/facelogo.svg";
 import instalogo from "../assets/instalogo.svg";
 import twitterlogo from "../assets/twitterlogo.svg";
@@ -13,7 +15,20 @@ import five from "../assets/4.svg";
 import six from "../assets/6.svg";
 
 export default function Footer() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+
+  function handleLogout() {
+    const noUser = {
+      id: null,
+      email: null,
+    };
+    dispatch(setUser(noUser));
+    alerts("Bye!", `Logout successul 🏝`, "success");
+    navigate("/");
+  }
+
   return (
     <footer id="contact">
       <div className="social">
@@ -70,8 +85,12 @@ export default function Footer() {
             <img src={six} alt="" />
 
             <p>
-              Powered by Vercel
-              {!user.id && <Link to={"/login"}> - Admin Mode</Link>}
+              Powered by Vercel -
+              {!user.id ? (
+                <Link to={"/login"}> Admin Mode</Link>
+              ) : (
+                <Link onClick={handleLogout}> Logout</Link>
+              )}
             </p>
           </div>
         </div>

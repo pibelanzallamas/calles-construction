@@ -1,14 +1,26 @@
 import React from "react";
 import image from "../assets/home-image.jpg";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../state/userState";
 
 function Home() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   function handleGo() {
     navigate("/estimate");
+  }
+
+  function logOut() {
+    const noUser = {
+      id: null,
+      email: null,
+    };
+    navigate("/");
+    dispatch(setUser(noUser));
+    alerts("Bye!", `Logout successul 🏝`, "success");
   }
 
   return (
@@ -39,7 +51,7 @@ function Home() {
           <p>
             We offer a variety of professional contracting services to meet all
             your needs.
-            {user.id ? <span className="admin-badge"> Admin</span> : <></>}
+            {user.id && <span className="admin-badge"> Admin</span>}
           </p>
           <button onClick={handleGo} className="button">
             Get Estimate
