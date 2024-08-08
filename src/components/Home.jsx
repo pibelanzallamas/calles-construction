@@ -1,26 +1,14 @@
 import React from "react";
 import image from "../assets/home-image.jpg";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../state/userState";
+import { useSelector } from "react-redux";
 
 function Home() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   function handleGo() {
     navigate("/estimate");
-  }
-
-  function logOut() {
-    const noUser = {
-      id: null,
-      email: null,
-    };
-    navigate("/");
-    dispatch(setUser(noUser));
-    alerts("Bye!", `Logout successul 🏝`, "success");
   }
 
   return (
@@ -32,8 +20,7 @@ function Home() {
         <h1> Calle'$ Construcction</h1>
         <p>
           We offer a variety of professional contracting services to meet all
-          your needs.
-          {user.id ? <section className="admin-badge">Admin</section> : <></>}
+          your needs. <span className="admin-badge">{user.id && "Admin"}</span>
         </p>
         <div className="button-estimate-div">
           <button onClick={handleGo} className="button">

@@ -629,6 +629,12 @@ footer {
   min-height: 60vh;
 }
 
+.loading-text {
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: 600;
+}
+
 * {
   padding: 0;
   margin: 0;

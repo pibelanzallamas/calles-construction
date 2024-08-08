@@ -10,8 +10,10 @@ function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function handleLogin(e) {
+    setLoading(true);
     e.preventDefault();
     axios
       .post("http://localhost:3000/api/user/login", {
@@ -19,7 +21,8 @@ function Login() {
         password,
       })
       .then((user) => {
-        alerts("Aloha!", `Login successul 🏝`, "success");
+        setLoading(false);
+        alerts("Aloha!", `Login successul 🏝`, "info");
         dispatch(setUser(user.data));
         navigate("/");
       })
@@ -56,7 +59,11 @@ function Login() {
             placeholder="password"
           />
         </div>
-        <button type="submit">Send</button>
+        {loading ? (
+          <p className="loading-text"> Loading ...</p>
+        ) : (
+          <button type="submit">Send</button>
+        )}
       </form>
     </section>
   );
