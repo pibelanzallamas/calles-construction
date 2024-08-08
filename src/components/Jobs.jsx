@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Text from "../commons/Text";
 import Job from "../commons/Job";
+import { useSelector } from "react-redux";
 import { services } from "../utilities/services";
 import jobs from "../assets/jobs-img.jpg";
 import TopButton from "../commons/TopButton";
-import { useSelector } from "react-redux";
 
 function Jobs() {
   const texts = [
@@ -17,18 +17,59 @@ function Jobs() {
       desc: "We ensure quality by using top-notch materials, maintaining clear communication, adhering to safety standards, and delivering timely results with attention to team work.",
     },
   ];
-
   const user = useSelector((state) => state.user);
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [desc, setDesc] = useState("");
+  const [date, setDate] = useState("");
 
   return (
     <section id="jobs" className="jobs-compo">
       <h2>Jobs</h2>
 
-      <figure className="jobs-img">
-        <img src={jobs} alt="jobs-img" />
-      </figure>
+      <form onSubmit={handleLogin}>
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            required
+            maxLength={40}
+            placeholder="email"
+          />
+        </div>
+        <div className="field">
+          <div className="peak-line">
+            <label>Password</label>
+            <figure onClick={handlePeak}>
+              <img src={peak ? eyeOpen : eyeClose}></img>
+            </figure>
+          </div>
+          <input
+            type={peak ? "text" : "password"}
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
+            maxLength={20}
+            placeholder="password"
+          />
+        </div>
+        {loading ? (
+          <p className="loading-text"> Loading ...</p>
+        ) : (
+          <button type="submit">Send</button>
+        )}
+      </form>
 
-      <Text text={texts[0]} />
+      {/* <figure className="jobs-img">
+        <img src={jobs} alt="jobs-img" />
+      </figure> */}
+
+      {/* {jobs.length > 0 && jobs.map(())} */}
+
+      {/* <Text text={texts[0]} />
 
       <Job service={services[0]} />
 
@@ -42,7 +83,7 @@ function Jobs() {
 
       <Job service={services[4]} />
 
-      <Job service={services[5]} />
+      <Job service={services[5]} /> */}
 
       <TopButton />
     </section>

@@ -1,11 +1,8 @@
 import React from "react";
 import Service from "../commons/Service";
 import { services } from "../utilities/services.js";
-import { useSelector } from "react-redux";
 
 function Services() {
-  const user = useSelector((state) => state.user);
-
   return (
     <>
       <section className="services-compo">

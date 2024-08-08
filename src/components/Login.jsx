@@ -4,6 +4,8 @@ import { alerts } from "../utils/alerts";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../state/userState";
+import eyeOpen from "../assets/eye-outline.svg";
+import eyeClose from "../assets/eye-off-outline.svg";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,6 +13,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [peak, setPeak] = useState(false);
 
   function handleLogin(e) {
     setLoading(true);
@@ -21,15 +24,20 @@ function Login() {
         password,
       })
       .then((user) => {
-        setLoading(false);
         alerts("Aloha!", `Login successul 🏝`, "info");
         dispatch(setUser(user.data));
         navigate("/");
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
         alerts("Nope!", "Email o password incorrectos ☠️", "danger");
+        setLoading(false);
       });
+  }
+
+  function handlePeak() {
+    setPeak(!peak);
   }
 
   return (
@@ -49,9 +57,14 @@ function Login() {
           />
         </div>
         <div className="field">
-          <label>Password</label>
+          <div className="peak-line">
+            <label>Password</label>
+            <figure onClick={handlePeak}>
+              <img src={peak ? eyeOpen : eyeClose}></img>
+            </figure>
+          </div>
           <input
-            type="password"
+            type={peak ? "text" : "password"}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
