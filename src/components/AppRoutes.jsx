@@ -6,6 +6,7 @@ import Gallery from "./Gallery";
 import Estimate from "./Estimate";
 import Services from "./Services";
 import Location from "./Location";
+import Login from "./Login";
 
 function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ function AppRoutes() {
       <Route path="estimate" element={<Estimate />} />
       <Route path="services" element={<Services />} />
       <Route path="location" element={<Location />} />
+      <Route path="login" element={<Login />} />
     </Routes>
   );
 }

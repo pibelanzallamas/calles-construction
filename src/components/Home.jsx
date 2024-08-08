@@ -1,9 +1,11 @@
 import React from "react";
 import image from "../assets/home-image.jpg";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Home() {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   function handleGo() {
     navigate("/estimate");
@@ -19,6 +21,7 @@ function Home() {
         <p>
           We offer a variety of professional contracting services to meet all
           your needs.
+          {user.id ? <section className="admin-badge">Admin</section> : <></>}
         </p>
         <div className="button-estimate-div">
           <button onClick={handleGo} className="button">
@@ -36,6 +39,7 @@ function Home() {
           <p>
             We offer a variety of professional contracting services to meet all
             your needs.
+            {user.id ? <span className="admin-badge"> Admin</span> : <></>}
           </p>
           <button onClick={handleGo} className="button">
             Get Estimate

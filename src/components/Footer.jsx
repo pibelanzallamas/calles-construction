@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import facelogo from "../assets/facelogo.svg";
 import instalogo from "../assets/instalogo.svg";
 import twitterlogo from "../assets/twitterlogo.svg";
@@ -65,7 +66,9 @@ export default function Footer() {
           </div>
           <div className="line">
             <img src={six} alt="" />
-            <p>Powered by Vercel</p>
+            <p>
+              Powered by Vercel - <Link to={"/login"}>Admin Mode</Link>
+            </p>
           </div>
         </div>
       </div>
