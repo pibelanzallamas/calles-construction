@@ -1,4 +1,5 @@
 import React from "react";
+import trash from "../assets/trash.svg";
 
 function Job({ service }) {
   return (
@@ -7,7 +8,12 @@ function Job({ service }) {
         <img src={service.pic} alt={service.title} className="job-img" />
       </figure>
       <section className={service.side}>
-        <h3>{service.title}</h3>
+        <div className="pencil-line">
+          <h3>{service.title}</h3>
+          <figure>
+            <img src={trash} alt="trash-icon" />
+          </figure>
+        </div>
         <p>{service.bigDesc}</p>
       </section>
     </div>

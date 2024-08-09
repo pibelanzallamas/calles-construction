@@ -103,6 +103,7 @@ function Jobs() {
         <Job service={service} key={id} />
       ))}
 
+      {/* <Text text={texts[1]} /> */}
       {user.id && (
         <>
           {more ? (
@@ -171,7 +172,6 @@ function Jobs() {
         </>
       )}
 
-      <Text text={texts[1]} />
       <TopButton />
     </section>
   );

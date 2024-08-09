@@ -292,6 +292,9 @@ nav {
   margin-top: 0.2rem;
 }
 
+.form-job {
+  margin-bottom: 2rem;
+}
 .form-job form {
   display: flex;
   flex-direction: column;
@@ -320,6 +323,20 @@ nav {
 }
 .form-job form .button-estimate-div {
   margin-top: 1rem;
+}
+
+.pencil-line {
+  display: flex;
+  align-items: center;
+}
+.pencil-line figure {
+  margin-left: 0.3rem;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.pencil-line figure img {
+  width: 100%;
 }
 
 @media (min-width: 800px) {
