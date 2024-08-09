@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Text from "../commons/Text";
 import Job from "../commons/Job";
 import { useSelector } from "react-redux";
 import { services } from "../utilities/services";
-import jobs from "../assets/jobs-img.jpg";
+import portadaJobs from "../assets/jobs-img.jpg";
 import TopButton from "../commons/TopButton";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
+import axios from "axios";
 
 function Jobs() {
   const texts = [
@@ -22,41 +23,99 @@ function Jobs() {
   const user = useSelector((state) => state.user);
 
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");
+  const [desc, setDesc] = useState("");
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
+  const [jobs, setJobs] = useState({});
+  const [estado, setEstado] = useState(false);
 
-  function handleMore() {
-    setMore(true);
-  }
+  // function changeEstado() {
+  //   setEstado(!estado);
+  // }
 
-  function handleLess() {
-    setMore(false);
-  }
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/api/images/")
+  //     .then((jobs) => {
+  //       setJobs(jobs.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
-  function createJobs() {
+  // function deleteJob() {
+  //   const jid = 9;
+  //   axios
+  //     .delete(
+  //       "http://localhost:3000/api/images/delete",
+  //       {
+  //         data: { jid },
+  //       },
+  //       {
+  //         withCredentials: true,
+  //         credentials: "include",
+  //       }
+  //     )
+  //     .then((res) => {
+  //       alert("Deleted!", "Job deleted correctly", "danger");
+  //     });
+  // }
+
+  function createJobs(e) {
+    e.preventDefault();
     setLoading(true);
+
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("api_key", import.meta.env.VITE_IMG_API);
+    formData.append("name", title);
+
+    axios
+      .post("https://www.imghippo.com/v1/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: false,
+      })
+      .then((response) => {
+        console.log("exito", response);
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+    setLoading(false);
   }
 
   return (
     <section id="jobs" className="jobs-compo">
       <h2>Jobs</h2>
 
+      <figure className="jobs-img">
+        <img src={portadaJobs} alt="jobs-img" />
+      </figure>
+
+      <Text text={texts[0]} />
+
+      {services.map((service, id) => (
+        <Job service={service} key={id} />
+      ))}
+
       {user.id && (
         <>
           {more ? (
-            <figure onClick={handleLess} className="more-button">
+            <figure onClick={() => setMore(false)} className="less-button">
               <img src={lessButton} alt="less-button"></img>
             </figure>
           ) : (
-            <figure onClick={handleMore} className="more-button">
+            <figure onClick={() => setMore(true)} className="more-button">
               <img src={moreButton} alt="more-button"></img>
             </figure>
           )}
           {more && (
-            <div className="estimate-compo form-job">
+            <div className="form-job">
               <form onSubmit={createJobs}>
                 <div className="field">
                   <label htmlFor="title">Title</label>
@@ -96,12 +155,9 @@ function Jobs() {
                 <div className="field">
                   <label>Image</label>
                   <input
-                    type="text"
-                    onChange={(e) => setImage(e.target.value)}
-                    value={image}
+                    type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
                     required
-                    maxLength={20}
-                    placeholder="image"
                   />
                 </div>
                 {loading ? (
@@ -114,25 +170,8 @@ function Jobs() {
           )}
         </>
       )}
-      {/* <figure className="jobs-img">
-        <img src={jobs} alt="jobs-img" />
-      </figure>
-
-      <Text text={texts[0]} />
-
-      <Job service={services[0]} />
-
-      <Job service={services[1]} />
-
-      <Job service={services[2]} />
 
       <Text text={texts[1]} />
-
-      <Job service={services[3]} />
-
-      <Job service={services[4]} />
-
-      <Job service={services[5]} /> */}
       <TopButton />
     </section>
   );

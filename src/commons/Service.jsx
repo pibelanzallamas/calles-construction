@@ -1,7 +1,7 @@
 import React from "react";
 // import pencil from "../assets/edit.svg";
 
-function Service({ logo, title, desc, edit }) {
+function Service({ logo, title, desc }) {
   return (
     <div className="service">
       <figure>

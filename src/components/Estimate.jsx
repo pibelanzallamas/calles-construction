@@ -37,6 +37,7 @@ function Estimate() {
         setSending(false);
       },
       (err) => {
+        console.log(err);
         alerts(
           "Couldn't sent email!",
           "Check your information correctly.",
