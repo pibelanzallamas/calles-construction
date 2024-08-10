@@ -1,13 +1,13 @@
 .jobs-compo
   margin-top: 1rem
   display: flex
-  gap: 1rem
+  gap: 2.5rem //gap between jobs mobile
   flex-direction: column
   align-items: center
   text-align: center
   margin-bottom: 1rem
-  // h2
-  //   margin-bottom: -1rem
+  h2
+    margin-bottom: -0.5rem
 
 //LA PRIMERA IMAGEN AL PRINCIPIO 
 .jobs-img
@@ -33,10 +33,6 @@
     img
       width: 100%
       height: 100%
-  .l
-    text-align: left
-  .r
-    text-align: right
   h3
     font-size: 1.5rem
     margin-top: 0.5rem
@@ -45,11 +41,17 @@
     font-size: 1.1rem
     margin-top: 0.2rem
 
+.l
+  text-align: left
+  justify-content: left
+.r
+  text-align: right
+  justify-content: right
+
 //form job
 .form-job
-  margin-bottom: 2rem
+  margin-bottom: 1rem
   form 
-    // margin-top: 1rem
     display: flex
     flex-direction: column
     gap: 1rem
@@ -77,21 +79,24 @@
 
 //line-title-icon
 .pencil-line
-    display: flex
-    align-items: center
-    figure
-      margin-left: 0.3rem
-      cursor: pointer
-      width: 1.5rem
-      height: 1.5rem
-      img
-        width: 100%
+  display: flex
+  align-items: center
+  figure
+    margin-left: 0.3rem
+    cursor: pointer
+    width: 1.5rem
+    height: 1.5rem
+    img
+      width: 100%
 
 
 @media (min-width: 800px)
   .jobs-compo
     padding-left: 4rem
     padding-right: 4rem
+    gap: 4rem
+    h2
+      margin-bottom: -2rem
     .button-estimate-div
       margin-bottom: 1.5rem
   .text-compo
@@ -119,7 +124,7 @@
     width: 65vw
     margin: 0 auto
     padding-top: 2rem
-    gap: 1rem
+    gap: 5rem
     padding-bottom: 2rem
     .button-estimate-div
       // margin-top: -1.5rem
@@ -145,4 +150,5 @@
           font-size: 1.3rem
         input, textarea
           font-size: 1rem
+
     

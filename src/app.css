@@ -155,6 +155,9 @@ nav {
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
+.services-compo h2 {
+  margin-bottom: 0.5rem;
+}
 .services-compo .button-estimate-div {
   margin-top: 1.5rem;
 }
@@ -244,11 +247,14 @@ nav {
 .jobs-compo {
   margin-top: 1rem;
   display: flex;
-  gap: 1rem;
+  gap: 2.5rem;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin-bottom: 1rem;
+}
+.jobs-compo h2 {
+  margin-bottom: -0.5rem;
 }
 
 .jobs-img {
@@ -276,12 +282,6 @@ nav {
   width: 100%;
   height: 100%;
 }
-.job-card .l {
-  text-align: left;
-}
-.job-card .r {
-  text-align: right;
-}
 .job-card h3 {
   font-size: 1.5rem;
   margin-top: 0.5rem;
@@ -292,8 +292,18 @@ nav {
   margin-top: 0.2rem;
 }
 
+.l {
+  text-align: left;
+  justify-content: left;
+}
+
+.r {
+  text-align: right;
+  justify-content: right;
+}
+
 .form-job {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .form-job form {
   display: flex;
@@ -343,6 +353,10 @@ nav {
   .jobs-compo {
     padding-left: 4rem;
     padding-right: 4rem;
+    gap: 4rem;
+  }
+  .jobs-compo h2 {
+    margin-bottom: -2rem;
   }
   .jobs-compo .button-estimate-div {
     margin-bottom: 1.5rem;
@@ -374,7 +388,7 @@ nav {
     width: 65vw;
     margin: 0 auto;
     padding-top: 2rem;
-    gap: 1rem;
+    gap: 5rem;
     padding-bottom: 2rem;
   }
   .jobs-img {
@@ -413,10 +427,10 @@ nav {
 .gallery-compo h2 {
   margin-bottom: 1rem;
 }
-.gallery-compo figure {
+.gallery-compo .image-card figure {
   width: 100%;
 }
-.gallery-compo figure img {
+.gallery-compo .image-card figure img {
   width: 100%;
   height: 100%;
 }
@@ -425,13 +439,17 @@ nav {
   margin-bottom: 1rem;
 }
 
+.gallery-gap {
+  gap: 1rem;
+}
+
 @media (min-width: 800px) {
   .gallery-compo {
     padding-left: 4rem;
     padding-right: 4rem;
   }
   .gallery-compo .button-estimate-div {
-    margin-top: 2rem;
+    margin-top: 3rem;
     margin-bottom: 2rem;
   }
 }

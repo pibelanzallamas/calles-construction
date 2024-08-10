@@ -99,8 +99,10 @@ function Jobs() {
 
       <Text text={texts[0]} />
 
-      {services.map((service, id) => (
-        <Job service={service} key={id} />
+      {services.map((service, i) => (
+        <>
+          <Job service={service} key={i} />
+        </>
       ))}
 
       {/* <Text text={texts[1]} /> */}

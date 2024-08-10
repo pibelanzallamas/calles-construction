@@ -1,27 +1,21 @@
 import React from "react";
-import pic from "../assets/gallery1.jpg";
-import pic2 from "../assets/gallery-carpentry.jpeg";
-import pic5 from "../assets/gallery5.jpg";
-import pic3 from "../assets/gallery3.jpg";
-import pic4 from "../assets/gallery-painting.jpeg";
-import pic6 from "../assets/gallery-paintings-2.jpeg";
-import pic8 from "../assets/gallery-electrician.jpeg";
-import TopButton from "../commons/TopButton";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { images } from "../utilities/gallery";
+import axios from "axios";
+import Image from "../commons/Image";
+import TopButton from "../commons/TopButton";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import images from "../utilities/gallery";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
-  const [image, setImage] = useState("");
-  const [desc, setDesc] = useState("");
+  const [image, setImage] = useState(""); //input
+  const [desc, setDesc] = useState(""); //input
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
-  const [gallery, setGallery] = useState({});
-  const [estado, setEstado] = useState(false);
+  const [gallery, setGallery] = useState({}); //all images
+  const [estado, setEstado] = useState(false); //state listener
 
   //get images
 
@@ -31,12 +25,16 @@ function Gallery() {
   //delete images
 
   return (
-    <section className="jobs-compo" id="gallery">
+    <section className="jobs-compo gallery-compo gallery-gap" id="gallery">
       <h2>Gallery</h2>
-      {images.map((image) => (
-        <figure>
-          <img src={image.url} alt={image.url} />
-        </figure>
+
+      {images.map((img, i) => (
+        <div className="image-card" key={i} id={i}>
+          <figure>
+            <img src={img.url} className="job-img" />
+          </figure>
+          <p>{img.desc}</p>
+        </div>
       ))}
 
       {user.id && (

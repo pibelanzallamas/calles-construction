@@ -26,7 +26,6 @@ export default function Footer() {
     };
     dispatch(setUser(noUser));
     alerts("Bye!", `Logout successul 🏝`, "success");
-    navigate("/");
   }
 
   return (
@@ -89,7 +88,10 @@ export default function Footer() {
               {!user.id ? (
                 <Link to={"/login"}> Admin Mode</Link>
               ) : (
-                <Link onClick={handleLogout}> Logout</Link>
+                <Link to={""} onClick={handleLogout}>
+                  {" "}
+                  Logout
+                </Link>
               )}
             </p>
           </div>
