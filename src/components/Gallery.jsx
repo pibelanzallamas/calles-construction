@@ -31,7 +31,7 @@ function Gallery() {
   //get images
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/images/")
+      .get("https://calles-construction-back.onrender.com/api/images/")
       .then((resp) => setGallery(resp.data))
       .catch((err) => console.log(err));
   }, [estado]);
@@ -51,10 +51,13 @@ function Gallery() {
         f
       );
 
-      const res = await axios.post("http://localhost:3000/api/images/create", {
-        image: url.data.secure_url,
-        description: desc,
-      });
+      const res = await axios.post(
+        "https://calles-construction-back.onrender.com/api/images/create",
+        {
+          image: url.data.secure_url,
+          description: desc,
+        }
+      );
 
       alerts("Good!", "Image upload successfuly", "success");
       setEstado(!estado);
@@ -72,7 +75,7 @@ function Gallery() {
   const confirmDelete = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/images/delete/${jid}`
+        `https://calles-construction-back.onrender.com/api/images/delete/${jid}`
       );
 
       alerts("Good!", "The image was erased", "success");

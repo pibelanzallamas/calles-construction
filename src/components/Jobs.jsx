@@ -37,7 +37,7 @@ function Jobs() {
   //get jobs
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/jobs/")
+      .get("https://calles-construction-back.onrender.com/api/jobs/")
       .then((resp) => setJobs(resp.data))
       .catch((err) => console.log(err));
   }, [estado]);
@@ -58,12 +58,15 @@ function Jobs() {
         f
       );
       const img = url.data.secure_url;
-      const resp = await axios.post("http://localhost:3000/api/jobs/create", {
-        title,
-        description: desc,
-        image: img,
-        date,
-      });
+      const resp = await axios.post(
+        "https://calles-construction-back.onrender.com/api/jobs/create",
+        {
+          title,
+          description: desc,
+          image: img,
+          date,
+        }
+      );
       setEstado(!estado);
 
       if (resp.data[1]) {
@@ -87,7 +90,7 @@ function Jobs() {
   const confirmDelete = async () => {
     try {
       const resp = await axios.delete(
-        `http://localhost:3000/api/jobs/delete/${jid}`
+        `https://calles-construction-back.onrender.com/jobs/delete/${jid}`
       );
 
       alerts("Good", "The Job was erase it", "success");
