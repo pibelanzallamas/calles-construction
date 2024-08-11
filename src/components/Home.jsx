@@ -7,12 +7,8 @@ function Home() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
-  function handleGo() {
-    navigate("/estimate");
-  }
-
   return (
-    <section className="home-compo" id="home">
+    <section id="home">
       <div className="home-mobile">
         <figure>
           <img src={image} alt="home-image" />
@@ -23,7 +19,12 @@ function Home() {
           your needs. <span className="admin-badge">{user.id && "Admin"}</span>
         </p>
         <div className="button-estimate-div">
-          <button onClick={handleGo} className="button">
+          <button
+            onClick={() => {
+              navigate("/estimate");
+            }}
+            className="button"
+          >
             Get Estimate
           </button>
         </div>
@@ -40,7 +41,12 @@ function Home() {
             your needs.
             {user.id && <span className="admin-badge"> Admin</span>}
           </p>
-          <button onClick={handleGo} className="button">
+          <button
+            onClick={() => {
+              navigate("/estimate");
+            }}
+            className="button"
+          >
             Get Estimate
           </button>
         </div>

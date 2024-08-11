@@ -7,25 +7,58 @@
   h2
     margin-bottom: 1rem
   .image-card
+    width: 100%
     figure
       width: 100%
       img
         width: 100%
         height: 100%
+    p
+      font-size: 1rem
+      text-align: center
   .button-estimate-div
     margin-top: 1rem
     margin-bottom: 1rem
+  .more-button
+    margin-top: 1rem
+    width: 2.5rem
+    img
+      height: 100%
+      width: 100%
+      display: block
+  .gallery-image
+    position: relative
+    figure:nth-of-type(2)
+      cursor: pointer
+      position: absolute
+      width: 1.9rem
+      top: 0
+      right: 0
+      background-color: #fbf7ef
+      border-radius: 12px
+      padding: 0.2rem
+      img
+        display: block
+        width: 100%
+        height: 100%
 
-.gallery-gap
-  gap: 1rem
+    
 
 @media (min-width: 800px)
   .gallery-compo
     padding-left: 4rem
     padding-right: 4rem
+    .more-button
+      margin-top: 1rem
+      width: 3rem
     .button-estimate-div
       margin-top: 3rem
       margin-bottom: 2rem
+    .form-job
+      margin-top: 1rem
+    .gallery-image
+      figure:nth-of-type(2)
+        width: 2rem
 
 @media (min-width: 1000px)
   .gallery-compo
@@ -38,4 +71,4 @@
       margin-top: 2rem
       margin-bottom: 3.5rem
     h2
-      margin-bottom: 0rem
+      margin-bottom: 1rem

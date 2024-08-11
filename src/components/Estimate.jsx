@@ -43,6 +43,7 @@ function Estimate() {
           "Check your information correctly.",
           "warning"
         );
+        setSending(false);
       }
     );
   };

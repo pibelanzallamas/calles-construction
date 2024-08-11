@@ -1,34 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Text from "../commons/Text";
-import Job from "../commons/Job";
 import { useSelector } from "react-redux";
 import { services } from "../utilities/services";
-import portadaJobs from "../assets/jobs-img.jpg";
+import { texts } from "../utilities/text";
+import axios from "axios";
+import Text from "../commons/Text";
+import Job from "../commons/Job";
 import TopButton from "../commons/TopButton";
+import portadaJobs from "../assets/jobs-img.jpg";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
-import axios from "axios";
 
 function Jobs() {
-  const texts = [
-    {
-      title: "Philosophy",
-      desc: "We are a solid group that cares for each other, cares about the work and cares about the people who hired us. We pay attention to details because we believe those are the most important things.",
-    },
-    {
-      title: "Methodology",
-      desc: "We ensure quality by using top-notch materials, maintaining clear communication, adhering to safety standards, and delivering timely results with attention to team work.",
-    },
-  ];
   const user = useSelector((state) => state.user);
-
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState(null);
+  const [jobs, setJobs] = useState({});
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
-  const [jobs, setJobs] = useState({});
   const [estado, setEstado] = useState(false);
 
   // function changeEstado() {
@@ -64,29 +54,34 @@ function Jobs() {
   //     });
   // }
 
+  // function createJobs(e) {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   const formData = new FormData();
+  //   formData.append("file", image);
+  //   formData.append("api_key", import.meta.env.VITE_IMG_API);
+  //   formData.append("name", title);
+
+  //   axios
+  //     .post("https://www.imghippo.com/v1/upload", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //       withCredentials: false,
+  //     })
+  //     .then((response) => {
+  //       console.log("exito", response);
+  //     })
+  //     .catch((err) => {
+  //       console.log("error", err);
+  //     });
+  //   setLoading(false);
+  // }
+
   function createJobs(e) {
     e.preventDefault();
-    setLoading(true);
-
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("api_key", import.meta.env.VITE_IMG_API);
-    formData.append("name", title);
-
-    axios
-      .post("https://www.imghippo.com/v1/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: false,
-      })
-      .then((response) => {
-        console.log("exito", response);
-      })
-      .catch((err) => {
-        console.log("error", err);
-      });
-    setLoading(false);
+    alert("ok");
   }
 
   return (
@@ -105,18 +100,19 @@ function Jobs() {
         </>
       ))}
 
-      {/* <Text text={texts[1]} /> */}
       {user.id && (
         <>
-          {more ? (
-            <figure onClick={() => setMore(false)} className="less-button">
-              <img src={lessButton} alt="less-button"></img>
-            </figure>
-          ) : (
-            <figure onClick={() => setMore(true)} className="more-button">
-              <img src={moreButton} alt="more-button"></img>
-            </figure>
-          )}
+          <div className="more-button">
+            {more ? (
+              <figure onClick={() => setMore(false)} className="more-button">
+                <img src={lessButton} alt="less-button"></img>
+              </figure>
+            ) : (
+              <figure onClick={() => setMore(true)} className="more-button">
+                <img src={moreButton} alt="more-button"></img>
+              </figure>
+            )}
+          </div>
           {more && (
             <div className="form-job">
               <form onSubmit={createJobs}>
@@ -173,7 +169,6 @@ function Jobs() {
           )}
         </>
       )}
-
       <TopButton />
     </section>
   );

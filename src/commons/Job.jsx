@@ -6,6 +6,10 @@ function Job({ service }) {
   // const [even, setEven] = useState(even % 2 == 0 ? "even" : "odd");
   const user = useSelector((state) => state.user);
 
+  function handleDelete() {
+    alert("ok");
+  }
+
   return (
     <div className="job-card">
       <figure>
@@ -15,7 +19,7 @@ function Job({ service }) {
         <div className={`pencil-line ${service.side}`}>
           <h3>{service.title}</h3>
           {user.id && (
-            <figure>
+            <figure onClick={handleDelete}>
               <img src={trash} alt="trash-icon" />
             </figure>
           )}
