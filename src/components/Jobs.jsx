@@ -97,7 +97,7 @@ function Jobs() {
       setEstado(!estado);
     } catch (e) {
       console.log(e);
-      alerts("Atention", "The Job couldn't be erase it", "danger");
+      alerts("Atention", "The Job couldn't be erase it", "warning");
     }
     closeBox();
   };
