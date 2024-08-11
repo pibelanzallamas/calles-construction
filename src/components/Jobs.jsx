@@ -88,9 +88,10 @@ function Jobs() {
 
   //delete images
   const confirmDelete = async () => {
+    const id = jid;
     try {
       const resp = await axios.delete(
-        `https://calles-construction-back.onrender.com/jobs/delete/${jid}`
+        `https://calles-construction-back.onrender.com/jobs/delete/${id}`
       );
 
       alerts("Good", "The Job was erase it", "success");
