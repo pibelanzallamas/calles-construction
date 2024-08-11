@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { services } from "../utilities/services";
 import { texts } from "../utilities/text";
 import axios from "axios";
 import Text from "../commons/Text";
@@ -9,6 +8,7 @@ import TopButton from "../commons/TopButton";
 import portadaJobs from "../assets/jobs-img.jpg";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
+import { alerts } from "../utils/alerts";
 
 function Jobs() {
   const user = useSelector((state) => state.user);
@@ -21,45 +21,88 @@ function Jobs() {
   const [more, setMore] = useState(false);
   const [estado, setEstado] = useState(false);
 
-  //get images
+  //get jobs
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/jobs/")
+      .then((resp) => setJobs(resp.data))
+      .catch((err) => console.log(err));
+  }, [estado]);
 
   //upload images
-  function createJobs(e) {
+  const createJobs = async (e) => {
     e.preventDefault();
+
+    const f = new FormData();
+    f.append("file", image);
+    f.append("upload_preset", "nfi9e7vs");
+    f.append("api_key", import.meta.env.VITE_API_KEY);
     setLoading(true);
-    //loading true
-    //subir imagen a server
-    //obtener url
-    //enviar url y lo demas
-    //alerts todo bien
-    //cambiar estado
-    //loading false
-    alert("upload");
-    setEstado(!estado);
+
+    try {
+      const url = await axios.post(
+        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
+        f
+      );
+      const img = url.data.secure_url;
+      const resp = await axios.post("http://localhost:3000/api/jobs/create", {
+        title,
+        description: desc,
+        image: img,
+        date,
+      });
+      setEstado(!estado);
+
+      if (resp.data[1]) {
+        alerts("Good!", "Jobs was created successfuly", "success");
+      } else {
+        alerts("Atention!", "Jobs was already created", "warning");
+      }
+    } catch (e) {
+      console.log(e);
+      alerts("Warning!", "Jobs could be created", "warning");
+    }
+    setTitle("");
+    setDesc("");
+    setDate("");
+    setImage(null);
     setLoading(false);
-  }
+  };
 
   //delete images
-  function handleDelete() {
-    alert("delete");
-  }
+  const handleDelete = async (id) => {
+    try {
+      const resp = await axios.delete(
+        `http://localhost:3000/api/jobs/delete/${id}`
+      );
+
+      alert("Good", "The Job was created", "success");
+      setEstado(!estado);
+    } catch (e) {
+      console.log(e);
+      alerts("Atention", "The Job couldn't be erase", "danger");
+    }
+  };
 
   return (
     <section id="jobs" className="jobs-compo">
       <h2>Jobs</h2>
-
       <figure className="jobs-img">
         <img src={portadaJobs} alt="jobs-img" />
       </figure>
-
       <Text text={texts[0]} />
 
-      {services.map((service, i) => (
-        <>
-          <Job service={service} key={i} deleteFun={handleDelete} />
-        </>
-      ))}
-
+      {jobs.length > 0 &&
+        jobs.map((job, i) => (
+          <>
+            <Job
+              service={job}
+              key={job.id}
+              indice={i}
+              deleteFun={handleDelete}
+            />
+          </>
+        ))}
       {user.id && (
         <>
           <div className="more-button">

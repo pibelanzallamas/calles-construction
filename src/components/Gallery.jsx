@@ -1,13 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { alerts } from "../utils/alerts";
 import axios from "axios";
-import Image from "../commons/Image";
 import TopButton from "../commons/TopButton";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
 import trash from "../assets/trash.svg";
-import images from "../utilities/gallery";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
@@ -19,47 +18,80 @@ function Gallery() {
   const [estado, setEstado] = useState(false); //state listener
 
   //get images
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/images/")
+      .then((resp) => setGallery(resp.data))
+      .catch((err) => console.log(err));
+  }, [estado]);
 
   //upload images
-  function createImage(e) {
+  const createImage = async (e) => {
     e.preventDefault();
+    const f = new FormData();
+    f.append("file", image);
+    f.append("upload_preset", "nfi9e7vs");
+    f.append("api_key", import.meta.env.VITE_API_KEY);
     setLoading(true);
-    //loading true
-    //subir imagen a server
-    //obtener url
-    //enviar url y desc
-    //alerts todo bien
-    //cambiar estado
-    //loading false
-    alert("enviado");
-    setEstado(!estado);
+
+    try {
+      const url = await axios.post(
+        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
+        f
+      );
+
+      const res = await axios.post("http://localhost:3000/api/images/create", {
+        image: url.data.secure_url,
+        description: desc,
+      });
+
+      alerts("Good!", "Image upload successfuly", "success");
+      setEstado(!estado);
+    } catch (e) {
+      console.log(e);
+      alerts("Warning!", "Couldn't upload image", "danger");
+    }
+
+    setDesc("");
+    setImage(null);
     setLoading(false);
-  }
+  };
 
   //delete images
-  function handleDelete() {
-    alert("delete");
-  }
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:3000/api/images/delete/${id}`
+      );
+
+      alerts("Good", "The image was erased", "success");
+      setEstado(!estado);
+    } catch (e) {
+      console.log(e);
+      alerts("Sorry", "Couldn't delete image", "danger");
+    }
+  };
 
   return (
     <section className="gallery-compo" id="gallery">
       <h2>Gallery</h2>
 
-      {images.map((img, i) => (
-        <div className="image-card" key={i} id={i}>
-          <div className="gallery-image">
-            <figure>
-              <img src={img.url} className="job-img" />
-            </figure>
-            {user.id && (
-              <figure onClick={handleDelete}>
-                <img src={trash} alt="trash-icon" />
+      {gallery.length > 0 &&
+        gallery.map((img, i) => (
+          <div className="image-card" key={i} id={img.id}>
+            <div className="gallery-image">
+              <figure>
+                <img src={img.image} className="job-img" />
               </figure>
-            )}
+              {user.id && (
+                <figure onClick={() => handleDelete(img.id)}>
+                  <img src={trash} alt="trash-icon" />
+                </figure>
+              )}
+            </div>
+            <p>{img.description}</p>
           </div>
-          <p>{img.desc}</p>
-        </div>
-      ))}
+        ))}
 
       {user.id && (
         <>
