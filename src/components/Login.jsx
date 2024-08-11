@@ -36,10 +36,6 @@ function Login() {
       });
   }
 
-  function handlePeak() {
-    setPeak(!peak);
-  }
-
   return (
     <section className="estimate-compo login-compo">
       <h2>Login</h2>
@@ -59,7 +55,7 @@ function Login() {
         <div className="field">
           <div className="peak-line">
             <label>Password</label>
-            <figure onClick={handlePeak}>
+            <figure onClick={() => setPeak(!peak)}>
               <img src={peak ? eyeOpen : eyeClose}></img>
             </figure>
           </div>

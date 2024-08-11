@@ -21,67 +21,27 @@ function Jobs() {
   const [more, setMore] = useState(false);
   const [estado, setEstado] = useState(false);
 
-  // function changeEstado() {
-  //   setEstado(!estado);
-  // }
+  //get images
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000/api/images/")
-  //     .then((jobs) => {
-  //       setJobs(jobs.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // function deleteJob() {
-  //   const jid = 9;
-  //   axios
-  //     .delete(
-  //       "http://localhost:3000/api/images/delete",
-  //       {
-  //         data: { jid },
-  //       },
-  //       {
-  //         withCredentials: true,
-  //         credentials: "include",
-  //       }
-  //     )
-  //     .then((res) => {
-  //       alert("Deleted!", "Job deleted correctly", "danger");
-  //     });
-  // }
-
-  // function createJobs(e) {
-  //   e.preventDefault();
-  //   setLoading(true);
-
-  //   const formData = new FormData();
-  //   formData.append("file", image);
-  //   formData.append("api_key", import.meta.env.VITE_IMG_API);
-  //   formData.append("name", title);
-
-  //   axios
-  //     .post("https://www.imghippo.com/v1/upload", formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //       withCredentials: false,
-  //     })
-  //     .then((response) => {
-  //       console.log("exito", response);
-  //     })
-  //     .catch((err) => {
-  //       console.log("error", err);
-  //     });
-  //   setLoading(false);
-  // }
-
+  //upload images
   function createJobs(e) {
     e.preventDefault();
-    alert("ok");
+    setLoading(true);
+    //loading true
+    //subir imagen a server
+    //obtener url
+    //enviar url y lo demas
+    //alerts todo bien
+    //cambiar estado
+    //loading false
+    alert("upload");
+    setEstado(!estado);
+    setLoading(false);
+  }
+
+  //delete images
+  function handleDelete() {
+    alert("delete");
   }
 
   return (
@@ -96,7 +56,7 @@ function Jobs() {
 
       {services.map((service, i) => (
         <>
-          <Job service={service} key={i} />
+          <Job service={service} key={i} deleteFun={handleDelete} />
         </>
       ))}
 
@@ -129,19 +89,19 @@ function Jobs() {
                   />
                 </div>
                 <div className="field">
-                  <label>Date</label>
+                  <label htmlFor="date">Date</label>
                   <input
+                    id="date"
                     type="date"
                     onChange={(e) => setDate(e.target.value)}
                     value={date}
                     required
-                    maxLength={20}
-                    placeholder="date"
                   />
                 </div>
                 <div className="field">
-                  <label>Description</label>
+                  <label htmlFor="desc">Description</label>
                   <textarea
+                    id="desc"
                     type="text"
                     onChange={(e) => setDesc(e.target.value)}
                     value={desc}
@@ -152,8 +112,9 @@ function Jobs() {
                   />
                 </div>
                 <div className="field">
-                  <label>Image</label>
+                  <label htmlFor="image">Image</label>
                   <input
+                    id="image"
                     type="file"
                     onChange={(e) => setImage(e.target.files[0])}
                     required

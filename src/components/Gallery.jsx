@@ -11,7 +11,7 @@ import images from "../utilities/gallery";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
-  const [image, setImage] = useState(""); //input
+  const [image, setImage] = useState(null); //input
   const [desc, setDesc] = useState(""); //input
   const [gallery, setGallery] = useState({}); //all images
   const [loading, setLoading] = useState(false);
@@ -21,10 +21,25 @@ function Gallery() {
   //get images
 
   //upload images
-  function createImage() {}
+  function createImage(e) {
+    e.preventDefault();
+    setLoading(true);
+    //loading true
+    //subir imagen a server
+    //obtener url
+    //enviar url y desc
+    //alerts todo bien
+    //cambiar estado
+    //loading false
+    alert("enviado");
+    setEstado(!estado);
+    setLoading(false);
+  }
 
   //delete images
-  function handleDelete() {}
+  function handleDelete() {
+    alert("delete");
+  }
 
   return (
     <section className="gallery-compo" id="gallery">
@@ -78,10 +93,10 @@ function Gallery() {
                     type="text"
                     onChange={(e) => setDesc(e.target.value)}
                     value={desc}
-                    required
                     rows={3}
-                    maxLength={140}
+                    maxLength={40}
                     placeholder="description"
+                    required
                   />
                 </div>
                 {loading ? (
