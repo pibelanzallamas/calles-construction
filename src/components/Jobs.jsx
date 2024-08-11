@@ -10,6 +10,7 @@ import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
 import { alerts } from "../utils/alerts";
 import { useNavigate } from "react-router-dom";
+import UserModals from "../modals/UserModals";
 
 function Jobs() {
   const navigate = useNavigate();
@@ -22,6 +23,16 @@ function Jobs() {
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
   const [estado, setEstado] = useState(false);
+  const [confirmBox, setConfirmBox] = useState(false);
+  const [jid, setJid] = useState({});
+
+  const openBox = () => setConfirmBox(true);
+  const closeBox = () => setConfirmBox(false);
+
+  function handleDelete(id) {
+    setJid(id);
+    openBox();
+  }
 
   //get jobs
   useEffect(() => {
@@ -63,28 +74,29 @@ function Jobs() {
       }
     } catch (e) {
       console.log(e);
-      alerts("Warning!", "Jobs could be created", "warning");
+      alerts("Warning!", "Jobs couldn't be created", "warning");
     }
     setTitle("");
     setDesc("");
     setDate("");
-    setImage(null);
+    setImage("");
     setLoading(false);
   };
 
   //delete images
-  const handleDelete = async (id) => {
+  const confirmDelete = async () => {
     try {
       const resp = await axios.delete(
-        `http://localhost:3000/api/jobs/delete/${id}`
+        `http://localhost:3000/api/jobs/delete/${jid}`
       );
 
-      alerts("Good", "The Job was created", "success");
+      alerts("Good", "The Job was erase it", "success");
       setEstado(!estado);
     } catch (e) {
       console.log(e);
-      alerts("Atention", "The Job couldn't be erase", "danger");
+      alerts("Atention", "The Job couldn't be erase it", "danger");
     }
+    closeBox();
   };
 
   return (
@@ -99,8 +111,8 @@ function Jobs() {
         jobs.map((job, i) => (
           <>
             <Job
-              service={job}
               key={job.id}
+              service={job}
               indice={i}
               deleteFun={handleDelete}
             />
@@ -177,6 +189,12 @@ function Jobs() {
         </>
       )}
       <TopButton />
+      <UserModals
+        isOpen={confirmBox}
+        onClose={closeBox}
+        onConfirm={confirmDelete}
+        text={"You sure you want to delete this job?"}
+      />
     </section>
   );
 }

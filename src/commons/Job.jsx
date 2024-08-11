@@ -19,7 +19,7 @@ function Job({ service, deleteFun, indice }) {
     "May",
     "Jun",
     "Jul",
-    "Agu",
+    "Aug",
     "Sep",
     "Oct",
     "Nov",

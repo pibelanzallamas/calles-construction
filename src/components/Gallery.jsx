@@ -7,6 +7,7 @@ import TopButton from "../commons/TopButton";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
 import trash from "../assets/trash.svg";
+import UserModals from "../modals/UserModals";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
@@ -16,6 +17,16 @@ function Gallery() {
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
   const [estado, setEstado] = useState(false); //state listener
+  const [confirmBox, setConfirmBox] = useState(false);
+  const [jid, setJid] = useState({});
+
+  const openBox = () => setConfirmBox(true);
+  const closeBox = () => setConfirmBox(false);
+
+  function handleDelete(id) {
+    setJid(id);
+    openBox();
+  }
 
   //get images
   useEffect(() => {
@@ -49,7 +60,7 @@ function Gallery() {
       setEstado(!estado);
     } catch (e) {
       console.log(e);
-      alerts("Warning!", "Couldn't upload image", "danger");
+      alerts("Warning!", "Couldn't upload image", "warning");
     }
 
     setDesc("");
@@ -58,18 +69,19 @@ function Gallery() {
   };
 
   //delete images
-  const handleDelete = async (id) => {
+  const confirmDelete = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/images/delete/${id}`
+        `http://localhost:3000/api/images/delete/${jid}`
       );
 
-      alerts("Good", "The image was erased", "success");
+      alerts("Good!", "The image was erased", "success");
       setEstado(!estado);
     } catch (e) {
       console.log(e);
-      alerts("Sorry", "Couldn't delete image", "danger");
+      alerts("Sorry!", "Couldn't erase image", "warning");
     }
+    closeBox();
   };
 
   return (
@@ -142,6 +154,12 @@ function Gallery() {
         </>
       )}
       <TopButton />
+      <UserModals
+        isOpen={confirmBox}
+        onClose={closeBox}
+        onConfirm={confirmDelete}
+        text={"You sure you want to delete this picture?"}
+      />
     </section>
   );
 }

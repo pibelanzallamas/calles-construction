@@ -25,7 +25,7 @@ export default function Footer() {
       email: null,
     };
     dispatch(setUser(noUser));
-    alerts("Bye!", `Logout successul 🏝`, "success");
+    alerts("Bye!", `Logout successul`, "success");
   }
 
   return (
