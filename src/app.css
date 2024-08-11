@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap");
 @font-face {
   font-family: graduate;
   src: url("./assets/Graduate-Regular.ttf");
@@ -271,6 +272,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
+  width: 100%;
 }
 .job-card figure {
   width: 100%;
@@ -317,6 +319,7 @@ nav {
 .more-button {
   width: 2.5rem;
   cursor: pointer;
+  margin-top: -0.5rem;
 }
 .more-button img {
   height: 100%;
@@ -357,6 +360,12 @@ nav {
   margin-top: 1rem;
 }
 
+.job-date {
+  font-size: 1rem;
+  font-weight: 750;
+  color: #0f4c61;
+}
+
 @media (min-width: 800px) {
   .jobs-compo {
     padding-left: 4rem;
@@ -376,7 +385,7 @@ nav {
     font-size: 1.5rem;
   }
   .job-card h3 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
   .job-card p {
     font-size: 1.5rem;

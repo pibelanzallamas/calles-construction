@@ -9,8 +9,10 @@ import portadaJobs from "../assets/jobs-img.jpg";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
 import { alerts } from "../utils/alerts";
+import { useNavigate } from "react-router-dom";
 
 function Jobs() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -55,6 +57,7 @@ function Jobs() {
 
       if (resp.data[1]) {
         alerts("Good!", "Jobs was created successfuly", "success");
+        navigate("/jobs");
       } else {
         alerts("Atention!", "Jobs was already created", "warning");
       }
@@ -76,7 +79,7 @@ function Jobs() {
         `http://localhost:3000/api/jobs/delete/${id}`
       );
 
-      alert("Good", "The Job was created", "success");
+      alerts("Good", "The Job was created", "success");
       setEstado(!estado);
     } catch (e) {
       console.log(e);
