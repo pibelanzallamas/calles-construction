@@ -43,7 +43,9 @@ function Job({ service, deleteFun, indice }) {
             </figure>
           )}
         </div>
-        <p>{service.description}</p>
+        <div className="job-description">
+          <p>{service.description}</p>
+        </div>
       </section>
     </div>
   );
