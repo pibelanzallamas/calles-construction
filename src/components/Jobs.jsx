@@ -29,8 +29,8 @@ function Jobs() {
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
 
-  function handleDelete(id) {
-    setJid(id);
+  function handleDelete(param) {
+    setJid(param);
     openBox();
   }
 
@@ -88,10 +88,9 @@ function Jobs() {
 
   //delete images
   const confirmDelete = async () => {
-    const id = jid;
     try {
       const resp = await axios.delete(
-        `https://calles-construction-back.onrender.com/jobs/delete/${id}`
+        `https://calles-construction-back.onrender.com/jobs/delete/${jid}`
       );
 
       alerts("Good", "The Job was erase it", "success");
