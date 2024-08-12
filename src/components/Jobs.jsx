@@ -24,13 +24,13 @@ function Jobs() {
   const [more, setMore] = useState(false);
   const [estado, setEstado] = useState(false);
   const [confirmBox, setConfirmBox] = useState(false);
-  const [jid, setJid] = useState({});
+  const [jid, setJid] = useState("");
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
 
-  function handleDelete(param) {
-    setJid(param);
+  function handleDelete(id) {
+    setJid(id);
     openBox();
   }
 
@@ -88,11 +88,12 @@ function Jobs() {
 
   //delete images
   const confirmDelete = async () => {
+    console.log(jid);
     try {
       const resp = await axios.delete(
         `https://calles-construction-back.onrender.com/jobs/delete/${jid}`
       );
-
+      console.log(resp);
       alerts("Good", "The Job was erase it", "success");
       setEstado(!estado);
     } catch (e) {
