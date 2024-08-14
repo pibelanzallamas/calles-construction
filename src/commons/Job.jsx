@@ -26,13 +26,12 @@ function Job({ service, deleteFun, indice }) {
     "Dec",
   ];
 
-  // const date = meses[fecha[1] - 1] + " " + fecha[2];
+  const date = meses[fecha[1] - 1] + " " + fecha[2];
 
-  const date = "Dec 04";
   return (
     <div className="job-card">
       <figure>
-        <img src={service.pic} alt={service.title} className="job-img" />
+        <img src={service.image} alt={service.title} className="job-img" />
       </figure>
       <section className={service.side}>
         <div className={`pencil-line ${service.side}`}>
@@ -44,7 +43,7 @@ function Job({ service, deleteFun, indice }) {
             </figure>
           )}
         </div>
-        <p>{service.bigDesc}</p>
+        <p>{service.description}</p>
       </section>
     </div>
   );
