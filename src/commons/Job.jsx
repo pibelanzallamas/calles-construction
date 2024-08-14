@@ -9,7 +9,7 @@ function Job({ service, deleteFun, indice }) {
     service.side = "l";
   } else service.side = "r";
 
-  const fecha = service.date.split("T")[0].split("-");
+  // const fecha = service.date.split("T")[0].split("-");
 
   const meses = [
     "Jan",
@@ -26,12 +26,13 @@ function Job({ service, deleteFun, indice }) {
     "Dec",
   ];
 
-  const date = meses[fecha[1] - 1] + " " + fecha[2];
+  // const date = meses[fecha[1] - 1] + " " + fecha[2];
 
+  const date = "Dec 04";
   return (
     <div className="job-card">
       <figure>
-        <img src={service.image} alt={service.title} className="job-img" />
+        <img src={service.pic} alt={service.title} className="job-img" />
       </figure>
       <section className={service.side}>
         <div className={`pencil-line ${service.side}`}>
@@ -43,9 +44,7 @@ function Job({ service, deleteFun, indice }) {
             </figure>
           )}
         </div>
-        <div className="job-description">
-          <p>{service.description}</p>
-        </div>
+        <p>{service.bigDesc}</p>
       </section>
     </div>
   );

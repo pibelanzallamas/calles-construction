@@ -11,6 +11,7 @@ import lessButton from "../assets/lessButton.svg";
 import { alerts } from "../utils/alerts";
 import { useNavigate } from "react-router-dom";
 import UserModals from "../modals/UserModals";
+import { services } from "../utilities/services";
 
 function Jobs() {
   const navigate = useNavigate();
@@ -111,8 +112,8 @@ function Jobs() {
       </figure>
       <Text text={texts[0]} />
 
-      {jobs.length > 0 &&
-        jobs.map((job, i) => (
+      {services.length > 0 &&
+        services.map((job, i) => (
           <>
             <Job
               key={job.id}

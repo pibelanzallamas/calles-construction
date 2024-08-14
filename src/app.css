@@ -285,7 +285,8 @@ nav {
   font-size: 1.5rem;
   text-decoration: underline;
 }
-.job-card p {
+.job-card section p {
+  overflow-wrap: break-word;
   font-size: 1.1rem;
   margin-top: 0.2rem;
 }
@@ -371,8 +372,8 @@ nav {
 
 @media (min-width: 800px) {
   .jobs-compo {
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
     gap: 4rem;
   }
   .jobs-compo h2 {
@@ -411,7 +412,7 @@ nav {
 }
 @media (min-width: 1000px) {
   .jobs-compo {
-    width: 65vw;
+    width: 50vw;
     margin: 0 auto;
     padding-top: 2rem;
     gap: 4rem;
@@ -504,8 +505,8 @@ nav {
 
 @media (min-width: 800px) {
   .gallery-compo {
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
   .gallery-compo .more-button {
     margin-top: 1rem;
@@ -524,7 +525,7 @@ nav {
 }
 @media (min-width: 1000px) {
   .gallery-compo {
-    width: 65vw;
+    width: 55vw;
     gap: 1rem;
     margin: 0rem auto;
     padding-top: 2rem;

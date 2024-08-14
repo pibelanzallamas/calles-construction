@@ -26,7 +26,7 @@ export const services = [
     desc: "House electrical installation: wiring and fixture setup.",
     logo: electricalLogo,
     bigDesc:
-      "We install, maintain, and repair electrical systems, ensuring safe and efficient power distribution in residential and commercial settings.", //poner buildings?
+      "We insdfhlashdflhsklhfahdlfhkalshdgklhasdkljfghaskdhfkashdklfhasdkfhaskljdhfklashdfashdlfhasdhfstall, maintain, and repair electrical systems, ensuring safe and efficient power distribution in residential and commercial settings.", //poner buildings?
     pic: electricalPic,
     side: "r",
   },
