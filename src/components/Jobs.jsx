@@ -11,7 +11,6 @@ import lessButton from "../assets/lessButton.svg";
 import { alerts } from "../utils/alerts";
 import { useNavigate } from "react-router-dom";
 import UserModals from "../modals/UserModals";
-import { services } from "../utilities/services";
 
 function Jobs() {
   const navigate = useNavigate();
@@ -94,7 +93,7 @@ function Jobs() {
       const resp = await axios.delete(
         `https://calles-construction-back.onrender.com/jobs/delete/${jid}`
       );
-      console.log(resp);
+
       alerts("Good", "The Job was erase it", "success");
       setEstado(!estado);
     } catch (e) {
@@ -112,8 +111,8 @@ function Jobs() {
       </figure>
       <Text text={texts[0]} />
 
-      {services.length > 0 &&
-        services.map((job, i) => (
+      {jobs.length > 0 &&
+        jobs.map((job, i) => (
           <>
             <Job
               key={job.id}
