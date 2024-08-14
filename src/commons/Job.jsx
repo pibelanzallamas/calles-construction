@@ -9,7 +9,7 @@ function Job({ service, deleteFun, indice }) {
     service.side = "l";
   } else service.side = "r";
 
-  // const fecha = service.date.split("T")[0].split("-");
+  const fecha = service.date.split("T")[0].split("-");
 
   const meses = [
     "Jan",

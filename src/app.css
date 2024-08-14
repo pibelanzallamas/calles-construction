@@ -372,8 +372,8 @@ nav {
 
 @media (min-width: 800px) {
   .jobs-compo {
-    padding-left: 5rem;
-    padding-right: 5rem;
+    width: 75vw;
+    margin: 0 auto;
     gap: 4rem;
   }
   .jobs-compo h2 {
@@ -412,7 +412,7 @@ nav {
 }
 @media (min-width: 1000px) {
   .jobs-compo {
-    width: 50vw;
+    width: 55vw;
     margin: 0 auto;
     padding-top: 2rem;
     gap: 4rem;
@@ -505,8 +505,8 @@ nav {
 
 @media (min-width: 800px) {
   .gallery-compo {
-    padding-left: 5rem;
-    padding-right: 5rem;
+    width: 70vw;
+    margin: 0 auto;
   }
   .gallery-compo .more-button {
     margin-top: 1rem;
