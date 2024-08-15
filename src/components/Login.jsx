@@ -24,14 +24,14 @@ function Login() {
         password,
       })
       .then((user) => {
-        alerts("Aloha!", `Logged in successfully`, "info");
+        alerts("Hello!", `Logged in successfully`, "success");
         dispatch(setUser(user.data));
         navigate("/");
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        alerts("Nope!", "Email or password incorrect", "danger");
+        alerts("Sorry!", "Email or password are not correct", "warning");
         setLoading(false);
       });
   }

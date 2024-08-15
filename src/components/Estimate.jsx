@@ -23,11 +23,11 @@ function Estimate() {
       reply_to: email,
     };
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, USER_ID).then(
       (response) => {
         alerts(
           "Email sent successfully",
-          "You will get a response soon, thanks!",
+          "You will get a response soon, thank you",
           "success"
         );
         setNumber("");
@@ -39,8 +39,8 @@ function Estimate() {
       (err) => {
         console.log(err);
         alerts(
-          "Couldn't sent email!",
-          "Check your information correctly.",
+          "Sorry!",
+          "Couldn't sent email, try to contact in another way",
           "warning"
         );
         setSending(false);
