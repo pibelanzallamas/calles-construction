@@ -12,8 +12,9 @@ function Estimate() {
   const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
   const USER_ID = import.meta.env.VITE_USER_ID;
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
+
     setSending(true);
     const templateParams = {
       from_name: name,
@@ -23,29 +24,27 @@ function Estimate() {
       reply_to: email,
     };
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, USER_ID).then(
-      (response) => {
-        alerts(
-          "Email sent successfully",
-          "You will get a response soon, thank you",
-          "success"
-        );
-        setNumber("");
-        setEmail("");
-        setName("");
-        setMessage("");
-        setSending(false);
-      },
-      (err) => {
-        console.log(err);
-        alerts(
-          "Sorry!",
-          "Couldn't sent email, try to contact in another way",
-          "warning"
-        );
-        setSending(false);
-      }
-    );
+    try {
+      const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, USER_ID);
+      alerts(
+        "Email sent successfully",
+        "You will get a response soon, thank you",
+        "success"
+      );
+      setNumber("");
+      setEmail("");
+      setName("");
+      setMessage("");
+      setSending(false);
+    } catch (e) {
+      alerts(
+        "Sorry!",
+        "Couldn't sent email, try to contact in another way",
+        "warning"
+      );
+      setSending(false);
+      console.log(e);
+    }
   };
 
   return (

@@ -31,7 +31,7 @@ function Login() {
       })
       .catch((err) => {
         console.log(err);
-        alerts("Sorry!", "Email or password are not correct", "warning");
+        alerts("Sorry!", "Email or password are not correct!", "warning");
         setLoading(false);
       });
   }
