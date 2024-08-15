@@ -31,20 +31,22 @@ function Estimate() {
         "You will get a response soon, thank you",
         "success"
       );
-      setNumber("");
-      setEmail("");
-      setName("");
-      setMessage("");
-      setSending(false);
+      if (res) {
+        setNumber("");
+        setEmail("");
+        setName("");
+        setMessage("");
+        setSending(false);
+      }
     } catch (e) {
       alerts(
         "Sorry!",
         "Couldn't sent email, try to contact in another way",
         "warning"
       );
-      setSending(false);
       console.log(e);
     }
+    setSending(false);
   };
 
   return (
