@@ -27,8 +27,8 @@ function Estimate() {
     try {
       const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, USER_ID);
       alerts(
-        "Email sent successfully",
-        "You will get a response soon, thank you",
+        "Thanks!",
+        "You will get a response as soon as posible!",
         "success"
       );
       if (res) {
@@ -39,11 +39,7 @@ function Estimate() {
         setSending(false);
       }
     } catch (e) {
-      alerts(
-        "Sorry!",
-        "Couldn't sent email, try to contact in another way",
-        "warning"
-      );
+      alerts("Sorry!", "Please contact me in another way!", "warning");
       console.log(e);
     }
     setSending(false);
