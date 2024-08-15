@@ -59,11 +59,11 @@ function Gallery() {
         }
       );
 
-      alerts("Good!", "Image upload successfuly", "success");
+      alerts("Okey!", "Image upload successfuly", "success");
       setEstado(!estado);
     } catch (e) {
       console.log(e);
-      alerts("Warning!", "Couldn't upload image", "warning");
+      alerts("Sorry!", "Image couldn't be uploaded", "danger");
     }
 
     setDesc("");
@@ -78,11 +78,11 @@ function Gallery() {
         `https://calles-construction-back.onrender.com/api/images/delete/${jid}`
       );
 
-      alerts("Good!", "The image was erased", "success");
+      alerts("Okey!", "Image erased successfuly", "success");
       setEstado(!estado);
     } catch (e) {
       console.log(e);
-      alerts("Sorry!", "Couldn't erase image", "warning");
+      alerts("Sorry!", "Image couldn't be erased", "danger");
     }
     closeBox();
   };

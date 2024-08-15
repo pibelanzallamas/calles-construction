@@ -70,14 +70,14 @@ function Jobs() {
       setEstado(!estado);
 
       if (resp.data[1]) {
-        alerts("Good!", "Jobs was created successfuly", "success");
+        alerts("Okey!", "Job upload successfuly", "success");
         navigate("/jobs");
       } else {
         alerts("Atention!", "Jobs was already created", "warning");
       }
     } catch (e) {
       console.log(e);
-      alerts("Warning!", "Jobs couldn't be created", "warning");
+      alerts("Sorry!", "Job couldn't be uploaded", "danger");
     }
     setTitle("");
     setDesc("");
@@ -94,11 +94,11 @@ function Jobs() {
         `https://calles-construction-back.onrender.com/api/jobs/delete/${jid}`
       );
 
-      alerts("Good", "The Job was erase it", "success");
+      alerts("Okey!", "Job erased successfuly", "success");
       setEstado(!estado);
     } catch (e) {
       console.log(e);
-      alerts("Atention", "The Job couldn't be erase it", "warning");
+      alerts("Sorry!", "Job couldn't be erased", "danger");
     }
     closeBox();
   };
