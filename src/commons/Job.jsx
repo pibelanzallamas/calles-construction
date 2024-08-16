@@ -40,12 +40,13 @@ function Job({ service, deleteFun, indice }) {
         )}
       </div>
 
-      <figure>
-        <img src={service.image} alt={service.title} className="job-img" />
-      </figure>
       <section className={service.side}>
         <p>{service.description}</p>
       </section>
+
+      <figure>
+        <img src={service.image} alt={service.title} className="job-img" />
+      </figure>
     </div>
   );
 }

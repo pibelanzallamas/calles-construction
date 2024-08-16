@@ -16,7 +16,7 @@ function Services({ takeValue }) {
       <section className="services-compo">
         <h2>Services</h2>
         {services.map((service, i) => (
-          <Service getTitle={handleService} key={i} element={service} />
+          <Service getTitle={getService} key={i} element={service} />
         ))}
       </section>
       <section className="services-compo2">

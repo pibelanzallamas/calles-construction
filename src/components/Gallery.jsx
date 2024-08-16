@@ -9,6 +9,7 @@ import lessButton from "../assets/lessButton.svg";
 import trash from "../assets/trash.svg";
 import UserModals from "../modals/UserModals";
 import { services } from "../utilities/services";
+import { fakeGallery } from "../utilities/gallery";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
@@ -20,6 +21,8 @@ function Gallery() {
   const [estado, setEstado] = useState(false); //state listener
   const [confirmBox, setConfirmBox] = useState(false);
   const [jid, setJid] = useState({});
+  const [rubro, setRubro] = useState("");
+  const [finalJobs, setFinalJobs] = useState([]);
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
@@ -28,6 +31,18 @@ function Gallery() {
     setJid(id);
     openBox();
   }
+
+  //filtrar
+  useEffect(() => {
+    const filter1 = services.filter(
+      (ele) => ele.category == rubro.toLowerCase()
+    );
+    const filter2 = fakeGallery.filter(
+      (ele) => ele.category == rubro.toLowerCase()
+    );
+
+    setFinalJobs(filter1.concat(filter2));
+  }, [rubro]);
 
   //get images
   useEffect(() => {
@@ -92,8 +107,21 @@ function Gallery() {
     <section className="gallery-compo" id="gallery">
       <h2>Gallery</h2>
 
-      {services.length > 0 &&
-        services.map((img, i) => (
+      {/* botonera */}
+      <div className="botonera">
+        <a onClick={() => setRubro("Drywall")}>Drywall</a>
+        <a onClick={() => setRubro("Painting")}>Painting</a>
+        <a onClick={() => setRubro("Electrical")}>Electrical</a>
+        <a onClick={() => setRubro("Carpentry")}>Carpentry</a>
+        <a onClick={() => setRubro("Plumbing")}>Plumbing</a>
+        <a onClick={() => setRubro("Utilities")}>Utilities</a>
+      </div>
+
+      {rubro && <h3>{rubro}</h3>}
+
+      {/* imágenes */}
+      {finalJobs.length > 0 &&
+        finalJobs.map((img, i) => (
           <div className="image-card" key={i} id={img.id}>
             <div className="gallery-image">
               <figure>
@@ -109,6 +137,7 @@ function Gallery() {
           </div>
         ))}
 
+      {/* form */}
       {user.id && (
         <>
           <div className="more-button">

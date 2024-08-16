@@ -500,8 +500,11 @@ nav {
   align-items: center;
   gap: 1rem;
 }
-.gallery-compo h2 {
+.gallery-compo h3 {
+  margin-top: 1rem;
   margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #0f4c61;
 }
 .gallery-compo .image-card {
   width: 100%;

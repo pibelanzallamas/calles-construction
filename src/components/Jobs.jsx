@@ -37,11 +37,6 @@ function Jobs({ serv }) {
     openBox();
   }
 
-  //handleRubro
-  const handleRubro = (rubro) => {
-    setRubro(rubro);
-  };
-
   //filtrar los jobs mostrados por rubro
   useEffect(() => {
     setFinalJobs(services.filter((ele) => ele.category == rubro.toLowerCase()));
@@ -126,12 +121,12 @@ function Jobs({ serv }) {
       <Text text={texts[0]} />
 
       <div className="botonera">
-        <a onClick={() => handleRubro("Drywall")}>Drywall</a>
-        <a onClick={() => handleRubro("Painting")}>Painting</a>
-        <a onClick={() => handleRubro("Electrical")}>Electrical</a>
-        <a onClick={() => handleRubro("Carpentry")}>Carpentry</a>
-        <a onClick={() => handleRubro("Plumbing")}>Plumbing</a>
-        <a onClick={() => handleRubro("Utilities")}>Utilities</a>
+        <a onClick={() => setRubro("Drywall")}>Drywall</a>
+        <a onClick={() => setRubro("Painting")}>Painting</a>
+        <a onClick={() => setRubro("Electrical")}>Electrical</a>
+        <a onClick={() => setRubro("Carpentry")}>Carpentry</a>
+        <a onClick={() => setRubro("Plumbing")}>Plumbing</a>
+        <a onClick={() => setRubro("Utilities")}>Utilities</a>
       </div>
 
       {rubro && <h2>{rubro}</h2>}
