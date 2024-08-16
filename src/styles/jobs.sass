@@ -26,6 +26,36 @@
     margin-top: 0.4rem
     font-size: 1.2rem
 
+//BOTONERA
+.botonera
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  grid-auto-rows: repeat(2, 1fr)
+  width: 70%
+  height: 100px
+  a
+    border: 1px solid #314044
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer
+  a:nth-child(1)
+    border-left: none
+    border-top: none
+  a:nth-child(2)
+    border-top: none
+  a:nth-child(3)
+    border-top: none
+    border-right: none
+  a:nth-child(4)
+    border-left: none
+    border-bottom: none
+  a:nth-child(5)
+    border-bottom: none
+  a:nth-child(6)
+    border-bottom: none
+    border-right: none
+
 //TARJETAS DE TRABAJO
 .job-card
   display: flex

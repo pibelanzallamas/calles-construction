@@ -25,6 +25,7 @@ function Jobs() {
   const [estado, setEstado] = useState(false);
   const [confirmBox, setConfirmBox] = useState(false);
   const [jid, setJid] = useState("");
+  const [rubro, setRubro] = useState("");
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
@@ -33,6 +34,13 @@ function Jobs() {
     setJid(id);
     openBox();
   }
+
+  //handleRubro
+  const handleRubro = (rubro) => {
+    setRubro(rubro);
+  };
+
+  //filtrar los jobs mostrados por rubro
 
   //get jobs
   useEffect(() => {
@@ -109,7 +117,19 @@ function Jobs() {
       <figure className="jobs-img">
         <img src={portadaJobs} alt="jobs-img" />
       </figure>
+
       <Text text={texts[0]} />
+
+      <div className="botonera">
+        <a onClick={() => handleRubro("Drywall")}>Drywall</a>
+        <a onClick={() => handleRubro("Painting")}>Painting</a>
+        <a onClick={() => handleRubro("Electrical")}>Electrical</a>
+        <a onClick={() => handleRubro("Carpentry")}>Carpentry</a>
+        <a onClick={() => handleRubro("Plumbing")}>Plumbing</a>
+        <a onClick={() => handleRubro("Utilities")}>Utilities</a>
+      </div>
+
+      {rubro && <h2>{rubro}</h2>}
 
       {jobs.length > 0 &&
         jobs.map((job, i) => (

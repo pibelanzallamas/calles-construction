@@ -268,6 +268,43 @@ nav {
   font-size: 1.2rem;
 }
 
+.botonera {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: repeat(2, 1fr);
+  width: 70%;
+  height: 100px;
+}
+.botonera a {
+  border: 1px solid #314044;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.botonera a:nth-child(1) {
+  border-left: none;
+  border-top: none;
+}
+.botonera a:nth-child(2) {
+  border-top: none;
+}
+.botonera a:nth-child(3) {
+  border-top: none;
+  border-right: none;
+}
+.botonera a:nth-child(4) {
+  border-left: none;
+  border-bottom: none;
+}
+.botonera a:nth-child(5) {
+  border-bottom: none;
+}
+.botonera a:nth-child(6) {
+  border-bottom: none;
+  border-right: none;
+}
+
 .job-card {
   display: flex;
   flex-direction: column;
