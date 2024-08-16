@@ -170,6 +170,15 @@ nav {
   align-items: center;
   gap: 0.3rem;
 }
+.service h3 {
+  cursor: pointer;
+}
+.service h3:hover {
+  color: orange;
+}
+.service h3:focus {
+  color: orange;
+}
 .service figure {
   width: 3rem;
   height: 3rem;

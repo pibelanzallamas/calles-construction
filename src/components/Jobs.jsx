@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import UserModals from "../modals/UserModals";
 import { services } from "../utilities/services";
 
-function Jobs() {
+function Jobs({ serv }) {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
@@ -26,7 +26,7 @@ function Jobs() {
   const [estado, setEstado] = useState(false);
   const [confirmBox, setConfirmBox] = useState(false);
   const [jid, setJid] = useState("");
-  const [rubro, setRubro] = useState("");
+  const [rubro, setRubro] = useState(serv || "");
   const [finalJobs, setFinalJobs] = useState([]);
 
   const openBox = () => setConfirmBox(true);

@@ -1,13 +1,13 @@
 import React from "react";
 // import pencil from "../assets/edit.svg";
 
-function Service({ logo, title, desc }) {
+function Service({ element, getTitle }) {
   return (
     <div className="service">
       <figure>
-        <img src={logo} alt={title} />
+        <img src={element.logo} alt={element.title} />
       </figure>
-      <h3>{title}</h3>
+      <h3 onClick={() => getTitle(element.title)}>{element.title}</h3>
       {/* <div className="pencil-line">
         {user.id && (
           <figure onClick={edit}>
@@ -15,7 +15,7 @@ function Service({ logo, title, desc }) {
           </figure>
         )}
       </div> */}
-      <p>{desc}</p>
+      <p>{element.desc}</p>
     </div>
   );
 }

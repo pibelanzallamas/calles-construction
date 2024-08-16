@@ -8,6 +8,7 @@ import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
 import trash from "../assets/trash.svg";
 import UserModals from "../modals/UserModals";
+import { services } from "../utilities/services";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
@@ -91,8 +92,8 @@ function Gallery() {
     <section className="gallery-compo" id="gallery">
       <h2>Gallery</h2>
 
-      {gallery.length > 0 &&
-        gallery.map((img, i) => (
+      {services.length > 0 &&
+        services.map((img, i) => (
           <div className="image-card" key={i} id={img.id}>
             <div className="gallery-image">
               <figure>
@@ -104,7 +105,7 @@ function Gallery() {
                 </figure>
               )}
             </div>
-            <p>{img.description}</p>
+            {/* <p>{img.description}</p> */}
           </div>
         ))}
 
