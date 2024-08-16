@@ -16,54 +16,66 @@ export const services = [
     title: "Drywall",
     desc: "Quality ceiling installations, drywall, and partitions services.",
     logo: logoDrywall,
-    bigDesc:
+    description:
       "Drywall work involves installing, finishing, and repairing interior walls and ceilings using gypsum boards for construction.",
-    pic: picDrywall,
+    image: picDrywall,
     side: "l",
+    date: "1999-12-22T00:00:9999",
+    category: "drywall",
   },
   {
     title: "Electrical",
     desc: "House electrical installation: wiring and fixture setup.",
     logo: electricalLogo,
-    bigDesc:
-      "We insdfhlashdflhsklhfahdlfhkalshdgklhasdkljfghaskdhfkashdklfhasdkfhaskljdhfklashdfashdlfhasdhfstall, maintain, and repair electrical systems, ensuring safe and efficient power distribution in residential and commercial settings.", //poner buildings?
-    pic: electricalPic,
+    description:
+      "We install, maintain, and repair electrical systems, ensuring safe and efficient power distribution in residential and commercial settings.", //poner buildings?
+    image: electricalPic,
     side: "r",
+    date: "1999-12-22T00:00:9999",
+    category: "electrical",
   },
   {
     title: "Painting",
     desc: "Professional painting for homes, spaces, or businesses.",
     logo: paintingLogo,
-    bigDesc:
+    description:
       "We prepare surfaces and apply paint on all types of materials and structures to enhance appearance and protect surfaces from damage.",
-    pic: paintingPic,
+    image: paintingPic,
     side: "l",
+    date: "1999-12-22T00:00:9999",
+    category: "painting",
   },
   {
     title: "Carpentry",
     desc: "Carpenter specializing in custom woodwork and renovations.",
     logo: carpentryLogo,
-    bigDesc:
+    description:
       "We construct, install, and repair structures and fixtures made from wood and other materials, ensuring precision and quality in our craftsmanship.",
-    pic: carpentryPic,
+    image: carpentryPic,
     side: "r",
+    date: "1999-12-22T00:00:9999",
+    category: "carpentry",
   },
   {
     title: "Plumbing",
     desc: "Installation and maintenance of plumbing and water systems.",
     logo: plumbingLogo,
-    bigDesc:
+    description:
       "We install and repair pipes, fixtures, and plumbing systems to ensure proper water distribution, drainage, and sanitation in buildings.",
-    pic: plumbingPic,
+    image: plumbingPic,
     side: "l",
+    date: "1999-12-22T00:00:9999",
+    category: "plumbing",
   },
   {
     title: "Utilities",
     desc: "Common premises maintenance and repairs.",
     logo: utilitysLogo,
-    bigDesc:
+    description:
       "We repair and maintain various services commonly needed in houses, buildings, and offices.",
-    pic: utilitysPic,
+    image: utilitysPic,
     side: "r",
+    date: "1999-12-22T00:00:9999",
+    category: "utilities",
   },
 ];

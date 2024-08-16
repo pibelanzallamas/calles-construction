@@ -11,6 +11,7 @@ import lessButton from "../assets/lessButton.svg";
 import { alerts } from "../utils/alerts";
 import { useNavigate } from "react-router-dom";
 import UserModals from "../modals/UserModals";
+import { services } from "../utilities/services";
 
 function Jobs() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function Jobs() {
   const [confirmBox, setConfirmBox] = useState(false);
   const [jid, setJid] = useState("");
   const [rubro, setRubro] = useState("");
+  const [finalJobs, setFinalJobs] = useState([]);
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
@@ -41,6 +43,9 @@ function Jobs() {
   };
 
   //filtrar los jobs mostrados por rubro
+  useEffect(() => {
+    setFinalJobs(services.filter((ele) => ele.category == rubro.toLowerCase()));
+  }, [rubro]);
 
   //get jobs
   useEffect(() => {
@@ -131,8 +136,8 @@ function Jobs() {
 
       {rubro && <h2>{rubro}</h2>}
 
-      {jobs.length > 0 &&
-        jobs.map((job, i) => (
+      {finalJobs.length > 0 &&
+        finalJobs.map((job, i) => (
           <>
             <Job
               key={job.id}

@@ -30,19 +30,20 @@ function Job({ service, deleteFun, indice }) {
 
   return (
     <div className="job-card">
+      <div className={`pencil-line ${service.side}`}>
+        <h3>{service.title}</h3>
+        <p className="job-date">{date}</p>
+        {user.id && (
+          <figure onClick={() => deleteFun(service.id)}>
+            <img src={trash} alt="trash-icon" />
+          </figure>
+        )}
+      </div>
+
       <figure>
         <img src={service.image} alt={service.title} className="job-img" />
       </figure>
       <section className={service.side}>
-        <div className={`pencil-line ${service.side}`}>
-          <h3>{service.title}</h3>
-          <p className="job-date">{date}</p>
-          {user.id && (
-            <figure onClick={() => deleteFun(service.id)}>
-              <img src={trash} alt="trash-icon" />
-            </figure>
-          )}
-        </div>
         <p>{service.description}</p>
       </section>
     </div>
