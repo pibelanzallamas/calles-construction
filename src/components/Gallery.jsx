@@ -34,14 +34,18 @@ function Gallery() {
 
   //filtrar
   useEffect(() => {
-    const filter1 = services.filter(
-      (ele) => ele.category == rubro.toLowerCase()
-    );
-    const filter2 = fakeGallery.filter(
-      (ele) => ele.category == rubro.toLowerCase()
-    );
+    if (rubro) {
+      const filter1 = services.filter(
+        (ele) => ele.category == rubro.toLowerCase()
+      );
+      const filter2 = fakeGallery.filter(
+        (ele) => ele.category == rubro.toLowerCase()
+      );
 
-    setFinalJobs(filter1.concat(filter2));
+      setFinalJobs(filter1.concat(filter2));
+    } else {
+      setFinalJobs(fakeGallery);
+    }
   }, [rubro]);
 
   //get images
