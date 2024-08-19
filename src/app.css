@@ -642,13 +642,13 @@ nav {
     font-size: 2.4rem;
   }
   .estimate-compo form {
-    width: 60vw;
+    width: 50vw;
   }
   .estimate-compo form .field label {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
   .estimate-compo form .field input, .estimate-compo form .field textarea {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 @media (min-width: 1000px) {
