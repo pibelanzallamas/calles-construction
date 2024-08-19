@@ -34,18 +34,14 @@ function Gallery() {
 
   //filtrar
   useEffect(() => {
-    if (rubro) {
-      const filter1 = services.filter(
-        (ele) => ele.category == rubro.toLowerCase()
-      );
-      const filter2 = fakeGallery.filter(
-        (ele) => ele.category == rubro.toLowerCase()
-      );
+    const filter1 = services.filter(
+      (ele) => ele.category == rubro.toLowerCase()
+    );
+    const filter2 = fakeGallery.filter(
+      (ele) => ele.category == rubro.toLowerCase()
+    );
 
-      setFinalJobs(filter1.concat(filter2));
-    } else {
-      setFinalJobs(fakeGallery);
-    }
+    setFinalJobs(filter2.concat(filter1)); //concatena las dos tablas filtradas, primero la de gallery
   }, [rubro]);
 
   //get images
@@ -190,7 +186,7 @@ function Gallery() {
           )}
         </>
       )}
-      <TopButton />
+      {rubro && <TopButton />}
       <UserModals
         isOpen={confirmBox}
         onClose={closeBox}

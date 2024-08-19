@@ -100,7 +100,7 @@ function Estimate() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
-            rows={8}
+            rows={7}
             maxLength={400}
           ></textarea>
         </div>

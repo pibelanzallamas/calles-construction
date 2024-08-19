@@ -212,7 +212,8 @@ function Jobs({ serv }) {
           )}
         </>
       )}
-      <TopButton />
+      {rubro ? <TopButton /> : <br />}
+
       <UserModals
         isOpen={confirmBox}
         onClose={closeBox}
