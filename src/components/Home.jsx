@@ -18,16 +18,14 @@ function Home() {
           We offer a variety of professional contracting services to meet all
           your needs. <span className="admin-badge">{user.id && "Admin"}</span>
         </p>
-        <div className="button-estimate-div">
-          <button
-            onClick={() => {
-              navigate("/estimate");
-            }}
-            className="button"
-          >
-            Get Estimate
-          </button>
-        </div>
+        <button
+          onClick={() => {
+            navigate("/estimate");
+          }}
+          className="button"
+        >
+          Get Estimate
+        </button>
       </div>
 
       <div className="home-desktop">
