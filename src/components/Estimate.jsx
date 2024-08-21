@@ -31,17 +31,21 @@ function Estimate() {
         TEMPLATE_ID,
         USER_ID
       );
-      alerts(
-        "Thanks!",
-        "You will get a response as soon as posible!",
-        "success"
-      );
+
       if (res) {
+        alerts(
+          "Thanks!",
+          "You will get a response as soon as posible!",
+          "success"
+        );
+
         setNumber("");
         setEmail("");
         setName("");
         setMessage("");
         setSending(false);
+      } else {
+        alerts("Sorry!", "Please contact me in another way!", "warning");
       }
     } catch (e) {
       alerts("Sorry!", "Please contact me in another way!", "warning");
@@ -100,19 +104,17 @@ function Estimate() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
-            rows={7}
+            rows={4}
             maxLength={400}
           ></textarea>
         </div>
-        <div className="button-estimate-div">
+        <div className="estimate-button">
           {sending ? (
-            <p className="sending-text">
+            <p>
               <i>Sending...</i>
             </p>
           ) : (
-            <button type="submit" className="button">
-              Get Estimate
-            </button>
+            <button type="submit">Get Estimate</button>
           )}
         </div>
       </form>
