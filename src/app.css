@@ -162,20 +162,13 @@ nav {
     display: block;
   }
 }
-.services-compo {
-  margin-top: 1rem;
+.services-mobile {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-}
-.services-compo h2 {
-  margin-bottom: 0.5rem;
-}
-
-.services-compo2 {
-  display: none;
+  text-align: center;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+  border: 1px solid red;
 }
 
 .service {
@@ -184,80 +177,69 @@ nav {
   align-items: center;
   gap: 0.3rem;
 }
-.service h3 {
-  cursor: pointer;
-}
-.service h3:hover {
-  color: orange;
-}
-.service h3:focus {
-  color: orange;
-}
 .service figure {
   width: 3rem;
   height: 3rem;
 }
-.service figure img {
-  width: 100%;
-  height: 100%;
+.service a {
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 .service p {
   width: 30ch;
-  text-align: center;
+}
+
+.services-desktop {
+  display: none;
 }
 
 @media (min-width: 800px) {
-  .services-compo {
-    margin-top: 0rem;
-    padding: 1rem;
-    font-size: 1.4rem;
+  .services-mobile {
     gap: 1.5rem;
   }
-  .services-compo h2 {
-    margin-bottom: 0.5rem;
+  .services-mobile .service {
+    gap: 0;
   }
-  .services-compo .service {
-    gap: 0.2rem;
+  .services-mobile .service figure {
+    width: 3.8rem;
+    height: 3.8rem;
   }
-  .services-compo figure {
-    width: 4rem;
-    height: 4rem;
-  }
-  .services-compo p {
+  .services-mobile .service a {
     font-size: 1.3rem;
+  }
+  .services-mobile .service p {
+    font-size: 1.2rem;
   }
 }
 @media (min-width: 1000px) {
-  .services-compo {
+  .services-mobile {
     display: none;
   }
-  .services-compo2 {
-    padding-top: 2rem;
+  .services-desktop {
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    padding-bottom: 5rem;
+    gap: 1.6rem;
+    padding-bottom: 2.4rem;
   }
-  .services-compo2 .grid-services {
+  .services-desktop .grid-services {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    row-gap: 3rem;
+    row-gap: 2.4rem;
     column-gap: 4rem;
   }
-  .services-compo2 .grid-services .service h3 {
-    font-size: 1.4rem;
-  }
-  .services-compo2 .grid-services .service p {
-    font-size: 1.2rem;
-  }
-  .services-compo2 .grid-services .service figure {
+  .services-desktop .grid-services .service figure {
     width: 4rem;
     height: 4rem;
   }
-  .services-compo2 .grid-services .service figure img {
-    width: 100%;
-    height: 100%;
+  .services-desktop .grid-services .service h3 {
+    font-size: 1.4rem;
+  }
+  .services-desktop .grid-services .service p {
+    font-size: 1.2rem;
+    text-align: center;
   }
 }
 .jobs-compo {
@@ -854,10 +836,6 @@ h2 {
   color: #0f4c61;
 }
 
-.button-estimate-div {
-  margin: 0 auto;
-}
-
 button {
   cursor: pointer;
   padding: 0.6rem;
@@ -876,6 +854,12 @@ button:active, button:hover {
 .admin-badge {
   color: #b62aee;
   font-weight: 700;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 @media (min-width: 800px) {

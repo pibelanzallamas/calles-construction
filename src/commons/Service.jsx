@@ -7,14 +7,7 @@ function Service({ element, getTitle }) {
       <figure>
         <img src={element.logo} alt={element.title} />
       </figure>
-      <h3 onClick={() => getTitle(element.title)}>{element.title}</h3>
-      {/* <div className="pencil-line">
-        {user.id && (
-          <figure onClick={edit}>
-            <img src={pencil} alt="pencil-icon" />
-          </figure>
-        )}
-      </div> */}
+      <a onClick={() => getTitle(element.title)}>{element.title}</a>
       <p>{element.desc}</p>
     </div>
   );

@@ -12,22 +12,22 @@ function Services({ takeValue }) {
   };
 
   return (
-    <>
-      <section className="services-compo">
+    <section id="services">
+      <div className="services-mobile">
         <h2>Services</h2>
         {services.map((service, i) => (
           <Service getTitle={getService} key={i} element={service} />
         ))}
-      </section>
-      <section className="services-compo2">
+      </div>
+      <div className="services-desktop">
         <h2>Services</h2>
         <div className="grid-services">
           {services.map((service, i) => (
             <Service getTitle={getService} key={i} element={service} />
           ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
