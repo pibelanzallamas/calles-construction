@@ -644,66 +644,32 @@ nav {
   }
 }
 .location-compo {
-  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
   gap: 1rem;
-  margin-bottom: 1rem;
-}
-.location-compo h2 {
-  margin-bottom: 1rem;
-}
-.location-compo .location-img {
-  width: 100%;
-}
-.location-compo .location-img img {
-  width: 100%;
-  height: 100%;
+  width: 85vw;
 }
 .location-compo p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
-.location-compo .button-estimate-div {
-  margin-top: -0.5rem;
+  font-size: 1.15rem;
 }
 
 @media (min-width: 800px) {
   .location-compo {
-    padding-left: 4rem;
-    padding-right: 4rem;
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    width: 70vw;
   }
   .location-compo p {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-  }
-  .location-compo .button-estimate-div {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  .location-img {
-    width: 100%;
-  }
-  .location-img img {
-    width: 100%;
-    height: 100%;
+    font-size: 1.4rem;
   }
 }
 @media (min-width: 1000px) {
   .location-compo {
-    width: 65vw;
-    margin: 0 auto;
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-  }
-  .location-compo h2 {
-    margin-bottom: 1rem;
-  }
-  .location-compo .button-estimate-div {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    padding-top: 1rem;
+    width: 60vw;
+    gap: 1.6rem;
+    padding-bottom: 2rem;
   }
 }
 footer {
@@ -865,8 +831,8 @@ img {
     font-size: 2.4rem;
   }
   button {
-    padding: 0.9rem;
-    font-size: 1.2rem;
+    padding: 0.6rem;
+    font-size: 1rem;
   }
 }
 @media (min-width: 1000px) {
@@ -874,7 +840,7 @@ img {
     font-size: 2.6rem;
   }
   button {
-    padding: 1rem;
+    padding: 0.7rem;
     font-size: 1.1rem;
     font-weight: 800;
   }

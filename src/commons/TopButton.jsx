@@ -9,11 +9,7 @@ function TopButton() {
     }
   }
 
-  return (
-    <div className="button-estimate-div">
-      <button onClick={handleGo}>Go to Top</button>
-    </div>
-  );
+  return <button onClick={handleGo}>Go to Top</button>;
 }
 
 export default TopButton;
