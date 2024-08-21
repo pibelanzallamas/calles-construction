@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { texts } from "../utilities/text";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { alerts } from "../utils/alerts";
+import { texts } from "../utilities/text";
+import { services } from "../utilities/services";
 import Text from "../commons/Text";
 import Job from "../commons/Job";
 import TopButton from "../commons/TopButton";
+import UserModals from "../modals/UserModals";
 import portadaJobs from "../assets/jobs-img.jpg";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
-import { alerts } from "../utils/alerts";
-import { useNavigate } from "react-router-dom";
-import UserModals from "../modals/UserModals";
-import { services } from "../utilities/services";
 
 function Jobs({ serv }) {
   const navigate = useNavigate();
@@ -19,28 +19,15 @@ function Jobs({ serv }) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [desc, setDesc] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
   const [jobs, setJobs] = useState({});
+  const [jid, setJid] = useState("");
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
   const [estado, setEstado] = useState(false);
   const [confirmBox, setConfirmBox] = useState(false);
-  const [jid, setJid] = useState("");
   const [rubro, setRubro] = useState(serv || "");
   const [finalJobs, setFinalJobs] = useState([]);
-
-  const openBox = () => setConfirmBox(true);
-  const closeBox = () => setConfirmBox(false);
-
-  function handleDelete(id) {
-    setJid(id);
-    openBox();
-  }
-
-  //filtrar los jobs mostrados por rubro
-  useEffect(() => {
-    setFinalJobs(services.filter((ele) => ele.category == rubro.toLowerCase()));
-  }, [rubro]);
 
   //get jobs
   useEffect(() => {
@@ -49,6 +36,11 @@ function Jobs({ serv }) {
       .then((resp) => setJobs(resp.data))
       .catch((err) => console.log(err));
   }, [estado]);
+
+  //filtrar los jobs mostrados por rubro
+  useEffect(() => {
+    setFinalJobs(services.filter((ele) => ele.category == rubro.toLowerCase()));
+  }, [rubro]);
 
   //upload images
   const createJobs = async (e) => {
@@ -95,6 +87,14 @@ function Jobs({ serv }) {
   };
 
   //delete images
+  const openBox = () => setConfirmBox(true);
+  const closeBox = () => setConfirmBox(false);
+
+  function handleDelete(id) {
+    setJid(id);
+    openBox();
+  }
+
   const confirmDelete = async () => {
     console.log("tenes el jid?", jid);
     try {

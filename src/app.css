@@ -168,7 +168,6 @@ nav {
   text-align: center;
   gap: 1.2rem;
   margin-bottom: 1rem;
-  border: 1px solid red;
 }
 
 .service {
@@ -230,15 +229,14 @@ nav {
     row-gap: 2.4rem;
     column-gap: 4rem;
   }
-  .services-desktop .grid-services .service figure {
+  .services-desktop .service figure {
     width: 4rem;
     height: 4rem;
   }
-  .services-desktop .grid-services .service h3 {
+  .services-desktop .service a {
     font-size: 1.4rem;
   }
-  .services-desktop .grid-services .service p {
-    font-size: 1.2rem;
+  .services-desktop .service p {
     text-align: center;
   }
 }
@@ -872,11 +870,6 @@ img {
   }
 }
 @media (min-width: 1000px) {
-  .home {
-    min-height: 100vh;
-    background-color: #fbf7ef;
-    padding: 0rem;
-  }
   h2 {
     font-size: 2.6rem;
   }
@@ -884,6 +877,11 @@ img {
     padding: 1rem;
     font-size: 1.1rem;
     font-weight: 800;
+  }
+  .home {
+    min-height: 100vh;
+    background-color: #fbf7ef;
+    padding: 0rem;
   }
 }
 
