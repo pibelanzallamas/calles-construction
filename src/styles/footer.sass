@@ -1,23 +1,11 @@
 footer
-  padding: 2rem 0.5rem
+  padding: 2rem
   background-color: #999
   color: white
   display: flex
   flex-direction: column
   align-items: center
   
-.social //1
-  display: none
-  justify-content: center
-  gap: 0.6rem
-  figure
-    width: 2rem
-    height: 2rem
-    img
-      width: 100%
-      height: 100%
-      display: block
-
 .credits
   display: flex
   flex-direction: column
@@ -37,12 +25,6 @@ footer
       font-size: 1.2rem   
 
 @media (min-width: 800px)
-  .social //1
-    justify-content: center
-    gap: 0.6rem
-    figure
-      width: 2.5rem
-      height: 2.5rem
   .credits 
     display: grid
     grid-template-columns: 1fr 1fr
@@ -51,10 +33,10 @@ footer
   .contact
     .line
       img
-        height: 1.6rem
-        width: 1.6rem
+        height: 1.4rem
+        width: 1.4rem
       p
-        font-size: 1.3rem
+        font-size: 1.2rem
     
 @media (min-width: 1000px)
   .credits 
@@ -62,7 +44,6 @@ footer
     grid-template-columns: 1fr 1fr
     gap: 9rem
     width: 75vw
-    // border: 1px solid red
   .contact
     .line
       img

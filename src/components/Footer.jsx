@@ -3,10 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { setUser } from "../state/userState";
 import { useDispatch, useSelector } from "react-redux";
 import { alerts } from "../utils/alerts";
-import facelogo from "../assets/facelogo.svg";
-import instalogo from "../assets/instalogo.svg";
-import twitterlogo from "../assets/twitterlogo.svg";
-import telegram from "../assets/telegram.svg";
 import one from "../assets/1.svg";
 import two from "../assets/2.svg";
 import three from "../assets/3.svg";
@@ -30,32 +26,10 @@ export default function Footer() {
 
   return (
     <footer id="contact">
-      <div className="social">
-        <figure>
-          <a href="https://www.google.com.ar" target="_blank">
-            <img src={facelogo} alt="social" />
-          </a>
-        </figure>
-        <figure>
-          <a href="https://www.google.com.ar" target="_blank">
-            <img src={telegram} alt="social" />
-          </a>
-        </figure>
-        <figure>
-          <a href="https://www.google.com.ar" target="_blank">
-            <img src={twitterlogo} alt="social" />
-          </a>
-        </figure>
-        <figure>
-          <a href="https://www.google.com.ar" target="_blank">
-            <img src={instalogo} alt="social" />
-          </a>
-        </figure>
-      </div>
       <div className="credits">
         <div className="contact">
           <div className="line">
-            <img src={one} alt="" />
+            <img src={one} />
             <p>Contact</p>
           </div>
           <div className="line">
@@ -73,25 +47,21 @@ export default function Footer() {
         </div>
         <div className="contact">
           <div className="line">
-            <img src={fourth} alt="" />
+            <img src={fourth} />
             <p>Jul, 2024</p>
           </div>
           <div className="line">
-            <img src={five} alt="" />
+            <img src={five} />
             <p>Clifton, New Jersey</p>
           </div>
           <div className="line">
-            <img src={six} alt="" />
-
+            <img src={six} />
             <p>
               Powered by Vercel -
               {!user.id ? (
                 <Link to={"/login"}> Admin Mode</Link>
               ) : (
-                <Link to={""} onClick={handleLogout}>
-                  {" "}
-                  Logout
-                </Link>
+                <Link onClick={handleLogout}> Logout</Link>
               )}
             </p>
           </div>
