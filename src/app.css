@@ -639,7 +639,7 @@ nav {
     margin-top: 1rem;
   }
   .estimate-compo form {
-    width: 35vw;
+    width: 30vw;
     gap: 0.6rem;
   }
 }
@@ -667,7 +667,7 @@ nav {
 @media (min-width: 1000px) {
   .location-compo {
     padding-top: 1rem;
-    width: 60vw;
+    width: 50vw;
     gap: 1.6rem;
     padding-bottom: 2rem;
   }
@@ -753,6 +753,9 @@ footer {
   cursor: pointer;
 }
 
+.login-compo form label {
+  font-weight: 700;
+}
 .login-compo form button {
   margin-top: 0.7rem;
 }
