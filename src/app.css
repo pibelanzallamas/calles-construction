@@ -241,7 +241,6 @@ nav {
   }
 }
 .jobs-compo {
-  margin-top: 1rem;
   display: flex;
   gap: 2.5rem;
   flex-direction: column;
@@ -650,14 +649,15 @@ nav {
   margin: 0 auto;
   gap: 1rem;
   width: 85vw;
+  padding-bottom: 1rem;
 }
 .location-compo p {
   font-size: 1.15rem;
+  font-weight: 700;
 }
 
 @media (min-width: 800px) {
   .location-compo {
-    padding-bottom: 1rem;
     width: 70vw;
   }
   .location-compo p {
@@ -668,8 +668,9 @@ nav {
   .location-compo {
     padding-top: 1rem;
     width: 50vw;
-    gap: 1.6rem;
-    padding-bottom: 2rem;
+  }
+  .location-compo h2 {
+    margin-bottom: 1rem;
   }
 }
 footer {
