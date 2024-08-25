@@ -94,8 +94,12 @@ function Gallery() {
         `https://calles-construction-back.onrender.com/api/images/delete/${jid}`
       );
 
-      alerts("Okey!", "Image erased successfuly", "success");
-      setEstado(!estado);
+      if (!res.data) {
+        alerts("Sorry!", "Image couldn't be erased", "warning");
+      } else {
+        alerts("Okey!", "Image erased successfuly", "success");
+        setEstado(!estado);
+      }
     } catch (e) {
       console.log(e);
       alerts("Sorry!", "Image couldn't be erased", "danger");
@@ -133,7 +137,6 @@ function Gallery() {
                 </figure>
               )}
             </div>
-            {/* <p>{img.description}</p> */}
           </div>
         ))}
 

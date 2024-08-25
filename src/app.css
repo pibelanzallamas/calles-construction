@@ -487,7 +487,6 @@ nav {
   }
 }
 .gallery-compo {
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -496,7 +495,7 @@ nav {
 .gallery-compo h3 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  font-size: 2rem;
+  font-size: 1.7rem;
   color: #0f4c61;
 }
 .gallery-compo .image-card {
@@ -504,27 +503,6 @@ nav {
 }
 .gallery-compo .image-card figure {
   width: 100%;
-}
-.gallery-compo .image-card figure img {
-  width: 100%;
-  height: 100%;
-}
-.gallery-compo .image-card p {
-  font-size: 1rem;
-  text-align: center;
-}
-.gallery-compo .button-estimate-div {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-.gallery-compo .more-button {
-  margin-top: 1rem;
-  width: 2.5rem;
-}
-.gallery-compo .more-button img {
-  height: 100%;
-  width: 100%;
-  display: block;
 }
 .gallery-compo .gallery-image {
   position: relative;
@@ -541,8 +519,15 @@ nav {
 }
 .gallery-compo .gallery-image figure:nth-of-type(2) img {
   display: block;
-  width: 100%;
+}
+.gallery-compo .more-button {
+  margin-top: 1rem;
+  width: 2.5rem;
+}
+.gallery-compo .more-button img {
   height: 100%;
+  width: 100%;
+  display: block;
 }
 
 @media (min-width: 800px) {
@@ -653,7 +638,6 @@ nav {
 }
 .location-compo p {
   font-size: 1.15rem;
-  font-weight: 700;
 }
 
 @media (min-width: 800px) {
