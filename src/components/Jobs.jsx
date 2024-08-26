@@ -129,7 +129,7 @@ function Jobs({ serv }) {
         <a onClick={() => setRubro("Utilities")}>Utilities</a>
       </div>
 
-      {rubro && <h3>{rubro}</h3>}
+      {rubro && <h2>{rubro}</h2>}
 
       {finalJobs.length > 0 &&
         finalJobs.map((job, i) => (
@@ -142,6 +142,7 @@ function Jobs({ serv }) {
             />
           </>
         ))}
+
       {user.id && (
         <>
           <div className="more-button">

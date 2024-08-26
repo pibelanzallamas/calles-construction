@@ -243,11 +243,12 @@ nav {
 }
 .jobs-compo {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
+
 .jobs-img {
   aspect-ratio: 1/1;
 }
@@ -309,15 +310,11 @@ nav {
 .job-card {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.4rem;
   width: 100%;
 }
 .job-card figure {
   width: 100%;
-}
-.job-card figure img {
-  width: 100%;
-  height: 100%;
 }
 .job-card h3 {
   font-size: 1.5rem;
@@ -326,7 +323,6 @@ nav {
 .job-card section p {
   overflow-wrap: break-word;
   font-size: 1.1rem;
-  margin-top: 0.2rem;
 }
 
 .job-date {
@@ -339,15 +335,12 @@ nav {
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  margin-bottom: -0.3rem;
 }
 .pencil-line figure {
   cursor: pointer;
   width: 1.4rem;
   height: 1.4rem;
-}
-.pencil-line figure img {
-  width: 100%;
-  height: 100%;
 }
 .pencil-line p {
   margin: 0 0.5rem;
@@ -395,14 +388,21 @@ nav {
   .jobs-compo {
     width: 75vw;
     margin: 0 auto;
-    gap: 1.5rem;
+    gap: 2.5rem;
     padding-bottom: 1rem;
   }
-  .text-compo h2 {
-    font-size: 1.8rem;
+  .jobs-img {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .jobs-compo h3 {
+    font-size: 2.2rem;
+  }
+  .text-compo h3 {
+    font-size: 2rem;
   }
   .text-compo p {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   .job-card h3 {
     font-size: 1.7rem;
@@ -420,7 +420,7 @@ nav {
   .r {
     text-align: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: row-reverse;
   }
   .form-job form {
     width: 55vw;
@@ -445,6 +445,7 @@ nav {
   }
   .jobs-compo .botonera {
     width: 90%;
+    font-size: 1.1rem;
   }
   .l {
     text-align: left;
@@ -460,7 +461,7 @@ nav {
     overflow: hidden;
   }
   .job-card {
-    gap: 0.3rem;
+    gap: 0.6rem;
   }
   .text-compo h3 {
     font-size: 2.2rem;
@@ -527,7 +528,7 @@ nav {
   .gallery-compo {
     width: 70vw;
     margin: 0 auto;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
   }
   .gallery-compo h3 {
     font-size: 1.9rem;
