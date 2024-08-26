@@ -243,13 +243,11 @@ nav {
 }
 .jobs-compo {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 1rem;
 }
-
 .jobs-img {
   aspect-ratio: 1/1;
 }
@@ -397,13 +395,8 @@ nav {
   .jobs-compo {
     width: 75vw;
     margin: 0 auto;
-    gap: 4rem;
-  }
-  .jobs-compo h2 {
-    margin-bottom: -2rem;
-  }
-  .jobs-compo .button-estimate-div {
-    margin-bottom: 1.5rem;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
   }
   .text-compo h2 {
     font-size: 1.8rem;
@@ -420,21 +413,54 @@ nav {
   .more-button {
     width: 3rem;
   }
+  .l {
+    text-align: center;
+    justify-content: center;
+  }
+  .r {
+    text-align: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+  .form-job form {
+    width: 55vw;
+  }
+  .form-job form .field label {
+    font-size: 1.3rem;
+  }
+  .form-job form .field input, .form-job form .field textarea {
+    font-size: 1rem;
+  }
 }
 @media (min-width: 1000px) {
   .jobs-compo {
-    width: 55vw;
+    width: 60vw;
     margin: 0 auto;
-    padding-top: 2rem;
-    gap: 4rem;
+    padding-top: 1rem;
+    gap: 3rem;
     padding-bottom: 2rem;
   }
   .jobs-compo h2 {
-    margin-bottom: -2rem;
+    margin-bottom: -1rem;
+  }
+  .jobs-compo .botonera {
+    width: 90%;
+  }
+  .l {
+    text-align: left;
+    justify-content: left;
+  }
+  .r {
+    text-align: right;
+    justify-content: right;
+    flex-direction: row;
   }
   .jobs-img {
     aspect-ratio: 16/9;
     overflow: hidden;
+  }
+  .job-card {
+    gap: 0.3rem;
   }
   .text-compo h3 {
     font-size: 2.2rem;
@@ -493,6 +519,10 @@ nav {
 .gallery-compo .more-button {
   width: 2.5rem;
 }
+.gallery-compo .form-job {
+  text-align: center;
+}
+
 @media (min-width: 800px) {
   .gallery-compo {
     width: 70vw;

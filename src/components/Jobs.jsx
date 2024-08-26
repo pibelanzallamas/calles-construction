@@ -129,7 +129,7 @@ function Jobs({ serv }) {
         <a onClick={() => setRubro("Utilities")}>Utilities</a>
       </div>
 
-      {rubro && <h2>{rubro}</h2>}
+      {rubro && <h3>{rubro}</h3>}
 
       {finalJobs.length > 0 &&
         finalJobs.map((job, i) => (
@@ -212,7 +212,8 @@ function Jobs({ serv }) {
           )}
         </>
       )}
-      {rubro ? <TopButton /> : <br />}
+
+      {rubro && <TopButton />}
 
       <UserModals
         isOpen={confirmBox}
