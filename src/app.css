@@ -272,8 +272,6 @@ nav {
   grid-auto-rows: repeat(2, 1fr);
   width: 70%;
   height: 100px;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
 }
 .botonera a {
   border: 1px solid #314044;
@@ -308,12 +306,6 @@ nav {
 .more-button {
   width: 2.5rem;
   cursor: pointer;
-  margin-top: -0.5rem;
-}
-.more-button img {
-  height: 100%;
-  width: 100%;
-  display: block;
 }
 
 .job-card {
@@ -374,9 +366,6 @@ nav {
   flex-direction: row-reverse;
 }
 
-.form-job {
-  margin-bottom: 1rem;
-}
 .form-job form {
   display: flex;
   flex-direction: column;
@@ -402,9 +391,6 @@ nav {
 .form-job form .field input:focus,
 .form-job form .field textarea:focus {
   border: orange 2px solid;
-}
-.form-job form .button-estimate-div {
-  margin-top: 1rem;
 }
 
 @media (min-width: 800px) {
@@ -433,18 +419,6 @@ nav {
   }
   .more-button {
     width: 3rem;
-  }
-  .form-job {
-    margin-top: -1rem;
-  }
-  .form-job form {
-    width: 60vw;
-  }
-  .form-job form .field label {
-    font-size: 1.6rem;
-  }
-  .form-job form .field input, .form-job form .field textarea {
-    font-size: 1.2rem;
   }
 }
 @media (min-width: 1000px) {
@@ -517,33 +491,22 @@ nav {
   display: block;
 }
 .gallery-compo .more-button {
-  margin-top: 1rem;
   width: 2.5rem;
 }
-.gallery-compo .more-button img {
-  height: 100%;
-  width: 100%;
-  display: block;
-}
-
 @media (min-width: 800px) {
   .gallery-compo {
     width: 70vw;
     margin: 0 auto;
+    padding-bottom: 1rem;
   }
-  .gallery-compo .more-button {
-    margin-top: 1rem;
-    width: 3rem;
-  }
-  .gallery-compo .button-estimate-div {
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+  .gallery-compo h3 {
+    font-size: 1.9rem;
   }
   .gallery-compo .form-job {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
-  .gallery-compo .gallery-image figure:nth-of-type(2) {
-    width: 2rem;
+  .gallery-compo .more-button {
+    width: 2.5rem;
   }
 }
 @media (min-width: 1000px) {
@@ -551,15 +514,10 @@ nav {
     width: 55vw;
     gap: 1rem;
     margin: 0rem auto;
-    padding-top: 2rem;
-    padding-bottom: 0rem;
+    padding-top: 1rem;
   }
-  .gallery-compo .button-estimate-div {
-    margin-top: 2rem;
-    margin-bottom: 3.5rem;
-  }
-  .gallery-compo h2 {
-    margin-bottom: 1rem;
+  .gallery-compo h3 {
+    font-size: 2.2rem;
   }
 }
 .estimate-compo {
