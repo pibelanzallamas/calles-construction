@@ -1,19 +1,15 @@
 .jobs-compo
   display: flex
-  gap: 2.5rem
+  gap: 1.5rem
   flex-direction: column
   align-items: center
   text-align: center
   margin-bottom: 1rem
-  h2
-    margin-bottom: -0.5rem
 
 //LA PRIMERA IMAGEN AL PRINCIPIO 
 .jobs-img
   aspect-ratio: 1 / 1
   img
-    width: 100%
-    height: 100%
     object-fit: cover
 
 //APARTADO DE PARRAFO
@@ -32,6 +28,8 @@
   grid-auto-rows: repeat(2, 1fr)
   width: 70%
   height: 100px
+  margin-top: 0.5rem
+  margin-bottom: 1rem
   a
     border: 1px solid #314044
     display: flex
@@ -55,6 +53,16 @@
     border-bottom: none
     border-right: none
 
+//MORE
+.more-button
+  width: 2.5rem
+  cursor: pointer
+  margin-top: -0.5rem
+  img
+    height: 100%
+    width: 100%
+    display: block
+
 //TARJETAS DE TRABAJO
 .job-card
   display: flex
@@ -75,13 +83,10 @@
       font-size: 1.1rem
       margin-top: 0.2rem
 
-.l
-  text-align: left
-  justify-content: left
-.r
-  text-align: right
-  justify-content: right
-  flex-direction: row-reverse
+.job-date
+  font-size: 1rem
+  font-weight: 750
+  color: #0f4c61
 
 .pencil-line
   display: flex
@@ -97,14 +102,15 @@
   p
     margin: 0 0.5rem
 
-.more-button
-  width: 2.5rem
-  cursor: pointer
-  margin-top: -0.5rem
-  img
-    height: 100%
-    width: 100%
-    display: block
+.l
+  text-align: left
+  justify-content: left
+.r
+  text-align: right
+  justify-content: right
+  flex-direction: row-reverse
+
+
 
 //form job
 .form-job
@@ -134,11 +140,7 @@
         border: orange  2px solid
     .button-estimate-div
       margin-top: 1rem
-
-.job-date
-  font-size: 1rem
-  font-weight: 750
-  color: #0f4c61
+      
 
 @media (min-width: 800px)
   .jobs-compo
