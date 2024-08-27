@@ -12,6 +12,7 @@ import UserModals from "../modals/UserModals";
 import portadaJobs from "../assets/jobs-img.jpg";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
+import editButton from "../assets/edit.svg";
 
 function Jobs({ serv }) {
   const navigate = useNavigate();
