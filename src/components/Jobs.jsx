@@ -12,7 +12,6 @@ import UserModals from "../modals/UserModals";
 import portadaJobs from "../assets/jobs-img.jpg";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
-import editButton from "../assets/edit.svg";
 
 function Jobs({ serv }) {
   const navigate = useNavigate();
@@ -130,7 +129,7 @@ function Jobs({ serv }) {
         <a onClick={() => setRubro("Utilities")}>Utilities</a>
       </div>
 
-      {rubro && <h2>{rubro}</h2>}
+      {rubro && <h2 className="rubro-title">{rubro}</h2>}
 
       {finalJobs.length > 0 &&
         finalJobs.map((job, i) => (

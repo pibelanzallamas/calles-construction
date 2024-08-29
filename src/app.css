@@ -302,6 +302,10 @@ nav {
   border-right: none;
 }
 
+.rubro-title {
+  margin: 1.4rem 0 -0.9rem 0;
+}
+
 .more-button {
   width: 2.5rem;
   cursor: pointer;
