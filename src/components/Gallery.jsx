@@ -14,7 +14,6 @@ import { fakeGallery } from "../utilities/gallery";
 function Gallery() {
   const user = useSelector((state) => state.user);
   const [image, setImage] = useState(null); //input
-  const [desc, setDesc] = useState(""); //input
   const [gallery, setGallery] = useState({}); //all images
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
@@ -71,7 +70,7 @@ function Gallery() {
         "https://calles-construction-back.onrender.com/api/images/create",
         {
           image: url.data.secure_url,
-          description: desc,
+          description: "desc",
         }
       );
 
@@ -82,7 +81,6 @@ function Gallery() {
       alerts("Sorry!", "Image couldn't be uploaded", "danger");
     }
 
-    setDesc("");
     setImage(null);
     setLoading(false);
   };
@@ -105,6 +103,15 @@ function Gallery() {
       alerts("Sorry!", "Image couldn't be erased", "danger");
     }
     closeBox();
+  };
+
+  //mod image
+  const handleChangeImage = async () => {
+    try {
+      console.log("change image");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -132,9 +139,14 @@ function Gallery() {
                 <img src={img.image} className="job-img" />
               </figure>
               {user.id && (
-                <figure onClick={() => handleDelete(img.id)}>
-                  <img src={trash} alt="trash-icon" />
-                </figure>
+                <div className="gallery-edit-button">
+                  <button onClick={() => handleChangeImage(img.id)}>
+                    Edit image
+                  </button>
+                  <figure onClick={() => handleDelete(img.id)}>
+                    <img src={trash} alt="trash-icon" />
+                  </figure>
+                </div>
               )}
             </div>
           </div>
@@ -164,19 +176,7 @@ function Gallery() {
                     required
                   />
                 </div>
-                <div className="field">
-                  <label htmlFor="description">Description</label>
-                  <textarea
-                    id="description"
-                    type="text"
-                    onChange={(e) => setDesc(e.target.value)}
-                    value={desc}
-                    rows={3}
-                    maxLength={40}
-                    placeholder="description"
-                    required
-                  />
-                </div>
+
                 {loading ? (
                   <p className="loading-text"> Loading ...</p>
                 ) : (
@@ -187,7 +187,9 @@ function Gallery() {
           )}
         </>
       )}
+
       {rubro && <TopButton />}
+
       <UserModals
         isOpen={confirmBox}
         onClose={closeBox}

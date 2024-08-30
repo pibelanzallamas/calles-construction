@@ -544,21 +544,35 @@ nav {
 .gallery-compo .image-card figure {
   width: 100%;
 }
+.gallery-compo .image-card figure img {
+  border-radius: 10px;
+}
 .gallery-compo .gallery-image {
   position: relative;
 }
-.gallery-compo .gallery-image figure:nth-of-type(2) {
-  cursor: pointer;
+.gallery-compo .gallery-image .gallery-edit-button {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.4rem;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+.gallery-compo .gallery-image .gallery-edit-button figure {
+  margin-right: 1rem;
+  cursor: pointer;
   width: 1.9rem;
-  top: 0;
-  right: 0;
   background-color: #fbf7ef;
   border-radius: 12px;
   padding: 0.2rem;
 }
-.gallery-compo .gallery-image figure:nth-of-type(2) img {
+.gallery-compo .gallery-image .gallery-edit-button figure img {
   display: block;
+}
+.gallery-compo .gallery-image .gallery-edit-button button {
+  border-radius: 6px;
 }
 .gallery-compo .more-button {
   width: 2.5rem;

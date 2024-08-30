@@ -11,19 +11,30 @@
     width: 100%
     figure
       width: 100%
+      img
+        border-radius: 10px
   .gallery-image
     position: relative
-    figure:nth-of-type(2)
-      cursor: pointer
+    .gallery-edit-button
       position: absolute
-      width: 1.9rem
-      top: 0
-      right: 0
-      background-color: #fbf7ef
-      border-radius: 12px
-      padding: 0.2rem
-      img
-        display: block
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: flex-end
+      gap: 0.4rem
+      top: 0.5rem
+      right: 0.5rem
+      figure
+        margin-right: 1rem
+        cursor: pointer
+        width: 1.9rem
+        background-color: #fbf7ef
+        border-radius: 12px
+        padding: 0.2rem
+        img
+          display: block
+      button
+        border-radius: 6px
   //boton mas
   .more-button
     width: 2.5rem
