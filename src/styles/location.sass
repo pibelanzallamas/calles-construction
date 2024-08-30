@@ -6,14 +6,25 @@
   gap: 1rem
   width: 85vw
   padding-bottom: 1rem
+  .map-image
+    img
+      border: 2px solid grey 
+      border-radius: 11px
   p
-    font-size: 1.15rem
-  
+    margin-top: -0.5rem
+    font-size: 1.2rem
+    font-weight: 4500
+  .google-maps
+    width: 4.5rem
+
 @media (min-width: 800px)
   .location-compo
     width:  70vw
     p
       font-size: 1.4rem
+    .google-maps
+      margin-top: 1rem
+      width: 6rem
 
 @media (min-width: 1000px)
   .location-compo
@@ -21,3 +32,5 @@
     width: 50vw
     h2
       margin-bottom: 1rem
+    .google-maps
+      margin-top: 0

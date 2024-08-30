@@ -48,7 +48,7 @@ export default function Footer() {
         <div className="contact">
           <div className="line">
             <img src={fourth} />
-            <p>Jul, 2024</p>
+            <p>Ago, 2024</p>
           </div>
           <div className="line">
             <img src={five} />

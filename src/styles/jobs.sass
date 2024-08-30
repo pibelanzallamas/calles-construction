@@ -9,6 +9,7 @@
 .jobs-img
   aspect-ratio: 1 / 1
   img
+    border-radius: 15px
     object-fit: cover
 
 //APARTADO DE PARRAFO
@@ -52,7 +53,7 @@
 
 //RUBRO TITULO
 .rubro-title
-  margin: 1.4rem 0 -0.9rem 0
+  // margin: rem 0 -0.5rem 0
 
 //MORE
 .more-button
@@ -125,13 +126,15 @@
 .edit-buttons
   display: flex
   justify-content: center
+  align-items: center
   gap: 0.8rem
   figure
     cursor: pointer
+  button
+    padding: 0.4rem
 
 .edit-button
-  width: 2rem
-  height: 2rem
+  height: 1.6rem
 
 //NEW JOB
 .form-job
@@ -163,7 +166,7 @@
   .jobs-compo
     width: 75vw
     margin: 0 auto
-    gap: 2.5rem
+    gap: 1.5rem
     padding-bottom: 1rem
   .jobs-img
     aspect-ratio: 16 / 9
@@ -190,6 +193,16 @@
     justify-content: center
     flex-direction: row-reverse
   
+  .rubro-title
+    // margin: -1rem 0
+
+  .edit-buttons
+    button
+      padding: 0.5rem
+
+  .edit-button
+    height: 1.8rem
+
   .form-job
     form
       width: 55vw
@@ -204,7 +217,7 @@
     width: 60vw
     margin: 0 auto
     padding-top: 1rem
-    gap: 2.7rem
+    gap: 2.3rem
     padding-bottom: 2rem
     h2
       margin-bottom: -1rem
@@ -235,6 +248,11 @@
       font-size: 2.2rem
     p
       font-size: 1.4rem
+  .edit-buttons
+    button
+      padding: 0.6rem
+  .edit-button
+    height: 2.2rem
   .form-job
     form
       width: 40vw

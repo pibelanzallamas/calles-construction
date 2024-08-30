@@ -24,17 +24,6 @@ export const services = [
     category: "drywall",
   },
   {
-    title: "Drywall",
-    desc: "Quality ceiling installations, drywall, and partitions services.",
-    logo: logoDrywall,
-    description:
-      "Drywall work involves installing, finishing, and repairing interior walls and ceilings using gypsum boards for construction.",
-    image: picDrywall,
-    side: "l",
-    date: "1999-12-22T00:00:9999",
-    category: "drywall",
-  },
-  {
     title: "Electrical",
     desc: "House electrical installation: wiring and fixture setup.",
     logo: electricalLogo,
@@ -88,5 +77,16 @@ export const services = [
     side: "r",
     date: "1999-12-22T00:00:9999",
     category: "utilities",
+  },
+  {
+    title: "Drywall",
+    desc: "Quality ceiling installations, drywall, and partitions services.",
+    logo: logoDrywall,
+    description:
+      "Drywall work involves installing, finishing, and repairing interior walls and ceilings using gypsum boards for construction.",
+    image: picDrywall,
+    side: "l",
+    date: "1999-12-22T00:00:9999",
+    category: "drywall",
   },
 ];
