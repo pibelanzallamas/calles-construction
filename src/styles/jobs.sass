@@ -65,8 +65,9 @@
   flex-direction: column
   gap: 0.4rem
   width: 100%
-  figure
+  figure .job-img
     width: 100%
+    border-radius: 14px
   h3
     font-size: 1.5rem
     text-decoration: underline
@@ -74,11 +75,6 @@
     p 
       overflow-wrap: break-word
       font-size: 1.1rem
-
-.job-date
-  font-size: 1rem
-  font-weight: 750
-  color: #0f4c61
 
 .pencil-line
   display: flex
@@ -92,6 +88,11 @@
   p
     margin: 0 0.5rem
 
+.job-date
+  font-size: 1rem
+  font-weight: 750
+  color: #0f4c61
+
 .l
   text-align: left
   justify-content: left
@@ -100,7 +101,39 @@
   justify-content: right
   flex-direction: row-reverse
 
-//form job
+//imagen gigante
+.job-image
+  position: relative
+  button
+    position: absolute
+    top: 0.3rem
+    border-radius: 10px
+    right: 0.3rem
+
+//EDIT JOB
+.input-job
+  background-color: inherit
+  outline: none
+  border: 2px solid gray
+  border-radius: 0.4rem
+  padding: 0.5rem
+  width: 100%
+.input-job:focus,
+.input-job:focus 
+    border: orange  2px solid
+
+.edit-buttons
+  display: flex
+  justify-content: center
+  gap: 0.8rem
+  figure
+    cursor: pointer
+
+.edit-button
+  width: 2rem
+  height: 2rem
+
+//NEW JOB
 .form-job
   form 
     display: flex
@@ -156,6 +189,7 @@
     text-align: center
     justify-content: center
     flex-direction: row-reverse
+  
   .form-job
     form
       width: 55vw
@@ -170,7 +204,7 @@
     width: 60vw
     margin: 0 auto
     padding-top: 1rem
-    gap: 3rem
+    gap: 2.7rem
     padding-bottom: 2rem
     h2
       margin-bottom: -1rem
