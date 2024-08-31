@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { alerts } from "../utils/alerts";
 import axios from "axios";
 import TopButton from "../commons/TopButton";
+import Image from "../commons/Image";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
-import trash from "../assets/trash.svg";
 import UserModals from "../modals/UserModals";
 import { services } from "../utilities/services";
 import { fakeGallery } from "../utilities/gallery";
@@ -132,25 +132,7 @@ function Gallery() {
 
       {/* imágenes */}
       {finalJobs.length > 0 &&
-        finalJobs.map((img, i) => (
-          <div className="image-card" key={i} id={img.id}>
-            <div className="gallery-image">
-              <figure>
-                <img src={img.image} className="job-img" />
-              </figure>
-              {user.id && (
-                <div className="gallery-edit-button">
-                  <button onClick={() => handleChangeImage(img.id)}>
-                    Edit image
-                  </button>
-                  <figure onClick={() => handleDelete(img.id)}>
-                    <img src={trash} alt="trash-icon" />
-                  </figure>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+        finalJobs.map((img) => <Image key={img.id} image={img} />)}
 
       {/* form */}
       {user.id && (

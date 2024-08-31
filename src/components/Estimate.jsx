@@ -28,7 +28,7 @@ function Estimate() {
       const res = await emailjs.send(
         SERVICE_ID,
         templateParams,
-        TEMPLATE_ID,
+        // TEMPLATE_ID,
         USER_ID
       );
 
