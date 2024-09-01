@@ -89,12 +89,10 @@ function Jobs({ serv }) {
   //delete images
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
-
   function handleDelete(id) {
     setJid(id);
     openBox();
   }
-
   const confirmDelete = async () => {
     console.log("tenes el jid?", jid);
     try {
