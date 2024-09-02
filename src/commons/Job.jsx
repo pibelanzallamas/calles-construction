@@ -75,12 +75,14 @@ function Job({ service, deleteFun, indice }) {
                 onClick={() => editFun(service.id)}
                 on
                 className="job-button"
+                title="Enter Edit Mode"
               >
                 <img src={edit} alt="edit-icon"></img>
               </figure>
               <figure
                 onClick={() => deleteFun(service.id)}
                 className="job-button"
+                title="Delete Job"
               >
                 <img src={trash} alt="trash-icon" />
               </figure>
@@ -106,11 +108,11 @@ function Job({ service, deleteFun, indice }) {
       {editMode && (
         <div className="edit-buttons">
           <figure onClick={() => editFun(service.id)} className="edit-button">
-            <img src={edit} alt="edit-icon"></img>
+            <img src={edit} alt="edit-icon" title="Exit Edit Mode"></img>
           </figure>
-          <button>Submit</button>
+          <button title="Update Job">Submit</button>
           <figure onClick={() => deleteFun(service.id)} className="edit-button">
-            <img src={trash} alt="trash-icon" />
+            <img src={trash} alt="trash-icon" title="Delete Job" />
           </figure>
         </div>
       )}
@@ -118,7 +120,7 @@ function Job({ service, deleteFun, indice }) {
         <figure>
           <img src={service.image} alt={service.title} className="job-img" />
         </figure>
-        {user.id && (
+        {user.id && editMode && (
           <button onClick={() => handleChangeImage(service.id)}>
             Edit image
           </button>
