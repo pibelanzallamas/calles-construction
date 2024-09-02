@@ -56,7 +56,7 @@ function Login() {
           <div className="peak-line">
             <label>Password</label>
             <figure onClick={() => setPeak(!peak)}>
-              <img src={peak ? eyeOpen : eyeClose}></img>
+              <img src={peak ? eyeClose : eyeOpen}></img>
             </figure>
           </div>
           <input
