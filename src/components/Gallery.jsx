@@ -40,8 +40,8 @@ function Gallery() {
       (ele) => ele.category == rubro.toLowerCase()
     );
 
-    setFinalJobs(filter2.concat(filter1)); //concatena las dos tablas filtradas, primero la de gallery
-  }, [rubro]);
+    setFinalJobs(filter2.concat(filter1));
+  }, [rubro, gallery]); // si se modifica gallery se vuelve afiltrar
 
   //get images
   useEffect(() => {
@@ -92,26 +92,17 @@ function Gallery() {
         `https://calles-construction-back.onrender.com/api/images/delete/${jid}`
       );
 
-      if (!res.data) {
-        alerts("Sorry!", "Image couldn't be erased", "warning");
-      } else {
-        alerts("Okey!", "Image erased successfuly", "success");
+      if (res.data) {
         setEstado(!estado);
+        alerts("Okey!", "Image erased successfuly", "success");
+      } else {
+        alerts("Sorry!", "Image couldn't be erased", "warning");
       }
     } catch (e) {
       console.log(e);
       alerts("Sorry!", "Image couldn't be erased", "danger");
     }
     closeBox();
-  };
-
-  //mod image
-  const handleChangeImage = async () => {
-    try {
-      console.log("change image");
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   return (
@@ -132,7 +123,14 @@ function Gallery() {
 
       {/* imágenes */}
       {finalJobs.length > 0 &&
-        finalJobs.map((img) => <Image key={img.id} image={img} />)}
+        finalJobs.map((img) => (
+          <Image
+            disparador={() => setEstado(!estado)}
+            key={img.id}
+            image={img}
+            handleDelete={handleDelete}
+          />
+        ))}
 
       {/* form */}
       {user.id && (
