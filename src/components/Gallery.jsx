@@ -29,8 +29,8 @@ function Gallery() {
   const [moreImages, setMoreImages] = useState(1);
 
   const divs = Array.from({ length: moreImages });
-
   const [category, setCategory] = useState("");
+  const [allImages, setAllImages] = useState([]);
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
@@ -61,27 +61,64 @@ function Gallery() {
   }, [estado]);
 
   //upload images
-  const createImage = async (e) => {
-    e.preventDefault();
+  const uploadImages = async (pic) => {
     const f = new FormData();
-    f.append("file", image);
+    f.append("file", pic);
     f.append("upload_preset", "nfi9e7vs");
     f.append("api_key", import.meta.env.VITE_API_KEY);
-    setLoading(true);
 
     try {
       const url = await axios.post(
         "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
         f
       );
+      const img = url.data.secure_url; //link
+      if (img) return img;
+    } catch (e) {
+      console.log(e);
+      alerts("Sorry!", "Image couldn't be uploaded", "danger");
+      return null;
+    }
+  };
 
-      const res = await axios.post(
+  //upload images into db
+  const imagesDb = async (link, category, jid) => {
+    try {
+      const imag = await axios.post(
         "https://calles-construction-back.onrender.com/api/images/create",
         {
-          image: url.data.secure_url,
-          description: "desc",
+          image: link,
+          category,
+          jid,
         }
       );
+      if (imag) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //upload images
+  const createImage = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const links = [];
+    try {
+      for (let i = 0; i < allImages.length; i++) {
+        if (!links.push(uploadImages(allImages[i]))) {
+          break;
+        }
+      }
+
+      for (let i = 0; i < links.length; i++) {
+        if (!imagesDb(links[i], category, 848484)) {
+          break;
+        }
+      }
 
       alerts("Okey!", "Image upload successfuly", "success");
       setEstado(!estado);
@@ -156,15 +193,9 @@ function Gallery() {
       {/* form */}
       {user.id && (
         <>
-          {more ? (
-            <figure onClick={() => setMore(false)} className="more-button">
-              <img src={lessButton} alt="less-button"></img>
-            </figure>
-          ) : (
-            <figure onClick={() => setMore(true)} className="more-button">
-              <img src={moreButton} alt="more-button"></img>
-            </figure>
-          )}
+          <figure onClick={() => setMore(!more)} className="more-button">
+            <img src={more ? lessButton : moreButton} alt="less-button"></img>
+          </figure>
           {more && (
             <div className="form-job">
               <form onSubmit={createImage}>

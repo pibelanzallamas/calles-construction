@@ -217,15 +217,9 @@ function Jobs({ serv }) {
       {user.id && (
         <>
           <div className="more-button">
-            {more ? (
-              <figure onClick={() => setMore(false)} className="more-button">
-                <img src={lessButton} alt="less-button"></img>
-              </figure>
-            ) : (
-              <figure onClick={() => setMore(true)} className="more-button">
-                <img src={moreButton} alt="more-button"></img>
-              </figure>
-            )}
+            <figure onClick={() => setMore(!more)} className="more-button">
+              <img src={more ? lessButton : moreButton} alt="less-button"></img>
+            </figure>
           </div>
           {more && (
             <div className="form-job">
