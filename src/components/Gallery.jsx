@@ -11,6 +11,8 @@ import UserModals from "../modals/UserModals";
 import { services } from "../utilities/services";
 import { fakeGallery } from "../utilities/gallery";
 import ReactLoading from "react-loading";
+import plus from "../assets/plus.svg";
+import minus from "../assets/minus.svg";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
@@ -24,6 +26,11 @@ function Gallery() {
   const [rubro, setRubro] = useState("");
   const [finalJobs, setFinalJobs] = useState([]);
   const [deleting, setDeleting] = useState(false);
+  const [moreImages, setMoreImages] = useState(1);
+
+  const divs = Array.from({ length: moreImages });
+
+  const [category, setCategory] = useState("");
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
@@ -162,13 +169,49 @@ function Gallery() {
             <div className="form-job">
               <form onSubmit={createImage}>
                 <div className="field">
-                  <label htmlFor="image">Image</label>
-                  <input
-                    id="image"
-                    type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
+                  <label htmlFor="cat">Category</label>
+                  <select
+                    id="cat"
+                    onChange={(e) => setCategory(e.target.value)}
+                    value={category}
                     required
-                  />
+                  >
+                    <option value="">Select a category</option>
+                    <option value="Drywall">Drywall</option>
+                    <option value="Painting">Painting</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Carpentry">Carpentry</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Utilities">Utilities</option>
+                  </select>
+                </div>
+
+                {divs.map((_, index) => (
+                  <div key={index} className="field">
+                    <label htmlFor="image">Image {index + 1}</label>
+                    <input
+                      id="image"
+                      type="file"
+                      onChange={(e) => setImage(e.target.files[0])}
+                      required
+                    />
+                  </div>
+                ))}
+
+                <div className="moreLessImages">
+                  <figure
+                    onClick={() => setMoreImages(moreImages - 1)}
+                    className="more-button"
+                  >
+                    <img src={minus} alt="more-button"></img>
+                  </figure>
+
+                  <figure
+                    onClick={() => setMoreImages(moreImages + 1)}
+                    className="more-button"
+                  >
+                    <img src={plus} alt="more-button"></img>
+                  </figure>
                 </div>
 
                 {loading ? (

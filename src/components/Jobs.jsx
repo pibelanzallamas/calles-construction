@@ -38,8 +38,6 @@ function Jobs({ serv }) {
 
   const [category, setCategory] = useState("");
 
-  const arregloMayor = [];
-
   //definir un arreglo useState
   //y pushearlo a arregloMayor
 
@@ -53,8 +51,6 @@ function Jobs({ serv }) {
   //llamar a un createJobs por cada imagen - pasar jid y category por parametro
   //guarda cada imagen con url, jid, y category
   //guardar datos en datera
-
-  arregloMayor.push();
 
   //get jobs
   useEffect(() => {
