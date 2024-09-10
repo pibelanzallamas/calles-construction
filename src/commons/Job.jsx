@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import trash from "../assets/trash.svg";
 import edit from "../assets/edit.svg";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { alerts } from "../utils/alerts";
 
-function Job({ service, deleteFun, indice }) {
+function Job({ key, service, deleteFun, disparador, indice }) {
   const user = useSelector((state) => state.user);
   const [editMode, setEditMode] = useState(false);
   const [desc, setDesc] = useState(service.description);
   const [title, setTitle] = useState(service.title);
   const [dat, setDat] = useState(service.date.split("T")[0]);
-  const [img, setImg] = useState(null);
-
+  const [img, setImg] = useState("");
+  const imgUpdater = useRef(null);
   if (indice % 2 === 0) {
     service.side = "l";
   } else service.side = "r";
@@ -34,14 +36,58 @@ function Job({ service, deleteFun, indice }) {
 
   const date = meses[fecha[1] - 1] + " " + fecha[2];
 
-  //dos funciones para editar, una para editar solo la imagen
-  //una para editar el resto de los campos
+  const submitUpdate = async () => {
+    try {
+      const resp = await axios.put(
+        `https://calles-construction-back.onrender.com/api/jobs/update/${key}`,
+        { title, desc, date }
+      );
 
-  const editFun = () => {
-    setEditMode(!editMode);
+      if (resp) {
+        alerts("Okey!", "Job updated successfuly", "success");
+      } else {
+        alerts("Sorry!", "Job couldn't be updated", "warning");
+      }
+    } catch (e) {
+      console.log(e);
+      alerts("Sorry!", "Job couldn't be updated", "danger");
+    }
   };
 
-  const handleChangeImage = () => {};
+  const handleNewImage = (e) => {
+    setImg(e.target.files[0]);
+    handleChangeImage();
+  };
+
+  const handleChangeImage = async (key) => {
+    const f = new FormData();
+    f.append("file", img);
+    f.append("upload_preset", "nfi9e7vs");
+    f.append("api_key", import.meta.env.VITE_API_KEY);
+
+    try {
+      const clou = await axios.post(
+        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
+        f
+      );
+      const link = clou.data.secure_url;
+
+      const res = await axios.put(
+        `https://calles-construction-back.onrender.com/api/jobs/update/${key}`,
+        { link }
+      );
+
+      if (res.data) {
+        disparador();
+        alerts("Okey!", "Image updated successfuly", "success");
+      } else {
+        alerts("Sorry!", "Image couldn't be updated", "warning");
+      }
+    } catch (e) {
+      console.log(e);
+      alerts("Sorry!", "Image couldn't be updated", "danger");
+    }
+  };
 
   return (
     <div className="job-card">
@@ -72,7 +118,7 @@ function Job({ service, deleteFun, indice }) {
           ) : (
             <>
               <figure
-                onClick={() => editFun(service.id)}
+                onClick={() => setEditMode(!editMode)}
                 on
                 className="job-button"
                 title="Enter Edit Mode"
@@ -97,7 +143,7 @@ function Job({ service, deleteFun, indice }) {
               onChange={(e) => setDesc(e.target.value)}
               type="text"
               rows={3}
-              maxLength={50}
+              maxLength={150}
               className="input-job"
             />
           </>
@@ -107,10 +153,15 @@ function Job({ service, deleteFun, indice }) {
       </section>
       {editMode && (
         <div className="edit-buttons">
-          <figure onClick={() => editFun(service.id)} className="edit-button">
+          <figure
+            onClick={() => setEditMode(!editMode)}
+            className="edit-button"
+          >
             <img src={edit} alt="edit-icon" title="Exit Edit Mode"></img>
           </figure>
-          <button title="Update Job">Submit</button>
+          <button onClick={() => submitUpdate()} title="Update Job">
+            Submit
+          </button>
           <figure onClick={() => deleteFun(service.id)} className="edit-button">
             <img src={trash} alt="trash-icon" title="Delete Job" />
           </figure>
@@ -121,11 +172,16 @@ function Job({ service, deleteFun, indice }) {
           <img src={service.image} alt={service.title} className="job-img" />
         </figure>
         {user.id && editMode && (
-          <button onClick={() => handleChangeImage(service.id)}>
-            Edit image
-          </button>
+          <button onClick={() => imgUpdater.current.click()}>Edit image</button>
         )}
       </div>
+      <input
+        ref={imgUpdater}
+        id="imagen-updater"
+        type="file"
+        onChange={handleNewImage}
+        style={{ display: "none" }}
+      ></input>
     </div>
   );
 }
@@ -142,3 +198,13 @@ export default Job;
 //  job (name: 'asdfa', title: "hahaha") mod ---> mod *job* en bdd --> mandar un senial
 // de que se modifico este job, YO MODIGIQUE!!! recibie jobs recibe la alerta y trae a todos
 // de nuevo/ modo view de nuevo...
+
+//editJob=> {
+//recibir nuevos datos, title, date, descr
+//actualizar datos con axios.put {desd, title, date}
+//alerts
+//mandar estado al jobs para marcar que tiene updates
+
+//obtener link wwww.comepu.e
+//obtener id www pavada
+//modfiicar imagen y listo

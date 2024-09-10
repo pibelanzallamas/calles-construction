@@ -36,7 +36,7 @@ function Image({ image, key, disparador, handleDelete }) {
       }
     } catch (e) {
       console.log(e);
-      alerts("Sorry!", "Image couldn't be erased", "danger");
+      alerts("Sorry!", "Image couldn't be updated", "danger");
     }
   };
 
@@ -74,25 +74,3 @@ function Image({ image, key, disparador, handleDelete }) {
 }
 
 export default Image;
-
-//modificar las fotos de galleries
-//hacer click en edit image
-//seleccionar una imagen de mi compu
-//esa imagen tiene que mostrarse en mi gallery
-
-//abrir un input type file
-//guardar los datos de esa imagen
-//subirla a la nube
-//obtener el numero de id de la imagen
-//remplazar el link de ese registro de gallery por el nuevo
-//volver a pedir todas las imagenes
-//mostrar el nuevo registro con la nueva imagen
-
-//input type display:off
-//
-//el mod lo hacemos en image
-//el cartel de alert en image
-//disparar un funcion pasada por props
-//
-//disparar estado en gallery
-//pedir todas las fotos de nuevo

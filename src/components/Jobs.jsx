@@ -137,6 +137,7 @@ function Jobs({ serv }) {
               service={job}
               indice={i}
               deleteFun={handleDelete}
+              disparador={() => setEstado(!estado)}
             />
           </>
         ))}
