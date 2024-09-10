@@ -10,6 +10,7 @@ import lessButton from "../assets/lessButton.svg";
 import UserModals from "../modals/UserModals";
 import { services } from "../utilities/services";
 import { fakeGallery } from "../utilities/gallery";
+import ReactLoading from "react-loading";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
@@ -22,6 +23,7 @@ function Gallery() {
   const [jid, setJid] = useState({});
   const [rubro, setRubro] = useState("");
   const [finalJobs, setFinalJobs] = useState([]);
+  const [deleting, setDeleting] = useState(false);
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
@@ -87,6 +89,7 @@ function Gallery() {
 
   //delete images
   const confirmDelete = async () => {
+    setDeleting(true);
     try {
       const res = await axios.delete(
         `https://calles-construction-back.onrender.com/api/images/delete/${jid}`
@@ -103,6 +106,7 @@ function Gallery() {
       alerts("Sorry!", "Image couldn't be erased", "danger");
     }
     closeBox();
+    setDeleting(false);
   };
 
   return (
@@ -124,12 +128,22 @@ function Gallery() {
       {/* imágenes */}
       {finalJobs.length > 0 &&
         finalJobs.map((img) => (
-          <Image
-            disparador={() => setEstado(!estado)}
-            key={img.id}
-            image={img}
-            handleDelete={handleDelete}
-          />
+          <>
+            <Image
+              disparador={() => setEstado(!estado)}
+              key={img.id}
+              image={img}
+              handleDelete={handleDelete}
+            />
+            {deleting && (
+              <ReactLoading
+                type={"spin"}
+                color="#0f4c61"
+                height={50}
+                width={50}
+              />
+            )}
+          </>
         ))}
 
       {/* form */}

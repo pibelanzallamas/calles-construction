@@ -3,14 +3,17 @@ import { useSelector } from "react-redux";
 import trash from "../assets/trash.svg";
 import axios from "axios";
 import { alerts } from "../utils/alerts";
+import ReactLoading from "react-loading";
 
 function Image({ image, key, disparador, handleDelete }) {
   const user = useSelector((state) => state.user);
   const imgUpdater = useRef(null);
   const [newImg, setNewImg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   //mod imagen
   const handleChangeImage = async () => {
+    setLoading(true);
     const f = new FormData();
     f.append("file", newImg);
     f.append("upload_preset", "nfi9e7vs");
@@ -38,6 +41,7 @@ function Image({ image, key, disparador, handleDelete }) {
       console.log(e);
       alerts("Sorry!", "Image couldn't be updated", "danger");
     }
+    setLoading(false);
   };
 
   const handleNewImage = (e) => {
@@ -56,10 +60,18 @@ function Image({ image, key, disparador, handleDelete }) {
             <button onClick={() => imgUpdater.current.click()}>
               Edit image
             </button>
-            <figure onClick={() => handleDelete(image.id)}>
+
+            <figure
+              onClick={() => {
+                handleDelete(image.id);
+              }}
+            >
               <img src={trash} alt="trash-icon" />
             </figure>
           </div>
+        )}
+        {loading && (
+          <ReactLoading type={"spin"} color="#0f4c61" height={50} width={50} />
         )}
       </div>
       <input

@@ -4,6 +4,7 @@ import edit from "../assets/edit.svg";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { alerts } from "../utils/alerts";
+import ReactLoading from "react-loading";
 
 function Job({ key, service, deleteFun, disparador, indice }) {
   const user = useSelector((state) => state.user);
@@ -12,7 +13,9 @@ function Job({ key, service, deleteFun, disparador, indice }) {
   const [title, setTitle] = useState(service.title);
   const [dat, setDat] = useState(service.date.split("T")[0]);
   const [img, setImg] = useState("");
+  const [loading, setLoading] = useState(false);
   const imgUpdater = useRef(null);
+
   if (indice % 2 === 0) {
     service.side = "l";
   } else service.side = "r";
@@ -36,22 +39,29 @@ function Job({ key, service, deleteFun, disparador, indice }) {
 
   const date = meses[fecha[1] - 1] + " " + fecha[2];
 
+  //mod jobs
+  //texts
   const submitUpdate = async () => {
+    setLoading(true);
     try {
       const resp = await axios.put(
         `https://calles-construction-back.onrender.com/api/jobs/update/${key}`,
-        { title, desc, date }
+        { title, desc, dat }
       );
 
-      if (resp) {
+      console.log(resp.data);
+
+      if (resp.data) {
         alerts("Okey!", "Job updated successfuly", "success");
+        disparador();
       } else {
         alerts("Sorry!", "Job couldn't be updated", "warning");
       }
     } catch (e) {
-      console.log(e);
+      console.log("exit", e);
       alerts("Sorry!", "Job couldn't be updated", "danger");
     }
+    setLoading(false);
   };
 
   const handleNewImage = (e) => {
@@ -59,18 +69,21 @@ function Job({ key, service, deleteFun, disparador, indice }) {
     handleChangeImage();
   };
 
+  //image
   const handleChangeImage = async (key) => {
     const f = new FormData();
     f.append("file", img);
     f.append("upload_preset", "nfi9e7vs");
     f.append("api_key", import.meta.env.VITE_API_KEY);
-
+    setLoading(true);
     try {
       const clou = await axios.post(
         "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
         f
       );
       const link = clou.data.secure_url;
+
+      console.log(link);
 
       const res = await axios.put(
         `https://calles-construction-back.onrender.com/api/jobs/update/${key}`,
@@ -84,9 +97,10 @@ function Job({ key, service, deleteFun, disparador, indice }) {
         alerts("Sorry!", "Image couldn't be updated", "warning");
       }
     } catch (e) {
-      console.log(e);
+      console.log("error", e);
       alerts("Sorry!", "Image couldn't be updated", "danger");
     }
+    setLoading(false);
   };
 
   return (
@@ -151,22 +165,30 @@ function Job({ key, service, deleteFun, disparador, indice }) {
           <p>{service.description}</p>
         )}
       </section>
-      {editMode && (
-        <div className="edit-buttons">
-          <figure
-            onClick={() => setEditMode(!editMode)}
-            className="edit-button"
-          >
-            <img src={edit} alt="edit-icon" title="Exit Edit Mode"></img>
-          </figure>
-          <button onClick={() => submitUpdate()} title="Update Job">
-            Submit
-          </button>
-          <figure onClick={() => deleteFun(service.id)} className="edit-button">
-            <img src={trash} alt="trash-icon" title="Delete Job" />
-          </figure>
-        </div>
-      )}
+      <div className={"last-row"}>
+        {editMode && (
+          <div className="edit-buttons">
+            <figure
+              onClick={() => setEditMode(!editMode)}
+              className="edit-button"
+            >
+              <img src={edit} alt="edit-icon" title="Exit Edit Mode"></img>
+            </figure>
+            <button onClick={() => submitUpdate()} title="Update Job">
+              Submit
+            </button>
+            <figure
+              onClick={() => deleteFun(service.id)}
+              className="edit-button"
+            >
+              <img src={trash} alt="trash-icon" title="Delete Job" />
+            </figure>
+          </div>
+        )}
+        {loading && (
+          <ReactLoading type={"spin"} color="#0f4c61" height={50} width={50} />
+        )}
+      </div>
       <div className="job-image">
         <figure>
           <img src={service.image} alt={service.title} className="job-img" />

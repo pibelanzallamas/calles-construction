@@ -12,6 +12,7 @@ import UserModals from "../modals/UserModals";
 import portadaJobs from "../assets/jobs-img.jpg";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
+import ReactLoading from "react-loading";
 
 function Jobs({ serv }) {
   const navigate = useNavigate();
@@ -28,11 +29,12 @@ function Jobs({ serv }) {
   const [confirmBox, setConfirmBox] = useState(false);
   const [rubro, setRubro] = useState(serv || "");
   const [finalJobs, setFinalJobs] = useState([]);
+  const [deleting, setDeleting] = useState(false);
 
   //get jobs
   useEffect(() => {
     axios
-      .get("https://calles-construction-back.onrender.com/api/jobs/")
+      .get("https://calles-construction-back.onrender.com/api/jobs/") //ver si se modifica jobs"" tamb se modifina finalJobsss
       .then((resp) => setJobs(resp.data))
       .catch((err) => console.log(err));
   }, [estado]);
@@ -94,7 +96,7 @@ function Jobs({ serv }) {
     openBox();
   }
   const confirmDelete = async () => {
-    console.log("tenes el jid?", jid);
+    setDeleting(true);
     try {
       const resp = await axios.delete(
         `https://calles-construction-back.onrender.com/api/jobs/delete/${jid}`
@@ -107,6 +109,7 @@ function Jobs({ serv }) {
       alerts("Sorry!", "Job couldn't be erased", "danger");
     }
     closeBox();
+    setDeleting(false);
   };
 
   return (
@@ -139,6 +142,14 @@ function Jobs({ serv }) {
               deleteFun={handleDelete}
               disparador={() => setEstado(!estado)}
             />
+            {deleting && (
+              <ReactLoading
+                type={"spin"}
+                color="#0f4c61"
+                height={50}
+                width={50}
+              />
+            )}
           </>
         ))}
 
