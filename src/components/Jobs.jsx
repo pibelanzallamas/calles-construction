@@ -13,6 +13,8 @@ import portadaJobs from "../assets/jobs-img.jpg";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
 import ReactLoading from "react-loading";
+import plus from "../assets/plus.svg";
+import minus from "../assets/minus.svg";
 
 function Jobs({ serv }) {
   const navigate = useNavigate();
@@ -30,6 +32,29 @@ function Jobs({ serv }) {
   const [rubro, setRubro] = useState(serv || "");
   const [finalJobs, setFinalJobs] = useState([]);
   const [deleting, setDeleting] = useState(false);
+  const [moreImages, setMoreImages] = useState(1);
+
+  const divs = Array.from({ length: moreImages });
+
+  const [category, setCategory] = useState("");
+
+  const arregloMayor = [];
+
+  //definir un arreglo useState
+  //y pushearlo a arregloMayor
+
+  //guardar cada imagen agregada, minima 1, maximo de 15
+  //como las guardo?
+  //crear un data.format para cada una y darle las propiedades correspondientes
+  //subirlas y obtener links, llamar a la funcion por cada imagen
+  //guardar los links en bdd images, junto con category y un jid
+
+  //guardar las imagenes [im1,im2,im3]
+  //llamar a un createJobs por cada imagen - pasar jid y category por parametro
+  //guarda cada imagen con url, jid, y category
+  //guardar datos en datera
+
+  arregloMayor.push();
 
   //get jobs
   useEffect(() => {
@@ -45,33 +70,72 @@ function Jobs({ serv }) {
   }, [rubro]);
 
   //upload images
-  const createJobs = async (e) => {
-    e.preventDefault();
-
+  const uploadImages = async (pic) => {
     const f = new FormData();
-    f.append("file", image);
+    f.append("file", pic);
     f.append("upload_preset", "nfi9e7vs");
     f.append("api_key", import.meta.env.VITE_API_KEY);
-    setLoading(true);
 
     try {
       const url = await axios.post(
         "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
         f
       );
-      const img = url.data.secure_url;
+      const img = url.data.secure_url; //link
+      if (img) return img;
+    } catch (e) {
+      console.log(e);
+      alerts("Sorry!", "Image couldn't be uploaded", "danger");
+      return null;
+    }
+  };
+
+  //upload images into db
+  const imagesDb = async (link, category, jid) => {
+    try {
+      const imag = await axios.post(
+        "https://calles-construction-back.onrender.com/api/images/create",
+        {
+          image: link,
+          category,
+          jid,
+        }
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //upload job
+  const createJobs = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const links = [];
+
+    //subir imagenes a links
+    for (let i = 0; i < imagesAll.length; i++) {
+      links.push(uploadImages(imagesAll[i]));
+    }
+
+    try {
       const resp = await axios.post(
         "https://calles-construction-back.onrender.com/api/jobs/create",
         {
           title,
           description: desc,
-          image: img,
           date,
+          category,
         }
       );
-      setEstado(!estado);
 
       if (resp.data[1]) {
+        //subir links a bdd
+        for (let i = 0; i < links.length; i++) {
+          imagesDb(links[i], category, resp.data[1].id);
+        }
+
+        setEstado(!estado);
         alerts("Okey!", "Job upload successfuly", "success");
         navigate("/jobs");
       } else {
@@ -85,6 +149,7 @@ function Jobs({ serv }) {
     setDesc("");
     setDate("");
     setImage("");
+    setCategory("");
     setLoading(false);
   };
 
@@ -204,14 +269,51 @@ function Jobs({ serv }) {
                     placeholder="description"
                   />
                 </div>
+
                 <div className="field">
-                  <label htmlFor="image">Image</label>
-                  <input
-                    id="image"
-                    type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
+                  <label htmlFor="cat">Category</label>
+                  <select
+                    id="cat"
+                    onChange={(e) => setCategory(e.target.value)}
+                    value={category}
                     required
-                  />
+                  >
+                    <option value="">Select a category</option>
+                    <option value="Drywall">Drywall</option>
+                    <option value="Painting">Painting</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Carpentry">Carpentry</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Utilities">Utilities</option>
+                  </select>
+                </div>
+
+                {divs.map((_, index) => (
+                  <div key={index} className="field">
+                    <label htmlFor="image">Image {index + 1}</label>
+                    <input
+                      id="image"
+                      type="file"
+                      onChange={(e) => setImage(e.target.files[0])}
+                      required
+                    />
+                  </div>
+                ))}
+
+                <div className="moreLessImages">
+                  <figure
+                    onClick={() => setMoreImages(moreImages - 1)}
+                    className="more-button"
+                  >
+                    <img src={minus} alt="more-button"></img>
+                  </figure>
+
+                  <figure
+                    onClick={() => setMoreImages(moreImages + 1)}
+                    className="more-button"
+                  >
+                    <img src={plus} alt="more-button"></img>
+                  </figure>
                 </div>
                 {loading ? (
                   <p className="loading-text"> Loading ...</p>

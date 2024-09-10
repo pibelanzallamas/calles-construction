@@ -413,7 +413,8 @@ nav {
   font-size: 1rem;
 }
 .form-job form .field input,
-.form-job form .field textarea {
+.form-job form .field textarea,
+.form-job form .field select {
   margin-top: 0.3rem;
   width: 100%;
   background-color: inherit;
@@ -435,6 +436,12 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
+}
+
+.moreLessImages {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 @media (min-width: 800px) {

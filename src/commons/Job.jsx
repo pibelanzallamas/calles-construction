@@ -209,24 +209,3 @@ function Job({ key, service, deleteFun, disparador, indice }) {
 }
 //real alfa
 export default Job;
-
-//al activar modo de edicion: que los textos se transforme en campos y que
-//se puedan editar los campos, con lo que yo quiera, pero que dentro tengan los antiguos
-//y cuando yo presione, enter, o un boton que diga submit, se cambie al modo no edit
-//y se vean los cambios realizados recientemente
-//
-
-//modigico aca en un job con los datos traidos por props
-//  job (name: 'asdfa', title: "hahaha") mod ---> mod *job* en bdd --> mandar un senial
-// de que se modifico este job, YO MODIGIQUE!!! recibie jobs recibe la alerta y trae a todos
-// de nuevo/ modo view de nuevo...
-
-//editJob=> {
-//recibir nuevos datos, title, date, descr
-//actualizar datos con axios.put {desd, title, date}
-//alerts
-//mandar estado al jobs para marcar que tiene updates
-
-//obtener link wwww.comepu.e
-//obtener id www pavada
-//modfiicar imagen y listo
