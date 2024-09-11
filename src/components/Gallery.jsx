@@ -62,6 +62,7 @@ function Gallery() {
 
   //upload images
   const uploadImages = async (pic) => {
+    //las funciones async siempre van a devolver una promesa
     const f = new FormData();
     f.append("file", pic);
     f.append("upload_preset", "nfi9e7vs");
@@ -72,12 +73,10 @@ function Gallery() {
         "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
         f
       );
-      const img = url.data.secure_url; //link
-      if (img) return img;
+      return url.data.secure_url; //link
     } catch (e) {
       console.log(e);
       alerts("Sorry!", "Image couldn't be uploaded", "danger");
-      return null;
     }
   };
 
@@ -92,11 +91,6 @@ function Gallery() {
           jid,
         }
       );
-      if (imag) {
-        return true;
-      } else {
-        return false;
-      }
     } catch (e) {
       console.log(e);
     }
@@ -106,25 +100,22 @@ function Gallery() {
   const createImage = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const links = [];
     try {
+      const links = [];
+
       for (let i = 0; i < allImages.length; i++) {
-        if (!links.push(uploadImages(allImages[i]))) {
-          break;
-        }
+        links.push(await uploadImages(allImages[i])); //esperar a que la promesa se resuelva para dar resultado
       }
 
       for (let i = 0; i < links.length; i++) {
-        if (!imagesDb(links[i], category, 848484)) {
-          break;
-        }
+        imagesDb(links[i], category, 848484);
       }
 
       alerts("Okey!", "Image upload successfuly", "success");
       setEstado(!estado);
     } catch (e) {
-      console.log(e);
       alerts("Sorry!", "Image couldn't be uploaded", "danger");
+      console.log(e);
     }
 
     setImage(null);
@@ -223,26 +214,42 @@ function Gallery() {
                     <input
                       id="image"
                       type="file"
-                      onChange={(e) => setImage(e.target.files[0])}
+                      onChange={(e) => {
+                        const updatedImages = [...allImages];
+                        updatedImages[index] = e.target.files[0];
+                        setAllImages(updatedImages);
+                      }}
                       required
                     />
                   </div>
                 ))}
 
                 <div className="moreLessImages">
-                  <figure
-                    onClick={() => setMoreImages(moreImages - 1)}
-                    className="more-button"
-                  >
-                    <img src={minus} alt="more-button"></img>
-                  </figure>
+                  {moreImages > 1 && (
+                    <figure
+                      onClick={() =>
+                        setMoreImages(
+                          moreImages > 1 ? moreImages - 1 : moreImages
+                        )
+                      }
+                      className="more-button"
+                    >
+                      <img src={minus} alt="more-button"></img>
+                    </figure>
+                  )}
 
-                  <figure
-                    onClick={() => setMoreImages(moreImages + 1)}
-                    className="more-button"
-                  >
-                    <img src={plus} alt="more-button"></img>
-                  </figure>
+                  {moreImages < 15 && (
+                    <figure
+                      onClick={() =>
+                        setMoreImages(
+                          moreImages < 15 ? moreImages + 1 : moreImages
+                        )
+                      }
+                      className="more-button"
+                    >
+                      <img src={plus} alt="more-button"></img>
+                    </figure>
+                  )}
                 </div>
 
                 {loading ? (

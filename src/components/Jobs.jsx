@@ -35,22 +35,8 @@ function Jobs({ serv }) {
   const [moreImages, setMoreImages] = useState(1);
 
   const divs = Array.from({ length: moreImages });
-
   const [category, setCategory] = useState("");
-
-  //definir un arreglo useState
-  //y pushearlo a arregloMayor
-
-  //guardar cada imagen agregada, minima 1, maximo de 15
-  //como las guardo?
-  //crear un data.format para cada una y darle las propiedades correspondientes
-  //subirlas y obtener links, llamar a la funcion por cada imagen
-  //guardar los links en bdd images, junto con category y un jid
-
-  //guardar las imagenes [im1,im2,im3]
-  //llamar a un createJobs por cada imagen - pasar jid y category por parametro
-  //guarda cada imagen con url, jid, y category
-  //guardar datos en datera
+  const [allImages, setAllImages] = useState([]);
 
   //get jobs
   useEffect(() => {
@@ -77,8 +63,7 @@ function Jobs({ serv }) {
         "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
         f
       );
-      const img = url.data.secure_url; //link
-      if (img) return img;
+      return url.data.secure_url;
     } catch (e) {
       console.log(e);
       alerts("Sorry!", "Image couldn't be uploaded", "danger");
@@ -107,14 +92,13 @@ function Jobs({ serv }) {
     e.preventDefault();
     setLoading(true);
 
-    const links = [];
-
-    //subir imagenes a links
-    for (let i = 0; i < imagesAll.length; i++) {
-      links.push(uploadImages(imagesAll[i]));
-    }
-
     try {
+      const links = [];
+
+      for (let i = 0; i < allImages.length; i++) {
+        links.push(await uploadImages(allImages[i]));
+      }
+      console.log(links);
       const resp = await axios.post(
         "https://calles-construction-back.onrender.com/api/jobs/create",
         {
@@ -284,27 +268,44 @@ function Jobs({ serv }) {
                     <input
                       id="image"
                       type="file"
-                      onChange={(e) => setImage(e.target.files[0])}
+                      onChange={(e) => {
+                        const updatedImages = [...allImages];
+                        updatedImages[index] = e.target.files[0];
+                        setAllImages(updatedImages);
+                      }}
                       required
                     />
                   </div>
                 ))}
 
                 <div className="moreLessImages">
-                  <figure
-                    onClick={() => setMoreImages(moreImages - 1)}
-                    className="more-button"
-                  >
-                    <img src={minus} alt="more-button"></img>
-                  </figure>
+                  {moreImages > 1 && (
+                    <figure
+                      onClick={() =>
+                        setMoreImages(
+                          moreImages > 1 ? moreImages - 1 : moreImages
+                        )
+                      }
+                      className="more-button"
+                    >
+                      <img src={minus} alt="more-button"></img>
+                    </figure>
+                  )}
 
-                  <figure
-                    onClick={() => setMoreImages(moreImages + 1)}
-                    className="more-button"
-                  >
-                    <img src={plus} alt="more-button"></img>
-                  </figure>
+                  {moreImages < 15 && (
+                    <figure
+                      onClick={() =>
+                        setMoreImages(
+                          moreImages < 15 ? moreImages + 1 : moreImages
+                        )
+                      }
+                      className="more-button"
+                    >
+                      <img src={plus} alt="more-button"></img>
+                    </figure>
+                  )}
                 </div>
+
                 {loading ? (
                   <p className="loading-text"> Loading ...</p>
                 ) : (
