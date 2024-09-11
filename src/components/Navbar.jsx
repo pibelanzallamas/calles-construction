@@ -1,58 +1,110 @@
-import React, { useEffect, useState } from "react";
-import logo from "../assets/nav-logo.png";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import { Squash as Hamburger } from "hamburger-react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ReactLoading from "react-loading";
+import defaultLogo from "../assets/nav-logo.png";
+import { alerts } from "../utils/alerts";
 
 function Navbar({ openFunc }) {
-  const [isOpen, setOpen] = useState(false);
   const user = useSelector((state) => state.user);
-  const [nl, setNl] = useState(""); //link
-  const [i, setI] = useState(""); //imagen
-  const [finalLogo, setFinalLogo] = useState("");
+  const [isOpen, setOpen] = useState(false);
+  const [logo, setLogo] = useState({ link: defaultLogo });
+  const [newLogo, setNewLogo] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [estado, setEstado] = useState(false);
+  const imgUpdater = useRef(null);
 
   useEffect(() => {
     openFunc(isOpen);
   }, [isOpen]);
 
-  function subirImagen() {
-    //poner url en nl
-  }
-
-  function handleLogo() {
-    //seleccionar un logo .svg, .png, .jpeg
-    //subir a cloudinary, en carpeta logos
-    //obtener url www.site.com/archivo.jpg
-    //cambiar el src de img
-    //se muestra la imagen
-    setNl(
-      "https://upload.wikimedia.org/wikipedia/commons/4/4a/100x100_logo.png"
-    );
-  }
-
+  //get latest logo
   useEffect(() => {
-    if (nl) setFinalLogo(nl);
-    else setFinalLogo(logo);
-  }, [nl]);
+    const getLogo = async () => {
+      try {
+        const resp = await axios.get(
+          "https://calles-construction-back.onrender.com/api/descriptions/"
+        );
 
-  /*
-   * buscar remotamente y obtener el ultimo
-   * si el usuario carga uno, subirlo
-   * obtener el ultimo de nuevo y recargar el valor
-   */
+        if (resp.data) {
+          setLogo(resp.data[resp.data.length - 1]);
+        } else {
+          setLogo({ link: defaultLogo });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    getLogo();
+  }, [estado]);
+
+  //upload new logo
+  const handleNewImage = (e) => {
+    setNewLogo(e.target.files[0]);
+    handleChangeImage();
+  };
+
+  const handleChangeImage = async () => {
+    setLoading(true);
+    const f = new FormData();
+    f.append("file", newLogo);
+    f.append("upload_preset", "nfi9e7vs");
+    f.append("api_key", import.meta.env.VITE_API_KEY);
+
+    try {
+      const clou = await axios.post(
+        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
+        f
+      );
+      const link = clou.data.secure_url;
+
+      const res = await axios.post(
+        `https://calles-construction-back.onrender.com/api/descriptions/`,
+        { link }
+      );
+
+      if (res.data) {
+        alerts("Okey!", "Logo updated successfuly", "success");
+        setEstado(!estado);
+      } else {
+        alerts("Sorry!", "Logo couldn't be updated", "warning");
+      }
+    } catch (e) {
+      console.log(e);
+      alerts("Sorry!", "Logo couldn't be updated", "danger");
+    }
+    setLoading(false);
+  };
 
   return (
     <nav id="navbar">
       <div className="logo-section">
         <Link to="/">
           <figure className="nav-logo">
-            <img src={finalLogo} alt="calles-logo" />
+            <img src={logo.link} alt="calles-logo" />
           </figure>
         </Link>
         {user.id && (
-          <button id="logo-button" onClick={handleLogo}>
-            Change
-          </button>
+          <>
+            {loading ? (
+              <ReactLoading
+                type={"spin"}
+                color="#0f4c61"
+                height={30}
+                width={30}
+              />
+            ) : (
+              <button
+                id="logo-button"
+                onClick={() => imgUpdater.current.click()}
+              >
+                Change
+              </button>
+            )}
+          </>
         )}
       </div>
       <ul className="desktop-navbar">
@@ -64,6 +116,13 @@ function Navbar({ openFunc }) {
       <div className="hamburger">
         <Hamburger toggled={isOpen} toggle={setOpen} />
       </div>
+      <input
+        ref={imgUpdater}
+        id="imagen-updater"
+        type="file"
+        onChange={handleNewImage}
+        style={{ display: "none" }}
+      ></input>
     </nav>
   );
 }

@@ -82,6 +82,8 @@ function Jobs({ serv }) {
           jid,
         }
       );
+
+      return imag || false;
     } catch (e) {
       console.log(e);
     }
@@ -98,7 +100,7 @@ function Jobs({ serv }) {
       for (let i = 0; i < allImages.length; i++) {
         links.push(await uploadImages(allImages[i]));
       }
-      console.log(links);
+
       const resp = await axios.post(
         "https://calles-construction-back.onrender.com/api/jobs/create",
         {
@@ -109,8 +111,7 @@ function Jobs({ serv }) {
         }
       );
 
-      if (resp.data[1]) {
-        //subir links a bdd
+      if (resp.data) {
         for (let i = 0; i < links.length; i++) {
           imagesDb(links[i], category, resp.data[1].id);
         }
@@ -330,3 +331,7 @@ function Jobs({ serv }) {
 }
 
 export default Jobs;
+
+//cambiar el loadigo logo
+//hacer que se limpie el coso leugo de registar en gallery
+//hadcer que jobs marque error
