@@ -86,7 +86,7 @@ function Navbar({ openFunc }) {
       <div className="logo-section">
         <Link to="/">
           <figure className="nav-logo">
-            <img src={logo.link} alt="calles-logo" />
+            {logo.link && <img src={logo.link} alt="calles-logo" />}
           </figure>
         </Link>
         {user.id && (
