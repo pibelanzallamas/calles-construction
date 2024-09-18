@@ -61,6 +61,8 @@ function Navbar({ openFunc }) {
       );
       const link = clou.data.secure_url;
 
+      console.log(link);
+
       const res = await axios.post(
         `https://calles-construction-back.onrender.com/api/descriptions/create`,
         { link }
