@@ -28,7 +28,7 @@ function Navbar({ openFunc }) {
           "https://calles-construction-back.onrender.com/api/descriptions/"
         );
 
-        if (resp.data) {
+        if (resp.data.link) {
           console.log(resp.data);
           setLogo(resp.data[resp.data.length - 1]);
           console.log(logo);
