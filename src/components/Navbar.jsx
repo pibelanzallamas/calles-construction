@@ -28,12 +28,10 @@ function Navbar({ openFunc }) {
           "https://calles-construction-back.onrender.com/api/descriptions/"
         );
 
-        if (resp.data.link) {
-          console.log(resp.data);
+        if (resp.data.length > 0) {
           setLogo(resp.data[resp.data.length - 1]);
+          console.log(resp.data);
           console.log(logo);
-        } else {
-          setLogo({ link: defaultLogo });
         }
       } catch (e) {
         console.log(e);
@@ -130,3 +128,8 @@ function Navbar({ openFunc }) {
 }
 
 export default Navbar;
+
+//entrar,
+//cargar logo con el ultimo objet de mi ar, cada que esta mod
+//la primera vez, length == 0, set con defa
+//subir una nueva, mod el estado
