@@ -29,7 +29,9 @@ function Navbar({ openFunc }) {
         );
 
         if (resp.data) {
+          console.log(resp.data);
           setLogo(resp.data[resp.data.length - 1]);
+          console.log(logo);
         } else {
           setLogo({ link: defaultLogo });
         }
@@ -62,7 +64,7 @@ function Navbar({ openFunc }) {
       const link = clou.data.secure_url;
 
       const res = await axios.post(
-        `https://calles-construction-back.onrender.com/api/descriptions/`,
+        `https://calles-construction-back.onrender.com/api/descriptions/create`,
         { link }
       );
 

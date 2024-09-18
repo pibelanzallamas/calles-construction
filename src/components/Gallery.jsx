@@ -86,9 +86,11 @@ function Gallery() {
       const imag = await axios.post(
         "https://calles-construction-back.onrender.com/api/images/create",
         {
-          image: link,
-          category,
-          jid,
+          data: {
+            image: link,
+            category,
+            jid,
+          },
         }
       );
     } catch (e) {
