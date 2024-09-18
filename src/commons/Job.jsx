@@ -105,6 +105,31 @@ function Job({ key, service, deleteFun, disparador, indice }) {
 
   return (
     <div className="job-card">
+      <div className={"last-row"}>
+        {editMode && (
+          <div className="edit-buttons">
+            <button onClick={() => submitUpdate()} title="Update Job">
+              Submit
+            </button>
+            <figure
+              onClick={() => setEditMode(!editMode)}
+              className="edit-button"
+            >
+              <img src={edit} alt="edit-icon" title="Exit Edit Mode"></img>
+            </figure>
+            <figure
+              onClick={() => deleteFun(service.id)}
+              className="edit-button"
+            >
+              <img src={trash} alt="trash-icon" title="Delete Job" />
+            </figure>
+          </div>
+        )}
+        {loading && (
+          <ReactLoading type={"spin"} color="#0f4c61" height={50} width={50} />
+        )}
+      </div>
+
       <div className={`pencil-line ${service.side}`}>
         {editMode ? (
           <>
@@ -149,6 +174,7 @@ function Job({ key, service, deleteFun, disparador, indice }) {
             </>
           ))}
       </div>
+
       <section className={service.side}>
         {editMode ? (
           <>
@@ -165,30 +191,7 @@ function Job({ key, service, deleteFun, disparador, indice }) {
           <p>{service.description}</p>
         )}
       </section>
-      <div className={"last-row"}>
-        {editMode && (
-          <div className="edit-buttons">
-            <figure
-              onClick={() => setEditMode(!editMode)}
-              className="edit-button"
-            >
-              <img src={edit} alt="edit-icon" title="Exit Edit Mode"></img>
-            </figure>
-            <button onClick={() => submitUpdate()} title="Update Job">
-              Submit
-            </button>
-            <figure
-              onClick={() => deleteFun(service.id)}
-              className="edit-button"
-            >
-              <img src={trash} alt="trash-icon" title="Delete Job" />
-            </figure>
-          </div>
-        )}
-        {loading && (
-          <ReactLoading type={"spin"} color="#0f4c61" height={50} width={50} />
-        )}
-      </div>
+
       <div className="job-image">
         <figure>
           <img src={service.image} alt={service.title} className="job-img" />

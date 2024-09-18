@@ -112,6 +112,7 @@ function Jobs({ serv }) {
       );
 
       if (resp.data) {
+        console.log(resp.data);
         for (let i = 0; i < links.length; i++) {
           imagesDb(links[i], category, resp.data[1].id);
         }

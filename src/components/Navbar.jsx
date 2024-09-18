@@ -31,7 +31,7 @@ function Navbar({ openFunc }) {
         if (resp.data.length > 0) {
           setLogo(resp.data[resp.data.length - 1]);
           console.log(resp.data);
-          console.log(logo);
+          console.log("get logo updated", logo);
         }
       } catch (e) {
         console.log(e);
@@ -64,19 +64,21 @@ function Navbar({ openFunc }) {
       console.log(link);
 
       const res = await axios.post(
-        `https://calles-construction-back.onrender.com/api/descriptions/create`,
+        "https://calles-construction-back.onrender.com/api/descriptions/create",
         { link }
       );
 
       if (res.data) {
+        console.log("err, res.dat", res.data);
         alerts("Okey!", "Logo updated successfuly", "success");
         setEstado(!estado);
       } else {
-        alerts("Sorry!", "Logo couldn't be updated", "warning");
+        console.log("err, res", res);
+        alerts("Sorry!", "Logo couldn't be updated, try again", "warning");
       }
     } catch (e) {
-      console.log(e);
-      alerts("Sorry!", "Logo couldn't be updated", "danger");
+      console.log("error de cliente", e);
+      alerts("Sorry!", "Logo couldn't be updated, try again", "danger");
     }
     setLoading(false);
   };
