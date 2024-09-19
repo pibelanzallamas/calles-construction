@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <Analytics />
+      {/* <Analytics /> */}
       <Navbar openFunc={handleOpen} />
       <Hidden isOpen={hamburger} />
       <ScrollToTop />

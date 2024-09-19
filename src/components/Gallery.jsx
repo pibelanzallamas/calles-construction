@@ -8,8 +8,8 @@ import Image from "../commons/Image";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
 import UserModals from "../modals/UserModals";
-import { services } from "../utilities/services";
-import { fakeGallery } from "../utilities/gallery";
+// import { services } from "../utilities/services";
+// import { fakeGallery } from "../utilities/gallery";
 import ReactLoading from "react-loading";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
@@ -40,27 +40,28 @@ function Gallery() {
     openBox();
   }
 
-  //filtrar
-  useEffect(() => {
-    const filter1 = services.filter(
-      (ele) => ele.category == rubro.toLowerCase()
-    );
-    const filter2 = fakeGallery.filter(
-      (ele) => ele.category == rubro.toLowerCase()
-    );
-
-    setFinalJobs(filter2.concat(filter1));
-  }, [rubro, gallery]); // si se modifica gallery se vuelve afiltrar
-
   //get images
   useEffect(() => {
     axios
       .get("https://calles-construction-back.onrender.com/api/images/")
       .then((resp) => setGallery(resp.data))
       .catch((err) => console.log(err));
-  }, [estado]);
+  }, [estado, rubro]);
 
-  //upload images
+  // filtrar;
+  useEffect(() => {
+    if (gallery.length > 0) {
+      setFinalJobs(
+        gallery.filter((ele) => ele.category == rubro.toLowerCase())
+      );
+    }
+  }, [rubro, gallery]);
+
+  console.log(finalJobs);
+
+  //por que no funciona el filter, gallery si teiene dos datos, filter nada
+
+  //upload images to cloud
   const uploadImages = async (pic) => {
     //las funciones async siempre van a devolver una promesa
     const f = new FormData();
@@ -82,26 +83,29 @@ function Gallery() {
 
   //upload images into db
   const imagesDb = async (link, category, jid) => {
+    console.log(link, category, jid);
     try {
       const imag = await axios.post(
         "https://calles-construction-back.onrender.com/api/images/create",
         {
-          data: {
-            image: link,
-            category,
-            jid,
-          },
+          image: link,
+          category,
+          jid,
         }
       );
+
+      console.log(imag.data);
     } catch (e) {
       console.log(e);
     }
   };
 
-  //upload images
+  //upload images manager
   const createImage = async (e) => {
     e.preventDefault();
+
     setLoading(true);
+
     try {
       const links = [];
 
