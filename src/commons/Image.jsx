@@ -5,7 +5,7 @@ import axios from "axios";
 import { alerts } from "../utils/alerts";
 import ReactLoading from "react-loading";
 
-function Image({ image, key, disparador, handleDelete }) {
+function Image({ image, disparador, handleDelete }) {
   const user = useSelector((state) => state.user);
   const imgUpdater = useRef(null);
   const [newImg, setNewImg] = useState("");
@@ -25,21 +25,51 @@ function Image({ image, key, disparador, handleDelete }) {
         f
       );
       const link = clou.data.secure_url;
+      console.log("link de img pa update", link);
 
+      // if (link) {
+      //   const res = await axios.put(
+      //     `https://calles-construction-back.onrender.com/api/images/update/${image.id}`,
+      //     { link }
+      //   );
+      //   console.log("res from images/update/id", res);
+
+      //   // if (res.data) {
+      //   //   disparador();
+      //   //   alerts("Okey!", "Image updated successfuly", "success");
+      //   // } else {
+      //   //   alerts("Sorry!", "Image couldn't be updated", "warning");
+      //   // }
+      // }
       const res = await axios.put(
-        `https://calles-construction-back.onrender.com/api/images/update/${key}`,
+        `https://calles-construction-back.onrender.com/api/images/update/${image.id}`,
         { link }
       );
 
-      if (res.data) {
-        disparador();
-        alerts("Okey!", "Image updated successfuly", "success");
-      } else {
-        alerts("Sorry!", "Image couldn't be updated", "warning");
+      // Manejo de respuesta exitosa
+      if (res.status === 200) {
+        console.log(res.data.message); // 'Imagen actualizada con éxito.'
+        // Aquí puedes realizar alguna acción como mostrar una notificación o actualizar el estado
       }
-    } catch (e) {
-      console.log(e);
-      alerts("Sorry!", "Image couldn't be updated", "danger");
+    } catch (error) {
+      // console.log("error del catch", e);
+      // alerts("Sorry!", "Image couldn't be updated", "danger");
+      if (error.response) {
+        // La respuesta del servidor tiene un código de error (4xx o 5xx)
+        if (error.response.status === 404) {
+          console.error("No se encontró la imagen con el id proporcionado.");
+          // Maneja el caso de que no se encontró la imagen
+        } else if (error.response.status === 500) {
+          console.error("Error del servidor al actualizar la imagen.");
+          // Maneja el caso de error del servidor
+        } else {
+          console.error("Error inesperado:", error.response.data.message);
+          // Maneja cualquier otro tipo de error
+        }
+      } else {
+        // Error que no tiene respuesta del servidor (problema de red, etc.)
+        console.error("Error de red o de conexión:", error.message);
+      }
     }
     setLoading(false);
   };
@@ -50,7 +80,7 @@ function Image({ image, key, disparador, handleDelete }) {
   };
 
   return (
-    <div className="image-card" {...key} id={image.id}>
+    <div className="image-card" key={image.id}>
       <div className="gallery-image">
         <figure>
           <img src={image.image} className="job-img" />
@@ -86,3 +116,8 @@ function Image({ image, key, disparador, handleDelete }) {
 }
 
 export default Image;
+
+//borrar se puede, agregar se puede, pero no actualiza en el momento
+//modificar nada, -> error 404
+
+//pasa a jobs despues

@@ -17,7 +17,7 @@ import minus from "../assets/minus.svg";
 function Gallery() {
   const user = useSelector((state) => state.user);
   const [image, setImage] = useState(null); //input
-  const [gallery, setGallery] = useState({}); //all images
+  const [gallery, setGallery] = useState([]); //all images
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
   const [estado, setEstado] = useState(false); //state listener
@@ -52,14 +52,19 @@ function Gallery() {
   useEffect(() => {
     if (gallery.length > 0) {
       setFinalJobs(
-        gallery.filter((ele) => ele.category == rubro.toLowerCase())
+        gallery.filter(
+          (ele) => ele.category.toLowerCase() == rubro.toLowerCase()
+        )
       );
     }
   }, [rubro, gallery]);
 
-  console.log(finalJobs);
-
-  //por que no funciona el filter, gallery si teiene dos datos, filter nada
+  //select default value
+  useEffect(() => {
+    if (rubro) {
+      setCategory(rubro.toLowerCase());
+    }
+  }, [rubro]);
 
   //upload images to cloud
   const uploadImages = async (pic) => {
@@ -83,7 +88,6 @@ function Gallery() {
 
   //upload images into db
   const imagesDb = async (link, category, jid) => {
-    console.log(link, category, jid);
     try {
       const imag = await axios.post(
         "https://calles-construction-back.onrender.com/api/images/create",
@@ -93,8 +97,6 @@ function Gallery() {
           jid,
         }
       );
-
-      console.log(imag.data);
     } catch (e) {
       console.log(e);
     }
@@ -117,8 +119,8 @@ function Gallery() {
         imagesDb(links[i], category, 848484);
       }
 
-      alerts("Okey!", "Image upload successfuly", "success");
       setEstado(!estado);
+      alerts("Okey!", "Image upload successfuly", "success");
     } catch (e) {
       alerts("Sorry!", "Image couldn't be uploaded", "danger");
       console.log(e);
@@ -172,7 +174,6 @@ function Gallery() {
           <>
             <Image
               disparador={() => setEstado(!estado)}
-              key={img.id}
               image={img}
               handleDelete={handleDelete}
             />
@@ -205,12 +206,12 @@ function Gallery() {
                     required
                   >
                     <option value="">Select a category</option>
-                    <option value="Drywall">Drywall</option>
-                    <option value="Painting">Painting</option>
-                    <option value="Electrical">Electrical</option>
-                    <option value="Carpentry">Carpentry</option>
-                    <option value="Plumbing">Plumbing</option>
-                    <option value="Utilities">Utilities</option>
+                    <option value="drywall">Drywall</option>
+                    <option value="painting">Painting</option>
+                    <option value="electrical">Electrical</option>
+                    <option value="carpentry">Carpentry</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="utilities">Utilities</option>
                   </select>
                 </div>
 
