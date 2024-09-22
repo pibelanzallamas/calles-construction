@@ -27,20 +27,20 @@ function Image({ image, disparador, handleDelete }) {
       const link = clou.data.secure_url;
       console.log("link de img pa update", link);
 
-      // if (link) {
-      //   const res = await axios.put(
-      //     `https://calles-construction-back.onrender.com/api/images/update/${image.id}`,
-      //     { link }
-      //   );
-      //   console.log("res from images/update/id", res);
+      if (link) {
+        const res = await axios.put(
+          `https://calles-construction-back.onrender.com/api/images/update/${image.id}`,
+          { link }
+        );
+        console.log("res from images/update/id", res);
 
-      //   // if (res.data) {
-      //   //   disparador();
-      //   //   alerts("Okey!", "Image updated successfuly", "success");
-      //   // } else {
-      //   //   alerts("Sorry!", "Image couldn't be updated", "warning");
-      //   // }
-      // }
+        // if (res.data) {
+        //   disparador();
+        //   alerts("Okey!", "Image updated successfuly", "success");
+        // } else {
+        //   alerts("Sorry!", "Image couldn't be updated", "warning");
+        // }
+      }
       const res = await axios.put(
         `https://calles-construction-back.onrender.com/api/images/update/${image.id}`,
         { link }

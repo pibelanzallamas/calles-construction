@@ -8,8 +8,6 @@ import Image from "../commons/Image";
 import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
 import UserModals from "../modals/UserModals";
-// import { services } from "../utilities/services";
-// import { fakeGallery } from "../utilities/gallery";
 import ReactLoading from "react-loading";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
@@ -48,6 +46,71 @@ function Gallery() {
       .catch((err) => console.log(err));
   }, [estado, rubro]);
 
+  console.log(gallery);
+
+  //upload images to cloud
+  const uploadImages = async (pic) => {
+    //las funciones async siempre van a devolver una promesa
+    const f = new FormData();
+    f.append("file", pic);
+    f.append("upload_preset", "nfi9e7vs");
+    f.append("api_key", import.meta.env.VITE_API_KEY);
+
+    try {
+      const { data } = await axios.post(
+        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
+        f
+      );
+      return data.secure_url;
+    } catch (e) {
+      console.log(e);
+      throw new Error("Failed to upload image to the cloud");
+    }
+  };
+
+  //upload images into db
+  const imagesDb = async (link, category, jid) => {
+    try {
+      await axios.post(
+        "https://calles-construction-back.onrender.com/api/images/create",
+        {
+          image: link,
+          category,
+          jid,
+        }
+      );
+    } catch (e) {
+      console.log(e);
+      throw new Error("Failed to upload image to the database");
+    }
+  };
+
+  //upload images manager
+  const createImage = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      for (let i = 0; i < allImages.length; i++) {
+        const link = await uploadImages(allImages[i]);
+        await imagesDb(link, category, 848484);
+      }
+
+      setEstado(!estado);
+      alerts(
+        "Image Uploaded",
+        "The image(s) have been uploaded successfully.",
+        "success"
+      );
+    } catch (e) {
+      alerts("Upload Error", "The image(s) could not be uploaded.", "warning");
+      console.log(e);
+    }
+
+    setImage(null);
+    setLoading(false);
+  };
+
   // filtrar;
   useEffect(() => {
     if (gallery.length > 0) {
@@ -65,70 +128,6 @@ function Gallery() {
       setCategory(rubro.toLowerCase());
     }
   }, [rubro]);
-
-  //upload images to cloud
-  const uploadImages = async (pic) => {
-    //las funciones async siempre van a devolver una promesa
-    const f = new FormData();
-    f.append("file", pic);
-    f.append("upload_preset", "nfi9e7vs");
-    f.append("api_key", import.meta.env.VITE_API_KEY);
-
-    try {
-      const url = await axios.post(
-        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
-        f
-      );
-      return url.data.secure_url; //link
-    } catch (e) {
-      console.log(e);
-      alerts("Sorry!", "Image couldn't be uploaded", "danger");
-    }
-  };
-
-  //upload images into db
-  const imagesDb = async (link, category, jid) => {
-    try {
-      const imag = await axios.post(
-        "https://calles-construction-back.onrender.com/api/images/create",
-        {
-          image: link,
-          category,
-          jid,
-        }
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  //upload images manager
-  const createImage = async (e) => {
-    e.preventDefault();
-
-    setLoading(true);
-
-    try {
-      const links = [];
-
-      for (let i = 0; i < allImages.length; i++) {
-        links.push(await uploadImages(allImages[i])); //esperar a que la promesa se resuelva para dar resultado
-      }
-
-      for (let i = 0; i < links.length; i++) {
-        imagesDb(links[i], category, 848484);
-      }
-
-      setEstado(!estado);
-      alerts("Okey!", "Image upload successfuly", "success");
-    } catch (e) {
-      alerts("Sorry!", "Image couldn't be uploaded", "danger");
-      console.log(e);
-    }
-
-    setImage(null);
-    setLoading(false);
-  };
 
   //delete images
   const confirmDelete = async () => {
