@@ -111,6 +111,7 @@ function Gallery() {
       setEstado(!estado);
       setAllImages([]);
       setMoreImages(1);
+      setMore(false);
       alerts(
         "Image Uploaded",
         "The image(s) have been uploaded successfully.",
@@ -166,11 +167,11 @@ function Gallery() {
     setProcessing(id);
     try {
       const link = await uploadImages(newImg);
-
       await axios.put(
         `https://calles-construction-back.onrender.com/api/images/update/${id}`,
         { link }
       );
+
       setEstado(!estado);
       alerts(
         "Image Modified",
