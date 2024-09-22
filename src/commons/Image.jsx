@@ -25,7 +25,7 @@ function Image({ image, handleDelete, handleUpdate, processing }) {
             </figure>
           </div>
         )}
-        {processing && (
+        {processing == image.id && (
           <ReactLoading type={"spin"} color="#0f4c61" height={50} width={50} />
         )}
       </div>

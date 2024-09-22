@@ -26,7 +26,7 @@ function Gallery() {
   const [loading, setLoading] = useState(false);
   const [confirmBox, setConfirmBox] = useState(false);
   const [id, setId] = useState({});
-  const [deleting, setDeleting] = useState(0);
+  const [processing, setProcessing] = useState(null);
   const imgUpdater = useRef(null);
   const [newImg, setNewImg] = useState("");
   const openBox = () => setConfirmBox(true);
@@ -131,7 +131,8 @@ function Gallery() {
   };
 
   const confirmDelete = async () => {
-    setDeleting(1);
+    closeBox();
+    setProcessing(id);
     try {
       await axios.delete(
         `https://calles-construction-back.onrender.com/api/images/delete/${id}`
@@ -147,8 +148,7 @@ function Gallery() {
       console.log(e);
       alerts("Deletion Error", "The image could not be deleted.", "warning");
     }
-    closeBox();
-    setDeleting(0);
+    setProcessing(0);
   };
 
   //update image
@@ -163,15 +163,14 @@ function Gallery() {
   };
 
   const handleChangeImage = async () => {
-    setDeleting(2);
+    setProcessing(id);
     try {
-      const link = uploadImages(newImg);
+      const link = await uploadImages(newImg);
 
       await axios.put(
         `https://calles-construction-back.onrender.com/api/images/update/${id}`,
         { link }
       );
-
       setEstado(!estado);
       alerts(
         "Image Modified",
@@ -186,7 +185,7 @@ function Gallery() {
       );
       console.log(e);
     }
-    setDeleting(0);
+    setProcessing(0);
   };
 
   return (
@@ -209,10 +208,11 @@ function Gallery() {
       {finalJobs.length > 0 &&
         finalJobs.map((img) => (
           <Image
+            key={img.id}
             image={img}
             handleDelete={handleDelete}
             handleUpdate={handleUpdate}
-            processing={deleting}
+            processing={processing}
           />
         ))}
 
