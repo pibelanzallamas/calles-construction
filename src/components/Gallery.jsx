@@ -1,42 +1,36 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { alerts } from "../utils/alerts";
 import axios from "axios";
-import TopButton from "../commons/TopButton";
 import Image from "../commons/Image";
-import moreButton from "../assets/moreButton.svg";
 import lessButton from "../assets/lessButton.svg";
-import UserModals from "../modals/UserModals";
-import ReactLoading from "react-loading";
+import moreButton from "../assets/moreButton.svg";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
+import UserModals from "../modals/UserModals";
+import ReactLoading from "react-loading";
+import TopButton from "../commons/TopButton";
 
 function Gallery() {
   const user = useSelector((state) => state.user);
-  const [image, setImage] = useState(null); //input
   const [gallery, setGallery] = useState([]); //all images
-  const [loading, setLoading] = useState(false);
-  const [more, setMore] = useState(false);
-  const [estado, setEstado] = useState(false); //state listener
-  const [confirmBox, setConfirmBox] = useState(false);
-  const [jid, setJid] = useState({});
   const [rubro, setRubro] = useState("");
-  const [finalJobs, setFinalJobs] = useState([]);
-  const [deleting, setDeleting] = useState(false);
-  const [moreImages, setMoreImages] = useState(1);
-
-  const divs = Array.from({ length: moreImages });
+  const [finalJobs, setFinalJobs] = useState([]); //filter por rubro
+  const [estado, setEstado] = useState(false); //state listener
+  const [more, setMore] = useState(false); //guardar datos
   const [category, setCategory] = useState("");
   const [allImages, setAllImages] = useState([]);
-
+  const [moreImages, setMoreImages] = useState(1);
+  const divs = Array.from({ length: moreImages });
+  const [loading, setLoading] = useState(false);
+  const [confirmBox, setConfirmBox] = useState(false);
+  const [id, setId] = useState({});
+  const [deleting, setDeleting] = useState(0);
+  const imgUpdater = useRef(null);
+  const [newImg, setNewImg] = useState("");
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
-
-  function handleDelete(id) {
-    setJid(id);
-    openBox();
-  }
 
   //get images
   useEffect(() => {
@@ -44,11 +38,29 @@ function Gallery() {
       .get("https://calles-construction-back.onrender.com/api/images/")
       .then((resp) => setGallery(resp.data))
       .catch((err) => console.log(err));
-  }, [estado, rubro]);
+  }, [estado]);
 
-  console.log(gallery);
+  // filtrar;
+  useEffect(() => {
+    if (gallery.length > 0) {
+      setFinalJobs(
+        gallery.filter(
+          (ele) => ele.category.toLowerCase() == rubro.toLowerCase()
+        )
+      );
+    }
+  }, [rubro, gallery]);
 
-  //upload images to cloud
+  //select default value for category with rubro
+  useEffect(() => {
+    if (rubro) {
+      setCategory(rubro.toLowerCase());
+      setMore(false);
+    }
+  }, [rubro]);
+
+  //create images
+  //upload image to the cloud
   const uploadImages = async (pic) => {
     //las funciones async siempre van a devolver una promesa
     const f = new FormData();
@@ -68,7 +80,7 @@ function Gallery() {
     }
   };
 
-  //upload images into db
+  //upload image to the database
   const imagesDb = async (link, category, jid) => {
     try {
       await axios.post(
@@ -85,7 +97,7 @@ function Gallery() {
     }
   };
 
-  //upload images manager
+  //upload image/s
   const createImage = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -97,6 +109,8 @@ function Gallery() {
       }
 
       setEstado(!estado);
+      setAllImages([]);
+      setMoreImages(1);
       alerts(
         "Image Uploaded",
         "The image(s) have been uploaded successfully.",
@@ -107,48 +121,72 @@ function Gallery() {
       console.log(e);
     }
 
-    setImage(null);
     setLoading(false);
   };
 
-  // filtrar;
-  useEffect(() => {
-    if (gallery.length > 0) {
-      setFinalJobs(
-        gallery.filter(
-          (ele) => ele.category.toLowerCase() == rubro.toLowerCase()
-        )
-      );
-    }
-  }, [rubro, gallery]);
-
-  //select default value
-  useEffect(() => {
-    if (rubro) {
-      setCategory(rubro.toLowerCase());
-    }
-  }, [rubro]);
-
   //delete images
+  const handleDelete = (id) => {
+    setId(id);
+    openBox();
+  };
+
   const confirmDelete = async () => {
-    setDeleting(true);
+    setDeleting(1);
     try {
-      const res = await axios.delete(
-        `https://calles-construction-back.onrender.com/api/images/delete/${jid}`
+      await axios.delete(
+        `https://calles-construction-back.onrender.com/api/images/delete/${id}`
       );
 
-      if (res.data) {
-        setEstado(!estado);
-        alerts("Okey!", "Image erased successfuly", "success");
-      } else {
-        alerts("Sorry!", "Image couldn't be erased", "warning");
-      }
+      setEstado(!estado);
+      alerts(
+        "Image Deleted",
+        "The image has been deleted successfully.",
+        "success"
+      );
     } catch (e) {
       console.log(e);
-      alerts("Sorry!", "Image couldn't be erased", "danger");
+      alerts("Deletion Error", "The image could not be deleted.", "warning");
     }
     closeBox();
-    setDeleting(false);
+    setDeleting(0);
+  };
+
+  //update image
+  const handleUpdate = (id) => {
+    imgUpdater.current.click();
+    setId(id);
+  };
+
+  const handleNewImage = (e) => {
+    setNewImg(e.target.files[0]);
+    handleChangeImage();
+  };
+
+  const handleChangeImage = async () => {
+    setDeleting(2);
+    try {
+      const link = uploadImages(newImg);
+
+      await axios.put(
+        `https://calles-construction-back.onrender.com/api/images/update/${id}`,
+        { link }
+      );
+
+      setEstado(!estado);
+      alerts(
+        "Image Modified",
+        "The image has been modified successfully.",
+        "success"
+      );
+    } catch (e) {
+      alerts(
+        "Modification Error",
+        "The image could not be modified.",
+        "warning"
+      );
+      console.log(e);
+    }
+    setDeleting(0);
   };
 
   return (
@@ -170,21 +208,12 @@ function Gallery() {
       {/* imágenes */}
       {finalJobs.length > 0 &&
         finalJobs.map((img) => (
-          <>
-            <Image
-              disparador={() => setEstado(!estado)}
-              image={img}
-              handleDelete={handleDelete}
-            />
-            {deleting && (
-              <ReactLoading
-                type={"spin"}
-                color="#0f4c61"
-                height={50}
-                width={50}
-              />
-            )}
-          </>
+          <Image
+            image={img}
+            handleDelete={handleDelete}
+            handleUpdate={handleUpdate}
+            processing={deleting}
+          />
         ))}
 
       {/* form */}
@@ -218,7 +247,7 @@ function Gallery() {
                   <div key={index} className="field">
                     <label htmlFor="image">Image {index + 1}</label>
                     <input
-                      id="image"
+                      id={`image-${index}`}
                       type="file"
                       onChange={(e) => {
                         const updatedImages = [...allImages];
@@ -259,7 +288,14 @@ function Gallery() {
                 </div>
 
                 {loading ? (
-                  <p className="loading-text"> Loading ...</p>
+                  <div style={{ margin: "0 auto" }}>
+                    <ReactLoading
+                      type={"spin"}
+                      color="#0f4c61"
+                      height={50}
+                      width={50}
+                    />
+                  </div>
                 ) : (
                   <button type="submit">Send</button>
                 )}
@@ -271,11 +307,19 @@ function Gallery() {
 
       {rubro && <TopButton />}
 
+      <input
+        ref={imgUpdater}
+        id="imagen-updater"
+        type="file"
+        onChange={handleNewImage}
+        style={{ display: "none" }}
+      ></input>
+
       <UserModals
         isOpen={confirmBox}
         onClose={closeBox}
         onConfirm={confirmDelete}
-        text={"You sure you want to delete this picture?"}
+        text={"Are you sure you want to delete this image?"}
       />
     </section>
   );
