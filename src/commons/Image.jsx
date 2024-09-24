@@ -34,8 +34,3 @@ function Image({ image, handleDelete, handleUpdate, processing }) {
 }
 
 export default Image;
-
-//borrar se puede, agregar se puede, pero no actualiza en el momento
-//modificar nada, -> error 404
-
-//pasa a jobs despues

@@ -151,15 +151,18 @@ function Gallery() {
     }
     setProcessing(0);
   };
-
+  console.log(newImg);
   //update image
   const handleUpdate = (id) => {
-    imgUpdater.current.click();
     setId(id);
+    if (imgUpdater) {
+      imgUpdater.current.click();
+    }
   };
 
   const handleNewImage = (e) => {
-    setNewImg(e.target.files[0]);
+    const s = e.target.files[0];
+    setNewImg(s);
     handleChangeImage();
   };
 
