@@ -56,6 +56,7 @@ function Gallery() {
     if (rubro) {
       setCategory(rubro.toLowerCase());
       setMore(false);
+      setMoreImages(1);
     }
   }, [rubro]);
 
@@ -80,7 +81,7 @@ function Gallery() {
     }
   };
 
-  //upload image to the database
+  //upload image to the database   --> devuleve true
   const imagesDb = async (link, category, jid) => {
     try {
       await axios.post(
@@ -91,27 +92,32 @@ function Gallery() {
           jid,
         }
       );
+
+      return true;
     } catch (e) {
       console.log(e);
       throw new Error("Failed to upload image to the database");
     }
   };
 
-  //upload image/s
+  //post image
   const createImage = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      //console.log(allImages, link)
       for (let i = 0; i < allImages.length; i++) {
+        console.log(allImages[i]);
         const link = await uploadImages(allImages[i]);
+        console.log(link);
         await imagesDb(link, category, 848484);
       }
 
-      setEstado(!estado);
       setAllImages([]);
-      setMoreImages(1);
       setMore(false);
+      setMoreImages(1);
+      setEstado(!estado);
       alerts(
         "Image Uploaded",
         "The image(s) have been uploaded successfully.",
@@ -151,24 +157,32 @@ function Gallery() {
     }
     setProcessing(0);
   };
-  console.log(newImg);
+
   //update image
   const handleUpdate = (id) => {
     setId(id);
-    if (imgUpdater) {
-      imgUpdater.current.click();
-    }
+    imgUpdater.current.click();
   };
 
   const handleNewImage = (e) => {
     const s = e.target.files[0];
+    console.log("archivo recibido para mod", s);
     setNewImg(s);
-    handleChangeImage();
+    console.log("archivo newImg", newImg);
   };
+
+  useEffect(() => {
+    console.log("newImg dentro del useEffect", newImg);
+
+    if (newImg) {
+      handleChangeImage();
+    }
+  }, [newImg]);
 
   const handleChangeImage = async () => {
     setProcessing(id);
     try {
+      console.log("cuando lega la img en handleChangeImage", newImg);
       const link = await uploadImages(newImg);
       await axios.put(
         `https://calles-construction-back.onrender.com/api/images/update/${id}`,
@@ -181,6 +195,8 @@ function Gallery() {
         "The image has been modified successfully.",
         "success"
       );
+      setProcessing(0);
+      return true;
     } catch (e) {
       alerts(
         "Modification Error",
@@ -188,9 +204,14 @@ function Gallery() {
         "warning"
       );
       console.log(e);
+      setProcessing(0);
+      return false;
     }
-    setProcessing(0);
   };
+
+  console.log("gallery", gallery);
+
+  console.log("final", finalJobs);
 
   return (
     <section className="gallery-compo" id="gallery">
@@ -315,7 +336,7 @@ function Gallery() {
         ref={imgUpdater}
         id="imagen-updater"
         type="file"
-        onChange={handleNewImage}
+        onChange={(e) => handleNewImage(e)}
         style={{ display: "none" }}
       ></input>
 
