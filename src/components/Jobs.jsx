@@ -39,6 +39,9 @@ function Jobs({ serv }) {
   const [newImg, setNewImg] = useState("");
   const [deleting, setDeleting] = useState(false);
 
+  const openBox = () => setConfirmBox(true);
+  const closeBox = () => setConfirmBox(false);
+
   //get jobs
   useEffect(() => {
     axios
@@ -149,27 +152,30 @@ function Jobs({ serv }) {
   };
 
   //delete job
-  const openBox = () => setConfirmBox(true);
-  const closeBox = () => setConfirmBox(false);
   function handleDelete(id) {
-    setJid(id);
+    setId(id);
     openBox();
   }
+
   const confirmDelete = async () => {
-    setDeleting(true);
+    closeBox();
+    setProcessing(id);
     try {
-      const resp = await axios.delete(
-        `https://calles-construction-back.onrender.com/api/jobs/delete/${jid}`
+      await axios.delete(
+        `https://calles-construction-back.onrender.com/api/jobs/delete/${id}`
       );
 
-      alerts("Okey!", "Job erased successfuly", "success");
       setEstado(!estado);
+      alerts(
+        "Job Deleted",
+        "The job has been deleted successfully.",
+        "success"
+      );
     } catch (e) {
       console.log(e);
-      alerts("Sorry!", "Job couldn't be erased", "danger");
+      alerts("Deletion Error", "The job could not be deleted.", "warning");
     }
-    closeBox();
-    setDeleting(false);
+    setProcessing(0);
   };
 
   const updateData = async (id, data) => {
@@ -194,6 +200,8 @@ function Jobs({ serv }) {
     setProcessing(0);
   };
 
+  console.log(jobs);
+
   return (
     <section id="jobs" className="jobs-compo">
       <h2>Jobs</h2>
@@ -216,25 +224,14 @@ function Jobs({ serv }) {
 
       {finalJobs.length > 0 &&
         finalJobs.map((job, i) => (
-          <>
-            <Job
-              key={job.id}
-              service={job}
-              indice={i}
-              deleteFun={handleDelete}
-              disparador={() => setEstado(!estado)}
-              updateData={updateData}
-            />
-            {console.log("job id desde JOB COMPO", job.id)}
-            {deleting && (
-              <ReactLoading
-                type={"spin"}
-                color="#0f4c61"
-                height={50}
-                width={50}
-              />
-            )}
-          </>
+          <Job
+            key={job.id}
+            service={job}
+            indice={i}
+            deleteFun={handleDelete}
+            disparador={() => setEstado(!estado)}
+            updateData={updateData}
+          />
         ))}
 
       {user.id && (
@@ -361,7 +358,7 @@ function Jobs({ serv }) {
         isOpen={confirmBox}
         onClose={closeBox}
         onConfirm={confirmDelete}
-        text={"You sure you want to delete this job?"}
+        text={"Are you sure you want to delete this job?"}
       />
     </section>
   );

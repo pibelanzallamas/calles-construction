@@ -45,7 +45,7 @@ function Job({ key, service, deleteFun, updateData, disparador, indice }) {
   };
 
   return (
-    <div className="job-card">
+    <div className="job-card" key={key}>
       <div className={"last-row"}>
         {editMode && (
           <div className="edit-buttons">
