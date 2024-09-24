@@ -6,7 +6,7 @@ import axios from "axios";
 import { alerts } from "../utils/alerts";
 import ReactLoading from "react-loading";
 
-function Job({ key, service, deleteFun, disparador, indice }) {
+function Job({ key, service, deleteFun, updateData, disparador, indice }) {
   const user = useSelector((state) => state.user);
   const [editMode, setEditMode] = useState(false);
   const [desc, setDesc] = useState(service.description);
@@ -16,12 +16,11 @@ function Job({ key, service, deleteFun, disparador, indice }) {
   const [loading, setLoading] = useState(false);
   const imgUpdater = useRef(null);
 
+  //algoritmo para calcular Fecha
   if (indice % 2 === 0) {
     service.side = "l";
   } else service.side = "r";
-
   const fecha = service.date.split("T")[0].split("-");
-
   const meses = [
     "Jan",
     "Feb",
@@ -36,71 +35,13 @@ function Job({ key, service, deleteFun, disparador, indice }) {
     "Nov",
     "Dec",
   ];
-
   const date = meses[fecha[1] - 1] + " " + fecha[2];
 
   //mod jobs
   //texts
-  const submitUpdate = async () => {
-    setLoading(true);
-    try {
-      const resp = await axios.put(
-        `https://calles-construction-back.onrender.com/api/jobs/update/${key}`,
-        { title, desc, dat }
-      );
-
-      console.log(resp.data);
-
-      if (resp.data) {
-        alerts("Okey!", "Job updated successfuly", "success");
-        disparador();
-      } else {
-        alerts("Sorry!", "Job couldn't be updated", "warning");
-      }
-    } catch (e) {
-      console.log("exit", e);
-      alerts("Sorry!", "Job couldn't be updated", "danger");
-    }
-    setLoading(false);
-  };
-
   const handleNewImage = (e) => {
     setImg(e.target.files[0]);
     handleChangeImage();
-  };
-
-  //image
-  const handleChangeImage = async (key) => {
-    const f = new FormData();
-    f.append("file", img);
-    f.append("upload_preset", "nfi9e7vs");
-    f.append("api_key", import.meta.env.VITE_API_KEY);
-    setLoading(true);
-    try {
-      const clou = await axios.post(
-        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
-        f
-      );
-      const link = clou.data.secure_url;
-
-      console.log(link);
-
-      const res = await axios.put(
-        `https://calles-construction-back.onrender.com/api/jobs/update/${key}`,
-        { link }
-      );
-
-      if (res.data) {
-        disparador();
-        alerts("Okey!", "Image updated successfuly", "success");
-      } else {
-        alerts("Sorry!", "Image couldn't be updated", "warning");
-      }
-    } catch (e) {
-      console.log("error", e);
-      alerts("Sorry!", "Image couldn't be updated", "danger");
-    }
-    setLoading(false);
   };
 
   return (
@@ -108,7 +49,16 @@ function Job({ key, service, deleteFun, disparador, indice }) {
       <div className={"last-row"}>
         {editMode && (
           <div className="edit-buttons">
-            <button onClick={() => submitUpdate()} title="Update Job">
+            <button
+              onClick={() =>
+                updateData(service.id, {
+                  title,
+                  description: desc,
+                  date: service.date,
+                })
+              }
+              title="Update Job"
+            >
               Submit
             </button>
             <figure

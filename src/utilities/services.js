@@ -13,6 +13,7 @@ import utilitysPic from "../assets/utiles.png";
 
 export const services = [
   {
+    id: 3,
     title: "Drywall",
     desc: "Quality ceiling installations, drywall, and partitions services.",
     logo: logoDrywall,

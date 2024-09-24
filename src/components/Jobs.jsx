@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -19,24 +19,25 @@ import minus from "../assets/minus.svg";
 function Jobs({ serv }) {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const [jobs, setJobs] = useState({});
+  const [rubro, setRubro] = useState(serv || "");
+  const [finalJobs, setFinalJobs] = useState([]); //jobs filtrados
+  const [estado, setEstado] = useState(false);
+  const [more, setMore] = useState(false);
+  const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [desc, setDesc] = useState("");
-  const [image, setImage] = useState("");
-  const [jobs, setJobs] = useState({});
-  const [jid, setJid] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [more, setMore] = useState(false);
-  const [estado, setEstado] = useState(false);
-  const [confirmBox, setConfirmBox] = useState(false);
-  const [rubro, setRubro] = useState(serv || "");
-  const [finalJobs, setFinalJobs] = useState([]);
-  const [deleting, setDeleting] = useState(false);
-  const [moreImages, setMoreImages] = useState(1);
-
-  const divs = Array.from({ length: moreImages });
-  const [category, setCategory] = useState("");
   const [allImages, setAllImages] = useState([]);
+  const [moreImages, setMoreImages] = useState(1);
+  const divs = Array.from({ length: moreImages });
+  const [loading, setLoading] = useState(false);
+  const [confirmBox, setConfirmBox] = useState(false);
+  const [id, setId] = useState("");
+  const [processing, setProcessing] = useState(null);
+  const imgUpdater = useRef(null);
+  const [newImg, setNewImg] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
   //get jobs
   useEffect(() => {
@@ -46,12 +47,28 @@ function Jobs({ serv }) {
       .catch((err) => console.log(err));
   }, [estado]);
 
-  //filtrar los jobs mostrados por rubro
+  //filtrar
   useEffect(() => {
-    setFinalJobs(services.filter((ele) => ele.category == rubro.toLowerCase()));
+    if (services.length > 0) {
+      setFinalJobs(
+        services.filter(
+          (ele) => ele.category.toLowerCase() == rubro.toLowerCase()
+        )
+      );
+    }
+  }, [rubro, jobs]);
+
+  //select default value for category with rubro
+  useEffect(() => {
+    if (rubro) {
+      setCategory(rubro.toLowerCase());
+      setMore(false);
+      setMoreImages(1);
+    }
   }, [rubro]);
 
-  //upload images
+  //post job
+  //upload images to the cloud
   const uploadImages = async (pic) => {
     const f = new FormData();
     f.append("file", pic);
@@ -59,22 +76,20 @@ function Jobs({ serv }) {
     f.append("api_key", import.meta.env.VITE_API_KEY);
 
     try {
-      const url = await axios.post(
+      const { data } = await axios.post(
         "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
         f
       );
-      return url.data.secure_url;
+      return data.secure_url;
     } catch (e) {
       console.log(e);
-      alerts("Sorry!", "Image couldn't be uploaded", "danger");
-      return null;
+      throw new Error("Failed to upload image to the cloud");
     }
   };
-
   //upload images into db
   const imagesDb = async (link, category, jid) => {
     try {
-      const imag = await axios.post(
+      await axios.post(
         "https://calles-construction-back.onrender.com/api/images/create",
         {
           image: link,
@@ -83,13 +98,13 @@ function Jobs({ serv }) {
         }
       );
 
-      return imag || false;
+      return true;
     } catch (e) {
       console.log(e);
+      throw new Error("Failed to upload image to the database");
     }
   };
-
-  //upload job
+  //create job
   const createJobs = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -130,12 +145,10 @@ function Jobs({ serv }) {
     setTitle("");
     setDesc("");
     setDate("");
-    setImage("");
-    setCategory("");
     setLoading(false);
   };
 
-  //delete images
+  //delete job
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
   function handleDelete(id) {
@@ -157,6 +170,28 @@ function Jobs({ serv }) {
     }
     closeBox();
     setDeleting(false);
+  };
+
+  const updateData = async (id, data) => {
+    setProcessing(id);
+
+    try {
+      await axios.put(
+        `https://calles-construction-back.onrender.com/api/jobs/update/${id}`,
+        { data }
+      );
+
+      setEstado(!estado);
+      alerts(
+        "Job Modified",
+        "The job has been modified successfully.",
+        "success"
+      );
+    } catch (e) {
+      alerts("Modification Error", "The job could not be modified.", "warning");
+      console.log(e);
+    }
+    setProcessing(0);
   };
 
   return (
@@ -188,7 +223,9 @@ function Jobs({ serv }) {
               indice={i}
               deleteFun={handleDelete}
               disparador={() => setEstado(!estado)}
+              updateData={updateData}
             />
+            {console.log("job id desde JOB COMPO", job.id)}
             {deleting && (
               <ReactLoading
                 type={"spin"}
@@ -245,7 +282,6 @@ function Jobs({ serv }) {
                     placeholder="description"
                   />
                 </div>
-
                 <div className="field">
                   <label htmlFor="cat">Category</label>
                   <select
@@ -255,12 +291,12 @@ function Jobs({ serv }) {
                     required
                   >
                     <option value="">Select a category</option>
-                    <option value="Drywall">Drywall</option>
-                    <option value="Painting">Painting</option>
-                    <option value="Electrical">Electrical</option>
-                    <option value="Carpentry">Carpentry</option>
-                    <option value="Plumbing">Plumbing</option>
-                    <option value="Utilities">Utilities</option>
+                    <option value="drywall">Drywall</option>
+                    <option value="painting">Painting</option>
+                    <option value="electrical">Electrical</option>
+                    <option value="carpentry">Carpentry</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="utilities">Utilities</option>
                   </select>
                 </div>
 
@@ -333,6 +369,15 @@ function Jobs({ serv }) {
 
 export default Jobs;
 
-//cambiar el loadigo logo
-//hacer que se limpie el coso leugo de registar en gallery
-//hadcer que jobs marque error
+//tenemos para agregar jobs:
+//en dos tablas:
+//primera, datos normales
+//segunda, images
+//la segunda linkeada a la primera por un Job ID
+//para eliminar:
+//esuchar el boton, pasasrle el id del job.
+//con el id borrar directo d ela bdd
+//update. dos tabla:
+//modificar solo los datos --> mod esa tabla, co jid
+//modificar la otra de acuerdo al IMG ID de cada imagen
+//modificarla
