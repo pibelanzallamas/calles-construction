@@ -17,6 +17,7 @@ function Estimate() {
     e.preventDefault();
 
     setSending(true);
+
     const templateParams = {
       from_name: name,
       from_email: email,
@@ -24,6 +25,8 @@ function Estimate() {
       message: message,
       reply_to: email,
     };
+
+    console.log(SERVICE_ID, TEMPLATE_ID, USER_ID);
 
     try {
       const res = await emailjs.send(
