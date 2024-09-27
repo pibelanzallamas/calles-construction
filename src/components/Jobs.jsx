@@ -300,7 +300,7 @@ function Jobs({ serv }) {
                     value={desc}
                     required
                     rows={5}
-                    maxLength={140}
+                    maxLength={240}
                     placeholder="description"
                   />
                 </div>
