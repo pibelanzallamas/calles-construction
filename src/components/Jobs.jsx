@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { alerts } from "../utils/alerts";
 import { texts } from "../utilities/text";
@@ -15,9 +14,9 @@ import lessButton from "../assets/lessButton.svg";
 import ReactLoading from "react-loading";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
+import { uploadImages, imagesDb } from "../utils/utils";
 
 function Jobs({ serv }) {
-  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [jobs, setJobs] = useState({});
   const [rubro, setRubro] = useState(serv || "");
@@ -37,26 +36,37 @@ function Jobs({ serv }) {
   const [processing, setProcessing] = useState(null);
   const imgUpdater = useRef(null);
   const [newImg, setNewImg] = useState("");
-  const [deleting, setDeleting] = useState(false);
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
 
-  //get jobs
+  //get all jobs
   useEffect(() => {
     axios
-      .get("https://calles-construction-back.onrender.com/api/jobs/") //ver si se modifica jobs"" tamb se modifina finalJobsss
-      .then((resp) => setJobs(resp.data))
+      .get("https://calles-construction-back.onrender.com/api/jobs")
+      .then((resp) => {
+        const jobsData = resp.data;
+        const jobsWithImages = jobsData.map(async (job) => {
+          const jid = job.id;
+          const imagesResp = await axios.get(
+            `https://calles-construction-back.onrender.com/api/images/job/${jid}`
+          );
+
+          return { ...job, images: imagesResp.data };
+        });
+
+        Promise.all(jobsWithImages)
+          .then((finalJobs) => setJobs(finalJobs))
+          .catch((e) => console.log(e));
+      })
       .catch((err) => console.log(err));
   }, [estado]);
 
   //filtrar
   useEffect(() => {
-    if (services.length > 0) {
+    if (jobs.length > 0) {
       setFinalJobs(
-        services.filter(
-          (ele) => ele.category.toLowerCase() == rubro.toLowerCase()
-        )
+        jobs.filter((ele) => ele.category.toLowerCase() == rubro.toLowerCase())
       );
     }
   }, [rubro, jobs]);
@@ -65,89 +75,54 @@ function Jobs({ serv }) {
   useEffect(() => {
     if (rubro) {
       setCategory(rubro.toLowerCase());
-      setMore(false);
+      setTitle("");
+      setDesc("");
+      setDate("");
+      setAllImages([]);
       setMoreImages(1);
+      setMore(false);
     }
   }, [rubro]);
 
-  //post job
-  //upload images to the cloud
-  const uploadImages = async (pic) => {
-    const f = new FormData();
-    f.append("file", pic);
-    f.append("upload_preset", "nfi9e7vs");
-    f.append("api_key", import.meta.env.VITE_API_KEY);
-
-    try {
-      const { data } = await axios.post(
-        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
-        f
-      );
-      return data.secure_url;
-    } catch (e) {
-      console.log(e);
-      throw new Error("Failed to upload image to the cloud");
-    }
-  };
-  //upload images into db
-  const imagesDb = async (link, category, jid) => {
-    try {
-      await axios.post(
-        "https://calles-construction-back.onrender.com/api/images/create",
-        {
-          image: link,
-          category,
-          jid,
-        }
-      );
-
-      return true;
-    } catch (e) {
-      console.log(e);
-      throw new Error("Failed to upload image to the database");
-    }
-  };
   //create job
+  //both data in jobs and images in gallery!
   const createJobs = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const links = [];
+      const newJob = { title, description: desc, date, category };
 
-      for (let i = 0; i < allImages.length; i++) {
-        links.push(await uploadImages(allImages[i]));
-      }
-
-      const resp = await axios.post(
+      const { data } = await axios.post(
         "https://calles-construction-back.onrender.com/api/jobs/create",
-        {
-          title,
-          description: desc,
-          date,
-          category,
-        }
+        { newJob }
       );
 
-      if (resp.data) {
-        console.log(resp.data);
-        for (let i = 0; i < links.length; i++) {
-          imagesDb(links[i], category, resp.data[1].id);
-        }
+      console.log("data recibida luego de crear job", data[0]);
 
-        setEstado(!estado);
-        alerts("Okey!", "Job upload successfuly", "success");
-        navigate("/jobs");
-      } else {
-        alerts("Atention!", "Jobs was already created", "warning");
+      for (let i = 0; i < allImages.length; i++) {
+        const link = await uploadImages(allImages[i]);
+        console.log("link de imagen", link);
+        await imagesDb(link, category, data[0].id);
       }
+
+      setEstado(!estado);
+      alerts(
+        "Job Uploaded",
+        "The job have been uploaded successfully.",
+        "success"
+      );
+      setMore(false);
+      setMoreImages(1);
+      setTitle("");
+      setDesc("");
+      setDate("");
+      setAllImages([]);
     } catch (e) {
       console.log(e);
-      alerts("Sorry!", "Job couldn't be uploaded", "danger");
+      alerts("Upload Error", "The job could not be uploaded.", "warning");
     }
-    setTitle("");
-    setDesc("");
-    setDate("");
+
     setLoading(false);
   };
 
@@ -156,7 +131,6 @@ function Jobs({ serv }) {
     setId(id);
     openBox();
   }
-
   const confirmDelete = async () => {
     closeBox();
     setProcessing(id);
@@ -177,10 +151,12 @@ function Jobs({ serv }) {
     }
     setProcessing(0);
   };
+  //borra de la base y del front solo la primera vez, la seg solo de la base
 
+  //update job
   const updateData = async (id, data) => {
     setProcessing(id);
-
+    console.log("nueva data from updateDAte", data);
     try {
       await axios.put(
         `https://calles-construction-back.onrender.com/api/jobs/update/${id}`,
@@ -200,7 +176,55 @@ function Jobs({ serv }) {
     setProcessing(0);
   };
 
-  console.log(jobs);
+  //update image
+  const updateImages = (id, sid) => {
+    console.log("id del job que pidio mod imagen", sid);
+    console.log("id de la imagen a mod", id);
+    setProcessing(sid);
+    setId(id);
+    imgUpdater.current.click();
+  };
+
+  const handleNewImage = (e) => {
+    const s = e.target.files[0];
+    console.log("archivo recibido para mod", s);
+    setNewImg(s);
+    console.log("archivo newImg", newImg);
+  };
+
+  useEffect(() => {
+    console.log("newImg dentro del useEffect", newImg);
+
+    if (newImg) {
+      handleChangeImage();
+    }
+  }, [newImg]);
+
+  const handleChangeImage = async () => {
+    try {
+      console.log("cuando lega la img en handleChangeImage", newImg);
+      const link = await uploadImages(newImg);
+      await axios.put(
+        `https://calles-construction-back.onrender.com/api/images/update/${id}`,
+        { link }
+      );
+
+      setEstado(!estado);
+      alerts(
+        "Image Modified",
+        "The image has been modified successfully.",
+        "success"
+      );
+    } catch (e) {
+      alerts(
+        "Modification Error",
+        "The image could not be modified.",
+        "warning"
+      );
+      console.log(e);
+    }
+    setProcessing(0);
+  };
 
   return (
     <section id="jobs" className="jobs-compo">
@@ -226,11 +250,12 @@ function Jobs({ serv }) {
         finalJobs.map((job, i) => (
           <Job
             key={job.id}
-            service={job}
             indice={i}
+            service={job}
             deleteFun={handleDelete}
-            disparador={() => setEstado(!estado)}
             updateData={updateData}
+            processing={processing}
+            updateImages={updateImages}
           />
         ))}
 
@@ -342,7 +367,14 @@ function Jobs({ serv }) {
                 </div>
 
                 {loading ? (
-                  <p className="loading-text"> Loading ...</p>
+                  <div style={{ margin: "0 auto" }}>
+                    <ReactLoading
+                      type={"spin"}
+                      color="#0f4c61"
+                      height={50}
+                      width={50}
+                    />
+                  </div>
                 ) : (
                   <button type="submit">Send</button>
                 )}
@@ -360,21 +392,16 @@ function Jobs({ serv }) {
         onConfirm={confirmDelete}
         text={"Are you sure you want to delete this job?"}
       />
+
+      <input
+        ref={imgUpdater}
+        id="imagen-updater"
+        type="file"
+        onChange={(e) => handleNewImage(e)}
+        style={{ display: "none" }}
+      ></input>
     </section>
   );
 }
 
 export default Jobs;
-
-//tenemos para agregar jobs:
-//en dos tablas:
-//primera, datos normales
-//segunda, images
-//la segunda linkeada a la primera por un Job ID
-//para eliminar:
-//esuchar el boton, pasasrle el id del job.
-//con el id borrar directo d ela bdd
-//update. dos tabla:
-//modificar solo los datos --> mod esa tabla, co jid
-//modificar la otra de acuerdo al IMG ID de cada imagen
-//modificarla

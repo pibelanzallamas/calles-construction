@@ -2,25 +2,30 @@ import React, { useRef, useState } from "react";
 import trash from "../assets/trash.svg";
 import edit from "../assets/edit.svg";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import { alerts } from "../utils/alerts";
 import ReactLoading from "react-loading";
 
-function Job({ key, service, deleteFun, updateData, disparador, indice }) {
+function Job({
+  key,
+  service,
+  deleteFun,
+  updateData,
+  updateImages,
+  indice,
+  processing,
+}) {
   const user = useSelector((state) => state.user);
   const [editMode, setEditMode] = useState(false);
   const [desc, setDesc] = useState(service.description);
   const [title, setTitle] = useState(service.title);
   const [dat, setDat] = useState(service.date.split("T")[0]);
-  const [img, setImg] = useState("");
-  const [loading, setLoading] = useState(false);
-  const imgUpdater = useRef(null);
 
   //algoritmo para calcular Fecha
   if (indice % 2 === 0) {
     service.side = "l";
   } else service.side = "r";
+
   const fecha = service.date.split("T")[0].split("-");
+
   const meses = [
     "Jan",
     "Feb",
@@ -35,51 +40,11 @@ function Job({ key, service, deleteFun, updateData, disparador, indice }) {
     "Nov",
     "Dec",
   ];
-  const date = meses[fecha[1] - 1] + " " + fecha[2];
 
-  //mod jobs
-  //texts
-  const handleNewImage = (e) => {
-    setImg(e.target.files[0]);
-    handleChangeImage();
-  };
+  const date = meses[fecha[1] - 1] + " " + fecha[2];
 
   return (
     <div className="job-card" key={key}>
-      <div className={"last-row"}>
-        {editMode && (
-          <div className="edit-buttons">
-            <button
-              onClick={() =>
-                updateData(service.id, {
-                  title,
-                  description: desc,
-                  date: service.date,
-                })
-              }
-              title="Update Job"
-            >
-              Submit
-            </button>
-            <figure
-              onClick={() => setEditMode(!editMode)}
-              className="edit-button"
-            >
-              <img src={edit} alt="edit-icon" title="Exit Edit Mode"></img>
-            </figure>
-            <figure
-              onClick={() => deleteFun(service.id)}
-              className="edit-button"
-            >
-              <img src={trash} alt="trash-icon" title="Delete Job" />
-            </figure>
-          </div>
-        )}
-        {loading && (
-          <ReactLoading type={"spin"} color="#0f4c61" height={50} width={50} />
-        )}
-      </div>
-
       <div className={`pencil-line ${service.side}`}>
         {editMode ? (
           <>
@@ -142,23 +107,74 @@ function Job({ key, service, deleteFun, updateData, disparador, indice }) {
         )}
       </section>
 
-      <div className="job-image">
-        <figure>
-          <img src={service.image} alt={service.title} className="job-img" />
-        </figure>
-        {user.id && editMode && (
-          <button onClick={() => imgUpdater.current.click()}>Edit image</button>
+      <div className={"last-row"}>
+        {editMode && (
+          <>
+            <div className="edit-buttons">
+              <button
+                onClick={() =>
+                  updateData(service.id, {
+                    title,
+                    description: desc,
+                    date: service.date,
+                  })
+                }
+                title="Update Job"
+              >
+                Submit
+              </button>
+              <figure
+                onClick={() => setEditMode(!editMode)}
+                className="edit-button"
+              >
+                <img src={edit} alt="edit-icon" title="Exit Edit Mode"></img>
+              </figure>
+              <figure
+                onClick={() => deleteFun(service.id)}
+                className="edit-button"
+              >
+                <img src={trash} alt="trash-icon" title="Delete Job" />
+              </figure>
+            </div>
+            {processing === service.id && (
+              <>
+                <ReactLoading
+                  type={"spin"}
+                  color="#0f4c61"
+                  height={50}
+                  width={50}
+                />
+                {setEditMode(false)}
+              </>
+            )}
+          </>
         )}
       </div>
-      <input
-        ref={imgUpdater}
-        id="imagen-updater"
-        type="file"
-        onChange={handleNewImage}
-        style={{ display: "none" }}
-      ></input>
+
+      <div className="job-images">
+        {service.images && service.images.length > 0 ? (
+          service.images.map((image, index) => (
+            <div key={index} className="job-image">
+              <figure>
+                <img
+                  src={image.image}
+                  alt={service.title}
+                  className="job-img"
+                />
+              </figure>
+              {user.id && editMode && (
+                <button onClick={() => updateImages(image.id, service.id)}>
+                  Edit image
+                </button>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No images available</p>
+        )}
+      </div>
     </div>
   );
 }
-//real alfa
+
 export default Job;
