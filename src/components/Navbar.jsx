@@ -11,7 +11,7 @@ import { uploadImages } from "../utils/utils";
 function Navbar({ openFunc }) {
   const user = useSelector((state) => state.user);
   const [isOpen, setOpen] = useState(false);
-  const [logo, setLogo] = useState({ link: defaultLogo });
+  const [logo, setLogo] = useState();
   const [newLogo, setNewLogo] = useState("");
   const [loading, setLoading] = useState(false);
   const [estado, setEstado] = useState(false);
