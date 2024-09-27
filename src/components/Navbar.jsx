@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 import defaultLogo from "../assets/nav-logo.png";
 import { alerts } from "../utils/alerts";
+import { uploadImages } from "../utils/utils";
 
 function Navbar({ openFunc }) {
   const user = useSelector((state) => state.user);
@@ -42,32 +43,29 @@ function Navbar({ openFunc }) {
   //upload new logo
   const handleNewImage = (e) => {
     setNewLogo(e.target.files[0]);
-    handleChangeImage();
   };
+
+  useEffect(() => {
+    console.log("newImg dentro del useEffect", newLogo);
+
+    if (newLogo) {
+      handleChangeImage();
+    }
+  }, [newLogo]);
 
   const handleChangeImage = async () => {
     setLoading(true);
-    const f = new FormData();
-    f.append("file", newLogo);
-    f.append("upload_preset", "nfi9e7vs");
-    f.append("api_key", import.meta.env.VITE_API_KEY);
 
     try {
-      const clou = await axios.post(
-        "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
-        f
-      );
-      const link = clou.data.secure_url;
+      const link = await uploadImages(newLogo);
 
-      const res = await axios.post(
+      await axios.post(
         "https://calles-construction-back.onrender.com/api/descriptions/create",
         { link }
       );
 
-      if (res.data) {
-        setEstado(!estado);
-        alerts("Okey!", "Logo updated successfuly", "success");
-      }
+      setEstado(!estado);
+      alerts("Okey!", "Logo updated successfuly", "success");
     } catch (e) {
       console.log("error de cliente", e);
       alerts("Sorry!", "Logo couldn't be updated, try again", "danger");
@@ -116,7 +114,7 @@ function Navbar({ openFunc }) {
         ref={imgUpdater}
         id="imagen-updater"
         type="file"
-        onChange={handleNewImage}
+        onChange={(e) => handleNewImage(e)}
         style={{ display: "none" }}
       ></input>
     </nav>
