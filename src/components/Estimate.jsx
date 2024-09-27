@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { alerts } from "../utils/alerts";
+import ReactLoading from "react-loading";
 
 function Estimate() {
   const [name, setName] = useState("");
@@ -28,7 +29,7 @@ function Estimate() {
       const res = await emailjs.send(
         SERVICE_ID,
         templateParams,
-        // TEMPLATE_ID,
+        TEMPLATE_ID,
         USER_ID
       );
 
@@ -110,9 +111,14 @@ function Estimate() {
         </div>
         <div className="estimate-button">
           {sending ? (
-            <p>
-              <i>Sending...</i>
-            </p>
+            <div style={{ margin: "0 auto" }}>
+              <ReactLoading
+                type={"spin"}
+                color="#0f4c61"
+                height={50}
+                width={50}
+              />
+            </div>
           ) : (
             <button type="submit">Get Estimate</button>
           )}
