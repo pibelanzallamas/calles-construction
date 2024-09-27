@@ -98,7 +98,7 @@ function Job({
               onChange={(e) => setDesc(e.target.value)}
               type="text"
               rows={3}
-              maxLength={150}
+              maxLength={250}
               className="input-job"
             />
           </>
