@@ -12,7 +12,6 @@ import six from "../assets/6.svg";
 
 export default function Footer() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
   function handleLogout() {
@@ -48,7 +47,7 @@ export default function Footer() {
         <div className="contact">
           <div className="line">
             <img src={fourth} />
-            <p>Ago, 2024</p>
+            <p>Sept, 2024</p>
           </div>
           <div className="line">
             <img src={five} />

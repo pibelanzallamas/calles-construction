@@ -4,6 +4,7 @@ import { alerts } from "../utils/alerts";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../state/userState";
+import ReactLoading from "react-loading";
 import eyeOpen from "../assets/eye-outline.svg";
 import eyeClose from "../assets/eye-off-outline.svg";
 
@@ -69,7 +70,14 @@ function Login() {
           />
         </div>
         {loading ? (
-          <p className="loading-text"> Loading ...</p>
+          <div style={{ margin: "0 auto" }}>
+            <ReactLoading
+              type={"spin"}
+              color="#0f4c61"
+              height={50}
+              width={50}
+            />
+          </div>
         ) : (
           <button type="submit">Send</button>
         )}
