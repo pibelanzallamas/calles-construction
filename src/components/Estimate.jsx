@@ -64,7 +64,7 @@ function Estimate() {
 
       <form onSubmit={handleForm}>
         <div className="field">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Your Name</label>
           <input
             id="name"
             name="name"
@@ -76,7 +76,7 @@ function Estimate() {
           ></input>
         </div>
         <div className="field">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Your Email</label>
           <input
             id="email"
             name="email"
@@ -88,7 +88,7 @@ function Estimate() {
           ></input>
         </div>
         <div className="field">
-          <label htmlFor="number">Number</label>
+          <label htmlFor="number">Your Number</label>
           <input
             id="number"
             name="number"
@@ -101,7 +101,7 @@ function Estimate() {
           ></input>
         </div>
         <div className="field">
-          <label htmlFor="message">Message</label>
+          <label htmlFor="message">Your Message</label>
           <textarea
             id="message"
             name="message"
