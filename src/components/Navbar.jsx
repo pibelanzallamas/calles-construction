@@ -14,6 +14,7 @@ function Navbar({ openFunc }) {
   const [logo, setLogo] = useState({ link: defaultLogo });
   const [newLogo, setNewLogo] = useState("");
   const [loading, setLoading] = useState(false);
+
   const [estado, setEstado] = useState(false);
   const imgUpdater = useRef(null);
 
@@ -54,22 +55,31 @@ function Navbar({ openFunc }) {
   }, [newLogo]);
 
   const handleChangeImage = async () => {
+    //cambio el valor de Loading...
     setLoading(true);
 
     try {
+      //creo link de imagen newLogo
       const link = await uploadImages(newLogo);
 
+      //guardo el link del newLogo en la bdd
       await axios.post(
         "https://calles-construction-back.onrender.com/api/descriptions/create",
         { link }
       );
 
+      //cambio el estado del front
       setEstado(!estado);
+
+      //le muestro un alert al usuario de que todo salió bien
       alerts("Okey!", "Logo updated successfuly", "success");
     } catch (e) {
+      //muestro por consola si hubo un error
       console.log("error de cliente", e);
+      //le muestro un alert al usuario de que algo salió mal
       alerts("Sorry!", "Logo couldn't be updated, try again", "danger");
     }
+    //vuelvo el valor de loading a falso
     setLoading(false);
   };
 
@@ -81,24 +91,12 @@ function Navbar({ openFunc }) {
             {logo.link && <img src={logo.link} alt="calles-logo" />}
           </figure>
         </Link>
-        {user.id && (
-          <>
-            {loading ? (
-              <ReactLoading
-                type={"spin"}
-                color="#0f4c61"
-                height={30}
-                width={30}
-              />
-            ) : (
-              <button
-                id="logo-button"
-                onClick={() => imgUpdater.current.click()}
-              >
-                Change
-              </button>
-            )}
-          </>
+        {user.id && loading ? (
+          <ReactLoading type={"spin"} color="#0f4c61" height={30} width={30} />
+        ) : (
+          <button id="logo-button" onClick={() => imgUpdater.current.click()}>
+            Change
+          </button>
         )}
       </div>
       <ul className="desktop-navbar">
