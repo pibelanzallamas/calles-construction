@@ -10,7 +10,7 @@ _**Español**_
 
 Entrar al sitio web, y utilizar el menú. Para ver el modo admin, mirar la demo.
 
-Usar mail verdadero para enviar consulta y recibir respuesta.
+Usar mail verdadero para enviar consulta y obtener una respuesta.
 
 Muchas gracias.
 
