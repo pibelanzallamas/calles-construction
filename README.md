@@ -1,6 +1,6 @@
 Calle's Construction
 
-![image](https://res.cloudinary.com/daynclfo8/image/upload/v1730124619/calles_zngumy.png)
+![image](https://res.cloudinary.com/daynclfo8/image/upload/v1732610191/calles.png)
 
 [Demo](https://www.youtube.com/watch?v=mOV8O6jPwC4)
 
