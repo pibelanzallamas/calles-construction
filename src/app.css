@@ -516,7 +516,7 @@ nav {
   }
   .jobs-compo .botonera {
     width: 90%;
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   .l {
     text-align: left;
@@ -733,7 +733,7 @@ nav {
 }
 .location-compo p {
   margin-top: -0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 4500;
 }
 .location-compo .google-maps {
