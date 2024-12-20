@@ -17,6 +17,7 @@ function Login() {
   const [peak, setPeak] = useState(false);
 
   function handleLogin(e) {
+    console.log(email, password);
     setLoading(true);
     e.preventDefault();
     axios
@@ -31,7 +32,7 @@ function Login() {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("erro del front, ", err);
         alerts("Sorry!", "Email or password are not correct!", "warning");
         setLoading(false);
       });
