@@ -91,12 +91,13 @@ function Navbar({ openFunc }) {
             {logo.link && <img src={logo.link} alt="calles-logo" />}
           </figure>
         </Link>
-        {user.id && loading ? (
-          <ReactLoading type={"spin"} color="#0f4c61" height={30} width={30} />
-        ) : (
+        {user.id && (
           <button id="logo-button" onClick={() => imgUpdater.current.click()}>
             Change
           </button>
+        )}
+        {loading && (
+          <ReactLoading type={"spin"} color="#0f4c61" height={30} width={30} />
         )}
       </div>
       <ul className="desktop-navbar">
@@ -120,8 +121,3 @@ function Navbar({ openFunc }) {
 }
 
 export default Navbar;
-
-//entrar,
-//cargar logo con el ultimo objet de mi ar, cada que esta mod
-//la primera vez, length == 0, set con defa
-//subir una nueva, mod el estado
