@@ -15,7 +15,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className="app-container">
       <Analytics />
       <Navbar openFunc={handleOpen} />
       <Hidden isOpen={hamburger} />
@@ -24,7 +24,7 @@ function App() {
         <AppRoutes />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

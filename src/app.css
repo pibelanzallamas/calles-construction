@@ -890,8 +890,15 @@ body {
   font-family: open-sans;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
 .home {
-  min-height: initial;
+  flex: 1;
   background-color: #fbf7ef;
   padding: 0.94rem;
 }

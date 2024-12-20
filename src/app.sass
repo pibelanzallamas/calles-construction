@@ -41,8 +41,14 @@ html
 body
   font-family: open-sans
 
+.app-container
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  margin: 0
+
 .home
-  min-height: initial
+  flex: 1
   background-color: #fbf7ef
   padding: 0.94rem
 
@@ -85,8 +91,6 @@ img
     padding: 0.6rem
     font-size: 1rem
 
-  .home
-    // min-height: 100vh
 //desktop ----------------------------
 @media (min-width: 1000px)
   h2
