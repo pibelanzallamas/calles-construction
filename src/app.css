@@ -794,29 +794,27 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    width: 87vw;
   }
   .contact .line img {
     height: 1.4rem;
     width: 1.4rem;
   }
   .contact .line p {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 @media (min-width: 1000px) {
   .credits {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 9rem;
-    width: 75vw;
+    place-items: center;
   }
   .contact .line img {
     height: 1.6rem;
     width: 1.6rem;
   }
   .contact .line p {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 }
 .login-compo {
