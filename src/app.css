@@ -318,7 +318,6 @@ nav {
 }
 .job-card section p {
   overflow-wrap: break-word;
-  font-size: 1.1rem;
 }
 .job-card input, .job-card textarea {
   font-size: 1.1rem;
