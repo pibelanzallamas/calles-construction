@@ -36,6 +36,7 @@ function Jobs({ serv }) {
   const [processing, setProcessing] = useState(null);
   const imgUpdater = useRef(null);
   const [newImg, setNewImg] = useState("");
+  const [loading2, setLoading2] = useState(false);
 
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
