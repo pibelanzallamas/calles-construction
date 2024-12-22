@@ -523,6 +523,7 @@ nav {
   }
   .jobs-img {
     aspect-ratio: 16/9;
+    width: 55vw;
     overflow: hidden;
   }
   .job-card {
