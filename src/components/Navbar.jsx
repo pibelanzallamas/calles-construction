@@ -22,7 +22,7 @@ function Navbar({ openFunc }) {
     openFunc(isOpen);
   }, [isOpen]);
 
-  //get latest logo
+  //se lee el ultimo LOGO de la base de datos
   useEffect(() => {
     const getLogo = async () => {
       try {
@@ -41,7 +41,7 @@ function Navbar({ openFunc }) {
     getLogo();
   }, [estado]);
 
-  //upload new logo
+  //obtiene la imagen seleccionada y la sube a la base de datos
   const handleNewImage = (e) => {
     setNewLogo(e.target.files[0]);
   };
@@ -59,10 +59,8 @@ function Navbar({ openFunc }) {
     setLoading(true);
 
     try {
-      //creo link de imagen newLogo
       const link = await uploadImages(newLogo);
 
-      //guardo el link del newLogo en la bdd
       await axios.post(
         "https://calles-construction-back.onrender.com/api/descriptions/create",
         { link }
