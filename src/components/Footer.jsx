@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { setUser } from "../state/userState";
 import { useDispatch, useSelector } from "react-redux";
 import { alerts } from "../utils/alerts";
@@ -13,6 +13,11 @@ import six from "../assets/6.svg";
 export default function Footer() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const [date, setDate] = useState(null);
+
+  useEffect(() => {
+    const getDate = async () => {};
+  }, []);
 
   function handleLogout() {
     const noUser = {

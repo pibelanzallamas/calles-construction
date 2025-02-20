@@ -19,7 +19,7 @@ import { uploadImages, imagesDb } from "../utils/utils";
 function Jobs({ serv }) {
   const user = useSelector((state) => state.user);
   const [jobs, setJobs] = useState({});
-  const [rubro, setRubro] = useState(serv || "");
+  const [rubro, setRubro] = useState(serv || "Drywall");
   const [finalJobs, setFinalJobs] = useState([]); //jobs filtrados
   const [estado, setEstado] = useState(false);
   const [more, setMore] = useState(false);
