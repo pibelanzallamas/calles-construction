@@ -12,7 +12,7 @@ function Services({ takeValue }) {
   };
 
   return (
-    <section id="services">
+    <section id="services" className="home">
       <div className="services-mobile">
         <h2>Services</h2>
         {services.map((service, i) => (

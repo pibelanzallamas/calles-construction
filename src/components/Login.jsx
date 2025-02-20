@@ -38,7 +38,7 @@ function Login() {
   }
 
   return (
-    <section className="estimate-compo login-compo">
+    <section className="estimate-compo login-compo home">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className="field">

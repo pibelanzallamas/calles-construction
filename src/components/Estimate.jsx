@@ -59,7 +59,7 @@ function Estimate() {
   };
 
   return (
-    <section id="estimate" className="estimate-compo">
+    <section id="estimate" className="estimate-compo home">
       <h2>Ask me</h2>
 
       <form onSubmit={handleForm}>

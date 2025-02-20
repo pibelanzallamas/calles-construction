@@ -20,9 +20,7 @@ function App() {
       <Navbar openFunc={handleOpen} />
       <Hidden isOpen={hamburger} />
       <ScrollToTop />
-      <main className="home">
-        <AppRoutes />
-      </main>
+      <AppRoutes />
       <Footer />
     </div>
   );
