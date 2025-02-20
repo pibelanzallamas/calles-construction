@@ -236,6 +236,16 @@ function Jobs({ serv }) {
 
       <Text text={texts[0]} />
 
+      <p
+        style={{
+          fontWeight: "600",
+          color: "#0f4c61",
+        }}
+        className="category-title"
+      >
+        Select a category
+      </p>
+
       <div className="botonera">
         <a onClick={() => setRubro("Drywall")}>Drywall</a>
         <a onClick={() => setRubro("Painting")}>Painting</a>

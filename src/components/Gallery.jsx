@@ -16,11 +16,11 @@ import { uploadImages, imagesDb } from "../utils/utils";
 function Gallery() {
   const user = useSelector((state) => state.user);
   const [gallery, setGallery] = useState([]); //all images
-  const [rubro, setRubro] = useState("");
+  const [rubro, setRubro] = useState("Drywall");
   const [finalJobs, setFinalJobs] = useState([]); //filter por rubro
   const [estado, setEstado] = useState(false); //state listener
   const [more, setMore] = useState(false); //guardar datos
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Drywall");
   const [allImages, setAllImages] = useState([]);
   const [moreImages, setMoreImages] = useState(1);
   const divs = Array.from({ length: moreImages });
@@ -176,6 +176,17 @@ function Gallery() {
   return (
     <section className="gallery-compo" id="gallery">
       <h2>Gallery</h2>
+
+      <p
+        style={{
+          fontWeight: "600",
+          fontSize: "1.2rem",
+          marginBottom: "-0.5rem",
+          color: "#0f4c61",
+        }}
+      >
+        Select a category
+      </p>
 
       {/* botonera */}
       <div className="botonera">

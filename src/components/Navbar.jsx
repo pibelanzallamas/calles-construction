@@ -47,8 +47,6 @@ function Navbar({ openFunc }) {
   };
 
   useEffect(() => {
-    console.log("newImg dentro del useEffect", newLogo);
-
     if (newLogo) {
       handleChangeImage();
     }

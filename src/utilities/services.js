@@ -4,12 +4,12 @@ import paintingLogo from "../assets/paintingLogo.svg";
 import carpentryLogo from "../assets/carp-logo.svg";
 import plumbingLogo from "../assets/plumbingLogo.svg";
 import utilitysLogo from "../assets/utilitysLogo.svg";
-import picDrywall from "../assets/dry-wall.jpeg";
-import electricalPic from "../assets/electrician.jpeg";
-import paintingPic from "../assets/painters.jpeg";
-import carpentryPic from "../assets/carpenters.png";
-import plumbingPic from "../assets/plumbing.jpeg";
-import utilitysPic from "../assets/utiles.png";
+import picDrywall from "../assets/dry-logo.svg";
+import electricalPic from "../assets/electricalLogo.svg";
+import paintingPic from "../assets/paintingLogo.svg";
+import carpentryPic from "../assets/carp-logo.svg";
+import plumbingPic from "../assets/plumbingLogo.svg";
+import utilitysPic from "../assets/utilitysLogo.svg";
 
 export const services = [
   {

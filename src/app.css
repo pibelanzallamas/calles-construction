@@ -443,6 +443,11 @@ nav {
   gap: 1.5rem;
 }
 
+.category-title {
+  font-size: 1.15rem;
+  margin-bottom: -0.2rem;
+}
+
 @media (min-width: 800px) {
   .jobs-compo {
     width: 75vw;
@@ -495,6 +500,10 @@ nav {
   }
   .form-job form .field input, .form-job form .field textarea {
     font-size: 1rem;
+  }
+  .category-title {
+    font-size: 1.6rem;
+    margin-bottom: -1rem;
   }
 }
 @media (min-width: 1000px) {
