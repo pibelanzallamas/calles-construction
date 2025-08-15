@@ -5,12 +5,12 @@ export const uploadImages = async (pic) => {
   //las funciones async siempre van a devolver una promesa
   const f = new FormData();
   f.append("file", pic);
-  f.append("upload_preset", "nfi9e7vs");
+  f.append("upload_preset", "calles_preset_images");
   f.append("api_key", import.meta.env.VITE_API_KEY);
 
   try {
     const { data } = await axios.post(
-      "https://api.cloudinary.com/v1_1/dh71ewqgp/image/upload",
+      "https://api.cloudinary.com/v1_1/daynclfo8/image/upload",
       f
     );
     return data.secure_url;
