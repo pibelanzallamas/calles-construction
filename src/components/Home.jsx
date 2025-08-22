@@ -1,4 +1,3 @@
-import React from "react";
 import image from "../assets/home-image.jpg";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,7 +7,7 @@ function Home() {
   const user = useSelector((state) => state.user);
 
   return (
-    <section id="home">
+    <section class="home">
       <div className="home-mobile">
         <figure>
           <img src={image} alt="home-image" />

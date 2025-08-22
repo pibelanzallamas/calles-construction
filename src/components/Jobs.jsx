@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { alerts } from "../utils/alerts";
 import { texts } from "../utilities/text";
-import { services } from "../utilities/services";
 import Text from "../commons/Text";
 import Job from "../commons/Job";
 import TopButton from "../commons/TopButton";
@@ -228,7 +227,7 @@ function Jobs({ serv }) {
   };
 
   return (
-    <section id="jobs" className="jobs-compo">
+    <section id="jobs" className="home">
       <h2>Jobs</h2>
       <figure className="jobs-img">
         <img src={portadaJobs} alt="jobs-img" />
