@@ -634,19 +634,28 @@ nav {
 }
 
 @media (min-width: 800px) {
-  .gallery-compo {
+  #gallery {
     width: 70vw;
     min-height: 65vh;
     margin: 0 auto;
     padding-bottom: 1rem;
   }
-  .gallery-compo h3 {
+  #gallery .image-card {
+    width: 100%;
+  }
+  #gallery .image-card figure {
+    width: 100%;
+  }
+  #gallery .image-card figure img {
+    border-radius: 10px;
+  }
+  #gallery h3 {
     font-size: 1.9rem;
   }
-  .gallery-compo .form-job {
+  #gallery .form-job {
     margin-bottom: 1rem;
   }
-  .gallery-compo .more-button {
+  #gallery .more-button {
     width: 2.5rem;
   }
 }
@@ -662,8 +671,14 @@ nav {
   #gallery h3 {
     font-size: 2.2rem;
   }
-  .gallery-image {
-    width: 55vw;
+  #gallery .image-card {
+    width: 100%;
+  }
+  #gallery .image-card figure {
+    width: 100%;
+  }
+  #gallery .image-card figure img {
+    border-radius: 10px;
   }
 }
 .estimate-compo {
