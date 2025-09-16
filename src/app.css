@@ -449,11 +449,12 @@ nav {
 }
 
 @media (min-width: 800px) {
-  .jobs-compo {
-    width: 75vw;
+  #jobs {
+    width: 100%;
     margin: 0 auto;
     gap: 1.5rem;
     padding-bottom: 1rem;
+    padding-top: 1rem;
   }
   .jobs-img {
     aspect-ratio: 16/9;
@@ -467,6 +468,7 @@ nav {
   }
   .text-compo p {
     font-size: 1.2rem;
+    width: 50vw;
   }
   .job-card h3 {
     font-size: 1.7rem;
@@ -507,17 +509,16 @@ nav {
   }
 }
 @media (min-width: 1000px) {
-  .jobs-compo {
-    width: 60vw;
+  #jobs {
     margin: 0 auto;
     padding-top: 1rem;
     gap: 2.3rem;
     padding-bottom: 2rem;
   }
-  .jobs-compo h2 {
+  #jobs h2 {
     margin-bottom: -1rem;
   }
-  .jobs-compo .botonera {
+  #jobs .botonera {
     width: 90%;
     font-size: 1rem;
   }
@@ -736,7 +737,6 @@ nav {
   border-radius: 11px;
 }
 #location p {
-  margin-top: -0.5rem;
   font-weight: 4500;
 }
 #location .google-maps {
@@ -744,28 +744,32 @@ nav {
 }
 
 @media (min-width: 800px) {
-  .location-compo {
-    width: 70vw;
+  #location {
+    width: 100%;
   }
-  .location-compo p {
+  #location .map-image {
+    width: 45vw;
+  }
+  #location p {
     font-size: 1.4rem;
   }
-  .location-compo .google-maps {
-    margin-top: 1rem;
+  #location .google-maps {
     width: 6rem;
   }
 }
 @media (min-width: 1000px) {
-  .location-compo {
+  #location {
     gap: 0.5rem;
     padding-top: 1rem;
     padding-bottom: 2rem;
-    width: 50vw;
   }
-  .location-compo h2 {
+  #location .map-image {
+    width: 40vw;
+  }
+  #location h2 {
     margin-bottom: 1rem;
   }
-  .location-compo .google-maps {
+  #location .google-maps {
     margin-top: 1rem;
   }
 }
