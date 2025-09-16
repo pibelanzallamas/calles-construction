@@ -488,6 +488,9 @@ nav {
     justify-content: center;
     flex-direction: row-reverse;
   }
+  .botonera {
+    width: 55vw;
+  }
   .edit-buttons button {
     padding: 0.5rem;
   }
@@ -518,9 +521,8 @@ nav {
   #jobs h2 {
     margin-bottom: -1rem;
   }
-  #jobs .botonera {
-    width: 90%;
-    font-size: 1rem;
+  .botonera {
+    width: 45vw;
   }
   .l {
     text-align: left;
@@ -961,7 +963,7 @@ img {
     font-size: 2.6rem;
   }
   .home {
-    background-color: #fbf7ef;
+    background-color: #f0e8d9;
     padding: 0rem;
   }
 }
