@@ -174,9 +174,8 @@ function Gallery() {
   console.log("final", finalJobs);
 
   return (
-    <section className="gallery-compo" id="gallery">
+    <section id="gallery" className="home">
       <h2>Gallery</h2>
-
       <p
         style={{
           fontWeight: "600",

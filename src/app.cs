@@ -723,23 +723,27 @@ nav {
     gap: 0.6rem;
   }
 }
-#location {
+.location-compo {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
   gap: 1rem;
+  width: 85vw;
   padding-bottom: 1rem;
 }
-#location .map-image img {
+.location-compo .map-image {
+  width: 40vw;
+}
+.location-compo .map-image img {
   border: 1px solid grey;
   border-radius: 11px;
 }
-#location p {
+.location-compo p {
   margin-top: -0.5rem;
   font-weight: 4500;
 }
-#location .google-maps {
+.location-compo .google-maps {
   width: 4rem;
 }
 
@@ -957,9 +961,9 @@ img {
     font-size: 2.6rem;
   }
   .home {
-    background-color: #fbf7ef;
+    background-color: #671e80;
     padding: 0rem;
   }
 }
 
-/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.cs.map */

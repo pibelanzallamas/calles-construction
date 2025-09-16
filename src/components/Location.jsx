@@ -4,7 +4,7 @@ import map from "../assets/map.png";
 
 function Location() {
   return (
-    <section id="location" className="location-compo home">
+    <section id="location" className="home">
       <h2>Location</h2>
       <figure className="map-image">
         <img src={calles} alt="calle-location" />
