@@ -12,7 +12,7 @@ import UserModals from "../modals/UserModals";
 import ReactLoading from "react-loading";
 import TopButton from "../commons/TopButton";
 import { uploadImages, imagesDb } from "../utils/utils";
-import stp from "../assets/stp.png";
+
 function Gallery() {
   const user = useSelector((state) => state.user);
   const [gallery, setGallery] = useState([]); //all images
@@ -200,6 +200,7 @@ function Gallery() {
       {rubro && <h3>{rubro}</h3>}
 
       {/* imágenes */}
+      <div className="image-card" >
       {finalJobs.length > 0 &&
         finalJobs.map((img) => (
           <Image
@@ -210,6 +211,7 @@ function Gallery() {
             processing={processing}
           />
         ))}
+        </div>
 
       {/* form */}
       {user.id && (

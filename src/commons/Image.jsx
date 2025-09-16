@@ -7,7 +7,7 @@ function Image({ image, handleDelete, handleUpdate, processing }) {
   const user = useSelector((state) => state.user);
 
   return (
-    <div className="image-card" key={image.id}>
+    <div key={image.id}>
       <div className="gallery-image">
         <figure>
           <img src={image.image} className="job-img" />
