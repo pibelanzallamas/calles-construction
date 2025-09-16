@@ -662,6 +662,9 @@ nav {
   #gallery h3 {
     font-size: 2.2rem;
   }
+  .image-card {
+    width: 55%;
+  }
 }
 .estimate-compo {
   padding-bottom: 1rem;
