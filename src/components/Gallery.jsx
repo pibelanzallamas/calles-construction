@@ -12,7 +12,7 @@ import UserModals from "../modals/UserModals";
 import ReactLoading from "react-loading";
 import TopButton from "../commons/TopButton";
 import { uploadImages, imagesDb } from "../utils/utils";
-
+import stp from "../assets/stp.png";
 function Gallery() {
   const user = useSelector((state) => state.user);
   const [gallery, setGallery] = useState([]); //all images

@@ -635,7 +635,7 @@ nav {
 
 @media (min-width: 800px) {
   #gallery {
-    width: 70vw;
+    width: 100%;
     min-height: 65vh;
     margin: 0 auto;
     padding-bottom: 1rem;
@@ -643,10 +643,10 @@ nav {
   #gallery .image-card {
     width: 100%;
   }
-  #gallery .image-card figure {
+  #gallery figure {
     width: 100%;
   }
-  #gallery .image-card figure img {
+  #gallery figure img {
     border-radius: 10px;
   }
   #gallery h3 {
@@ -674,11 +674,14 @@ nav {
   #gallery .image-card {
     width: 100%;
   }
-  #gallery .image-card figure {
+  #gallery figure {
     width: 100%;
   }
-  #gallery .image-card figure img {
+  #gallery figure img {
     border-radius: 10px;
+  }
+  #gallery .job-img {
+    width: 50vw;
   }
 }
 .estimate-compo {
