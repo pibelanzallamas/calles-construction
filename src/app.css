@@ -586,6 +586,8 @@ nav {
   color: #0f4c61;
 }
 #gallery .image-card {
+  display: flex;
+  justify-content: center;
   width: 100%;
 }
 #gallery .image-card figure {
@@ -618,6 +620,9 @@ nav {
   background-color: #fbf7ef;
   border-radius: 12px;
   padding: 0.2rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 #gallery .gallery-image .gallery-edit-button figure img {
   display: block;
@@ -631,6 +636,10 @@ nav {
 }
 #gallery .form-job {
   text-align: center;
+}
+#gallery .job-img {
+  max-width: 100%;
+  height: auto;
 }
 
 @media (min-width: 800px) {
@@ -682,6 +691,12 @@ nav {
   }
   #gallery .job-img {
     width: 50vw;
+    max-width: 800px;
+  }
+  .image-card {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
   }
 }
 .estimate-compo {

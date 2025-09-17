@@ -11,6 +11,8 @@
     color: #0f4c61
   //1 imagen
   .image-card
+    display: flex;
+    justify-content: center;
     width: 100%
     figure
       width: 100%
@@ -38,6 +40,9 @@
         background-color: #fbf7ef
         border-radius: 12px
         padding: 0.2rem
+        display: flex;
+        justify-content: center;
+        width: 100%;
         img
           display: block
       button
@@ -48,6 +53,9 @@
     width: 2.5rem
   .form-job
     text-align: center
+  .job-img
+      max-width: 100%;
+      height: auto;   
 
 @media (min-width: 800px)
   #gallery
@@ -85,7 +93,8 @@
       img
         border-radius: 10px
     .job-img
-      width: 50vw
+      width: 50vw;
+      max-width: 800px;
   .image-card
     display: flex
     flex-direction: column

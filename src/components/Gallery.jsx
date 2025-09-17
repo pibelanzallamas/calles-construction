@@ -200,7 +200,6 @@ function Gallery() {
       {rubro && <h3>{rubro}</h3>}
 
       {/* imágenes */}
-      <div className="image-card" >
       {finalJobs.length > 0 &&
         finalJobs.map((img) => (
           <Image
@@ -211,7 +210,6 @@ function Gallery() {
             processing={processing}
           />
         ))}
-        </div>
 
       {/* form */}
       {user.id && (
