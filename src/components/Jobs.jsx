@@ -35,8 +35,7 @@ function Jobs({ serv }) {
   const [processing, setProcessing] = useState(null);
   const imgUpdater = useRef(null);
   const [newImg, setNewImg] = useState("");
-  const [loading2, setLoading2] = useState(false);
-
+  const [loading2, setLoading2] = useState(true);
   const openBox = () => setConfirmBox(true);
   const closeBox = () => setConfirmBox(false);
 
@@ -51,7 +50,7 @@ function Jobs({ serv }) {
           const imagesResp = await axios.get(
             `https://calles-construction-back.onrender.com/api/images/job/${jid}`
           );
-
+          setLoading2(false)
           return { ...job, images: imagesResp.data };
         });
 
@@ -256,19 +255,31 @@ function Jobs({ serv }) {
 
       {rubro && <h2 className="rubro-title">{rubro}</h2>}
 
-      {finalJobs.length > 0 &&
-        finalJobs.map((job, i) => (
-          <Job
-            key={job.id}
-            indice={i}
-            service={job}
-            deleteFun={handleDelete}
-            updateData={updateData}
-            processing={processing}
-            updateImages={updateImages}
-          />
-        ))}
 
+      {loading2 ? 
+         <div style={{ margin: "0 auto" }}>
+            <ReactLoading
+              type={"spin"}
+              color="#0f4c61"
+              height={50}
+              width={50}
+              style={{maringTop: "1rem"}}
+            />
+          </div>
+        :
+        finalJobs.length > 0 &&
+          finalJobs.map((job, i) => (
+            <Job
+              key={job.id}
+              indice={i}
+              service={job}
+              deleteFun={handleDelete}
+              updateData={updateData}
+              processing={processing}
+              updateImages={updateImages}
+            />
+        ))
+      }
       {user.id && (
         <>
           <div className="more-button">

@@ -76,6 +76,7 @@ function Login() {
               color="#0f4c61"
               height={50}
               width={50}
+              style={{maringTop: "1rem"}}
             />
           </div>
         ) : (
