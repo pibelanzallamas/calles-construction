@@ -15,7 +15,6 @@ function Image({ image, handleDelete, handleUpdate, processing }) {
         {user.id && (
           <div className="gallery-edit-button">
             <button onClick={() => handleUpdate(image.id)}>Edit image</button>
-
             <figure
               onClick={() => {
                 handleDelete(image.id);
