@@ -7,6 +7,7 @@ import ReactLoading from "react-loading";
 import defaultLogo from "../assets/nav-logo.png";
 import { alerts } from "../utils/alerts";
 import { uploadImages } from "../utils/utils";
+import { apiSegura } from "../utils/utils.js";
 
 function Navbar({ openFunc }) {
   const user = useSelector((state) => state.user);
@@ -26,7 +27,7 @@ function Navbar({ openFunc }) {
   useEffect(() => {
     const getLogo = async () => {
       try {
-        const resp = await axios.get(
+        const resp = await apiSegura.get(
           "https://calles-construction-back.onrender.com/api/descriptions/"
         );
 
@@ -59,7 +60,7 @@ function Navbar({ openFunc }) {
     try {
       const link = await uploadImages(newLogo);
 
-      await axios.post(
+      await apiSegura.post(
         "https://calles-construction-back.onrender.com/api/descriptions/create",
         { link }
       );

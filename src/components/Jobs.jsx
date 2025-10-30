@@ -14,6 +14,7 @@ import ReactLoading from "react-loading";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
 import { uploadImages, imagesDb } from "../utils/utils";
+import { apiSegura } from "../utils/utils.js";
 
 function Jobs({ serv }) {
   const user = useSelector((state) => state.user);
@@ -47,10 +48,10 @@ function Jobs({ serv }) {
         const jobsData = resp.data;
         const jobsWithImages = jobsData.map(async (job) => {
           const jid = job.id;
-          const imagesResp = await axios.get(
+          const imagesResp = await apiSegura.get(
             `https://calles-construction-back.onrender.com/api/images/job/${jid}`
           );
-          setLoading2(false)
+          setLoading2(false);
           return { ...job, images: imagesResp.data };
         });
 
@@ -92,7 +93,7 @@ function Jobs({ serv }) {
     try {
       const newJob = { title, description: desc, date, category };
 
-      const { data } = await axios.post(
+      const { data } = await apiSegura.post(
         "https://calles-construction-back.onrender.com/api/jobs/create",
         { newJob }
       );
@@ -134,7 +135,7 @@ function Jobs({ serv }) {
     closeBox();
     setProcessing(id);
     try {
-      await axios.delete(
+      await apiSegura.delete(
         `https://calles-construction-back.onrender.com/api/jobs/delete/${id}`
       );
 
@@ -157,7 +158,7 @@ function Jobs({ serv }) {
     setProcessing(id);
     console.log("nueva data from updateDAte", data);
     try {
-      await axios.put(
+      await apiSegura.put(
         `https://calles-construction-back.onrender.com/api/jobs/update/${id}`,
         { data }
       );
@@ -203,7 +204,7 @@ function Jobs({ serv }) {
     try {
       console.log("cuando lega la img en handleChangeImage", newImg);
       const link = await uploadImages(newImg);
-      await axios.put(
+      await apiSegura.put(
         `https://calles-construction-back.onrender.com/api/images/update/${id}`,
         { link }
       );
@@ -255,31 +256,30 @@ function Jobs({ serv }) {
 
       {rubro && <h2 className="rubro-title">{rubro}</h2>}
 
-
-      {loading2 ? 
-         <div style={{ margin: "0 auto" }}>
-            <ReactLoading
-              type={"spin"}
-              color="#0f4c61"
-              height={50}
-              width={50}
-              style={{maringTop: "1rem"}}
-            />
-          </div>
-        :
+      {loading2 ? (
+        <div style={{ margin: "0 auto" }}>
+          <ReactLoading
+            type={"spin"}
+            color="#0f4c61"
+            height={50}
+            width={50}
+            style={{ maringTop: "1rem" }}
+          />
+        </div>
+      ) : (
         finalJobs.length > 0 &&
-          finalJobs.map((job, i) => (
-            <Job
-              key={job.id}
-              indice={i}
-              service={job}
-              deleteFun={handleDelete}
-              updateData={updateData}
-              processing={processing}
-              updateImages={updateImages}
-            />
+        finalJobs.map((job, i) => (
+          <Job
+            key={job.id}
+            indice={i}
+            service={job}
+            deleteFun={handleDelete}
+            updateData={updateData}
+            processing={processing}
+            updateImages={updateImages}
+          />
         ))
-      }
+      )}
       {user.id && (
         <>
           <div className="more-button">

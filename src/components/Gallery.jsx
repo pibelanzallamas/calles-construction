@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { alerts } from "../utils/alerts";
+import { apiSegura } from "../utils/utils.js";
 import axios from "axios";
 import Image from "../commons/Image";
 import lessButton from "../assets/lessButton.svg";
@@ -101,7 +102,7 @@ function Gallery() {
     closeBox();
     setProcessing(id);
     try {
-      await axios.delete(
+      await apiSegura.delete(
         `https://calles-construction-back.onrender.com/api/images/delete/${id}`
       );
 
@@ -144,7 +145,7 @@ function Gallery() {
     try {
       console.log("cuando lega la img en handleChangeImage", newImg);
       const link = await uploadImages(newImg);
-      await axios.put(
+      await apiSegura.put(
         `https://calles-construction-back.onrender.com/api/images/update/${id}`,
         { link }
       );

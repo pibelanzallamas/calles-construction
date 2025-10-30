@@ -1,5 +1,11 @@
 import axios from "axios";
 
+export const apiSegura = axios.create({
+  timeout: 10000,
+  maxContentLength: 50 * 1024 * 1024,
+  maxBodyLength: 50 * 1024 * 1024,
+});
+
 //upload image to the cloud
 export const uploadImages = async (pic) => {
   //las funciones async siempre van a devolver una promesa
@@ -9,7 +15,7 @@ export const uploadImages = async (pic) => {
   f.append("api_key", import.meta.env.VITE_API_KEY);
 
   try {
-    const { data } = await axios.post(
+    const { data } = await apiSegura.post(
       "https://api.cloudinary.com/v1_1/daynclfo8/image/upload",
       f
     );
@@ -23,7 +29,7 @@ export const uploadImages = async (pic) => {
 //upload image to the database   --> devuleve true
 export const imagesDb = async (link, category, jid) => {
   try {
-    await axios.post(
+    await apiSegura.post(
       "https://calles-construction-back.onrender.com/api/images/create",
       {
         image: link,
